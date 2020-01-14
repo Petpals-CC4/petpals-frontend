@@ -1,15 +1,11 @@
-import React from "react";
-import "./App.css";
-
-// ------------------------------------------Component---------------------------------------
-
-import StoreInfo from "./components/StoreInfo/StoreInfo";
+import React from 'react';
+import './App.css';
 
 function App() {
   return (
-    <>
-      <StoreInfo />
-    </>
+    <div>
+      Something happen...
+    </div>
   );
 }
 
