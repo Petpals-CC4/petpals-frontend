@@ -3,22 +3,31 @@ import { Layout, Card } from "antd";
 
 export class StoreServices extends Component {
   state = {
-    data: {
-      ServiceName: "อาบน้ำน้อง",
-      ServiceDescription: "อาบน้ำหมาด้วยแชมพูกำจัดเห็บพรีเมี่ยม",
-      ServicePrice: "3,000"
-    }
+    service: 
+      [{service_name: "อาบน้ำน้อง",
+      service_description: "อาบน้ำหมาด้วยแชมพูกำจัดเห็บพรีเมี่ยม",
+      service_price: "3,000"},
+      {service_name: "อาบน้ำน้อง",
+      service_description: "อาบน้ำหมาด้วยแชมพูกำจัดเห็บพรีเมี่ยม",
+      service_price: "3,000"},
+      {service_name: "อาบน้ำน้อง",
+      service_description: "อาบน้ำหมาด้วยแชมพูกำจัดเห็บพรีเมี่ยม",
+      service_price: "3,000"}]
+    
   };
   render() {
     return (
       <Layout>
-        <Card>
-          <h1>{this.state.data.ServiceName}</h1>
-          <p>รายละเอียดเพิ่มเติม{this.state.data.ServiceDescription}</p>
+        {this.state.service.map( s => (
+<Card>
+          <h1>{s.service_name}</h1>
+          <p>รายละเอียดเพิ่มเติม{s.ServiceDescription}</p>
           <br/>
           <br/>
-          <p>ราคา {this.state.data.ServicePrice} บาท</p>
+          <p>ราคา {s.ServicePrice} บาท</p>
         </Card>
+        ))}
+        
       </Layout>
     );
   }

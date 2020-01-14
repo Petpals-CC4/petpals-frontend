@@ -19,7 +19,7 @@ export class StoreMaps extends Component {
       <Layout>
         <Card>
           <Row
-            gutter={[24, 16]}
+            gutter={[8,8]}
             type="flex"
             justify="space-around"
             align="middle"
@@ -29,7 +29,7 @@ export class StoreMaps extends Component {
             </Col>
             <Col span={6}>
               <Row
-                gutter={[8, 8]}
+                gutter={[16, 16]}
                 type="flex"
                 justify="space-around"
                 align="middle"
