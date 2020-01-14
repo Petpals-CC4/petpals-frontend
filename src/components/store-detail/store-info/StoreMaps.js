@@ -3,8 +3,8 @@ import { Layout, Col, Row, Card } from "antd";
 
 // -----------------------------------------Image-----------------------------------
 
-import phoneIcon from "../StoreInfo/phoneIcon.png";
-import googleMap from "../StoreInfo/googlemap.png";
+import phoneIcon from "../../../images/phoneIcon.png";
+import googleMap from "../../../images/googlemap.png";
 
 export class StoreMaps extends Component {
   state = {

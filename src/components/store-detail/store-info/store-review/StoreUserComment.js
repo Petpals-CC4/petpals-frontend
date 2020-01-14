@@ -3,8 +3,8 @@ import { Layout, Card, Row, Col, Button } from "antd";
 
 // --------------------------------image-----------------------------------
 
-import boneIcon from "../boneicon2.png";
-import boneEmptyIcon from "../boneicon3.png";
+import boneIcon from "../../../../images/boneicon2.png"
+import boneEmptyIcon from "../../../../images/boneicon3.png";
 
 export class StoreUserComment extends Component {
   state = {

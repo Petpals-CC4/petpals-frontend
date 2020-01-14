@@ -3,7 +3,7 @@ import { Layout, Row, Col } from 'antd'
 
 // ------------------------Icon------------------------------
 
-import boneEmptyIcon from "../boneicon3.png";
+import boneEmptyIcon from "../../../../images/boneicon3.png";
 
 // ---------------------Component--------------------------
 
