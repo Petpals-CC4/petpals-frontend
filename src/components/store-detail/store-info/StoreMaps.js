@@ -19,39 +19,30 @@ export class StoreMaps extends Component {
       <Layout>
         <Card>
           <Row
-            gutter={[8,8]}
+            gutter={[2, 8]}
             type="flex"
             justify="space-around"
             align="middle"
           >
-            <Col span={18}>
-              <h3>Address: {this.state.data.Address}</h3>
+            <Col span={4}>
+              <h4 style={{color:"#1DE1EE"}}>Address: {this.state.data.Address}</h4>
             </Col>
-            <Col span={6}>
-              <Row
-                gutter={[16, 16]}
-                type="flex"
-                justify="space-around"
-                align="middle"
-              >
-                <Col span={2}>
-                  <img
-                    src={phoneIcon}
-                    alt="phoneIcon"
-                    style={{ width: "15px", height: "15px" }}
-                  />
-                </Col>
-                <Col span={6}>
-                  <h3>{this.state.data.User_Phone}</h3>
-                </Col>
-              </Row>
+            <Col span={4}>
+              <div>
+                <img
+                  src={phoneIcon}
+                  alt="phoneIcon"
+                  style={{ width: "15px", height: "15px" }}
+                />
+                &nbsp;<h4 style={{color:"#1DE1EE"}}>{this.state.data.User_Phone}</h4>
+              </div>
             </Col>
           </Row>
-          <Row type="flex" justify="space-around" align="middle"s>
+          <Row type="flex" justify="space-around" align="middle" s>
             <img
               src={googleMap}
               alt="googleMap"
-              style={{ width: "40%", height: "10%" }}
+              style={{ width: "80%", height: "10%" }}
             />
           </Row>
         </Card>

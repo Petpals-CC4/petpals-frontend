@@ -16,19 +16,19 @@ export class StoreBio extends Component {
     return (
       <Layout>
         <Card>
-          <Row>
-            <Col>
+          <Row gutter={[8,8]}>
+            <Col span= {18}>
               <Row>
-                <h1>{this.state.store.store_Name}</h1>
+                <h1 style={{color:"#1DE1EE"}}>{this.state.store.store_Name}</h1>
               </Row>
               <Row>
-                <p>{this.state.store.store_Description}</p>
+                <p style={{color:"#1DE1EE"}}>{this.state.store.store_Description}</p>
               </Row>
             </Col>
-            <Col>
+            <Col span={6}>
               <img
                 src={this.state.store.image_url}
-                style={{ width: "30px", height: "30px" }}
+                style={{ width: "60px", height: "60px", borderRadius:'50%' }}
               />
             </Col>
           </Row>
