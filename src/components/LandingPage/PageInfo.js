@@ -9,7 +9,7 @@ export class PageInfo extends Component {
         
         return (
             <div>
-                <Row type='flex' justify= 'center' style= {{ padding: '15px',  }}>
+                <Row type='flex' justify= 'center' style= {{ padding: '15px'}}>
                     <span style= {{fontSize:'25px'}}>ค้นหาบริการสำหรับสัตว์เลี้ยงเเสนรักของคุณ</span>
                 </Row>
                 <Row type='flex' justify= 'center' style= {{}}>

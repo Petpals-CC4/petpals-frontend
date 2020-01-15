@@ -9,9 +9,9 @@ import PaymentPage from "./pages/PaymentPage";
 function App() {
   return (
     <div>
-      {/* <Navbar></Navbar> */}
+        {/* <Navbar></Navbar> */}
       {/* <StoreInfo /> */}
-      {/* <PaymentPage /> */}
+      {/* <PaymentPage />  */}
     </div>
   );
 }
