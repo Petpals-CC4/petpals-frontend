@@ -3,11 +3,11 @@ import { Layout, Row, Col, Card } from "antd";
 
 // ------------------------Icon------------------------------
 
-import boneEmptyIcon from "../../../../images/boneicon3.png";
+import boneEmptyIcon from "../../../images/boneicon3.png";
 
 // ---------------------Component--------------------------
 
-import StoreUserComment from "./StoreUserComment";
+import StoreUserComment from "./store-review/StoreUserComment";
 
 export class StoreReviews extends Component {
   render() {
