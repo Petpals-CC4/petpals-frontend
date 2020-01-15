@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {Card} from "antd";
+import {Card, Layout} from "antd";
 
 // --------------------------------image-----------------------------------
 
@@ -52,12 +52,12 @@ export class StoreUserComment extends Component {
                 boneRender.push(false);
             }
         }
-      return <div key={fIndex}>
-        <h3>
+      return <Card key={fIndex}>
+        <h4 style={{color:"#1DE1EE"}}>
           {f.user.firstname}&emsp;{f.user.lastname}
-        </h3>
-        <h4>{f.create_at}</h4>
-        <p>{f.comment}</p>
+        </h4>
+        <h5 style={{color:"#1DE1EE"}}>{f.create_at}</h5>
+        <p style={{color:"#1DE1EE"}}>{f.comment}</p>
         {boneRender.map((bone, index) => {
             return bone ? (
               <img
@@ -73,17 +73,15 @@ export class StoreUserComment extends Component {
               />
             );
           })}
-      </div>
+      </Card>
     });
   };
 
   render() {
     return (
-      <>
-        <Card>
+      <Layout>
           {this.handleCommentCardFont()} 
-        </Card>
-      </>
+      </Layout>
     );
   }
 }
