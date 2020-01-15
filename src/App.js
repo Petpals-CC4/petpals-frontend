@@ -11,9 +11,11 @@ function App() {
     <div>
         {/* <Navbar></Navbar> */}
       {/* <StoreInfo /> */}
-      {/* <PaymentPage />  */}
+      {/* <PaymentPage /> */}
+      {/* <VerifyPaymentPage /> */}
+      {/* <CarouselSlider /> */}
     </div>
   );
 }
 
-export default App;
+export default App
