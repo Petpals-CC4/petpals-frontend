@@ -21,7 +21,6 @@ export class StoreMaps extends Component {
           <Row
             gutter={[2, 8]}
             type="flex"
-            justify="space-around"
             align="middle"
           >
             <Col span={4}>
@@ -38,7 +37,7 @@ export class StoreMaps extends Component {
               </div>
             </Col>
           </Row>
-          <Row type="flex" justify="space-around" align="middle" s>
+          <Row type="flex"align="middle" s>
             <img
               src={googleMap}
               alt="googleMap"

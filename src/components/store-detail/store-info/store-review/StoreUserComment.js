@@ -8,7 +8,6 @@ import boneEmptyIcon from "../../../../images/boneicon3.png";
 
 export class StoreUserComment extends Component {
   state = {
-    boneRender: [],
     feedback: [
       {
         user: {
