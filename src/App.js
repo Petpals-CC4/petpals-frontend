@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import CarouselSlider from './components/CarouselSlider'
+import VerifyPaymentPage from './components/VerifyPaymentPage'
 
 export class App extends Component {
   render() {
     return (
-      <CarouselSlider />
-        
+      <VerifyPaymentPage />
+      // <CarouselSlider />
     )
   }
 }
