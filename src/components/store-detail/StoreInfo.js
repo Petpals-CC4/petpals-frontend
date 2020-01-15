@@ -4,7 +4,7 @@ import StoreBio from "./store-info/StoreBio";
 import StoreServices from "./store-info/StoreServices";
 import StoreReviews from "./store-info/StoreReviews";
 
-export class StoreInfo extends Component {
+class StoreInfo extends Component {
   render() {
     return (
       <>
