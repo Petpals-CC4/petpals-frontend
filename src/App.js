@@ -10,7 +10,7 @@ function App() {
   return (
     <div>
         {/* <Navbar></Navbar> */}
-      {/* <StoreInfo /> */}
+      <StoreInfo />
       {/* <PaymentPage /> */}
       {/* <VerifyPaymentPage /> */}
       {/* <CarouselSlider /> */}
