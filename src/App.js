@@ -6,7 +6,7 @@ import PaymentPage from "./pages/PaymentPage";
 function App() {
   return (
     <div>
-      {/* <StoreInfo /> */}
+      <StoreInfo />
       {/* <PaymentPage /> */}
     </div>
   );
