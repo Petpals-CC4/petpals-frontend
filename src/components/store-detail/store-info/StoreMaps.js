@@ -23,21 +23,24 @@ export class StoreMaps extends Component {
             type="flex"
             align="middle"
           >
-            <Col span={4}>
+            <Col span={12}>
               <h4 style={{color:"#1DE1EE"}}>Address: {this.state.data.Address}</h4>
             </Col>
-            <Col span={4}>
+            <Col span={12}>
               <div>
-                <img
-                  src={phoneIcon}
-                  alt="phoneIcon"
-                  style={{ width: "15px", height: "15px" }}
-                />
-                &nbsp;<h4 style={{color:"#1DE1EE"}}>{this.state.data.User_Phone}</h4>
+                <h4 style={{color:"#1DE1EE"}}>
+                  <img
+                    src={phoneIcon}
+                    alt="phoneIcon"
+                    style={{ width: "15px", height: "15px" }}
+                  />
+                  &nbsp;
+                  {this.state.data.User_Phone}
+                </h4>
               </div>
             </Col>
           </Row>
-          <Row type="flex"align="middle" s>
+          <Row style={{display: "flex", justifyContent: "center"}}>
             <img
               src={googleMap}
               alt="googleMap"

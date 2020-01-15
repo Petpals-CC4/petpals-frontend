@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { Row, Col, Button, Form, DatePicker, Input, Select, Divider } from 'antd'
 
-import StoreBio from './store-detail/StoreBio'
+import StoreBio from '../store-detail/store-info/StoreBio'
 
 const { Option } = Select
 
-class PaymentPage extends Component {
+class Payment extends Component {
+
   state = {
     configNotEmptyRule: {
       rules: [{ required: true, message: 'กรุณากรอกรายละเอียด!' }],
@@ -52,7 +53,7 @@ class PaymentPage extends Component {
     }
     return (
       <div style={{ margin: "2em" }}>
-        <div>
+        <div style={{ marginBottom: "2em" }}>
           <StoreBio />
         </div>
         <div>
@@ -131,5 +132,5 @@ class PaymentPage extends Component {
   }
 }
 
-const WrappedPaymentPage = Form.create({ name: 'payment_page_form' })(PaymentPage);
-export default WrappedPaymentPage
+const WrappedPayment = Form.create({ name: 'payment_page_form' })(Payment);
+export default WrappedPayment

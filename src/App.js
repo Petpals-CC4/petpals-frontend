@@ -1,11 +1,13 @@
 import React from "react";
 import "./App.css";
-import StoreInfo from "./components/store-detail/store-info/StoreInfo";
+import StoreInfo from "./components/store-detail/StoreInfo";
+import PaymentPage from "./pages/PaymentPage";
 
 function App() {
   return (
     <div>
-      <StoreInfo />
+      {/* <StoreInfo /> */}
+      {/* <PaymentPage /> */}
     </div>
   );
 }

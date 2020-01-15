@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import StoreMaps from "./StoreMaps";
-import StoreBio from "./StoreBio";
-import StoreServices from "./StoreServices";
-import StoreReviews from "./store-review/StoreReviews";
+import StoreMaps from "./store-info/StoreMaps";
+import StoreBio from "./store-info/StoreBio";
+import StoreServices from "./store-info/StoreServices";
+import StoreReviews from "./store-info/StoreReviews";
 
 export class StoreInfo extends Component {
   render() {
