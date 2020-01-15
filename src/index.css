@@ -1,4 +1,6 @@
 body {
+  min-height: 100vh;
+  min-width: 100vw;
   margin: 0;
   font-family: 'Kanit',
     sans-serif;
@@ -8,3 +10,4 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+ 

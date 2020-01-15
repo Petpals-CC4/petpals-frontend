@@ -9,14 +9,14 @@ export class PageInfo extends Component {
         
         return (
             <div>
-                <Row type='flex' justify= 'center' style= {{ padding: '15px'}}>
-                    <h1>ค้นหาบริการสำหรับสัตว์เลี้ยงเเสนรักของคุณ</h1>
+                <Row type='flex' justify= 'center' style= {{ padding: '15px',  }}>
+                    <span style= {{fontSize:'25px'}}>ค้นหาบริการสำหรับสัตว์เลี้ยงเเสนรักของคุณ</span>
                 </Row>
                 <Row type='flex' justify= 'center' style= {{}}>
-                    <h2>ให้เราดูเเลสัตว์เลี้ยงตัวโปรดของคุณ</h2>
+                    <span style= {{fontSize:'25px'}}>ให้เราดูเเลสัตว์เลี้ยงตัวโปรดของคุณ</span>
                 </Row>
                 <Row type='flex' >
-                    <Col span={8} style={{ type:'flex', padding: '29' }}>๔</Col>
+                    <Col span={8}>๔</Col>
                     <Col span={8}>๖sssssssssssssssssssssssssssssssssssssss</Col>
                 <Col span={8}>๗ssssssssssssssssssssssssssssssssssssssssssssssss</Col>
                 </Row>
