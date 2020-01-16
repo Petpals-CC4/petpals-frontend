@@ -1,24 +1,3 @@
-<<<<<<< HEAD
-import React, { Component } from "react";
-import "./App.css";
-import StoreDetailPage from "./pages/StoreDetailPage";
-// import LandingPage from './components/LandingPage/LandingPage';
-// import Navbar from './components/landing/Navbar'
-// import PaymentPage from "./pages/PaymentPage";
-
-class App extends Component {
-  render() {
-    return (
-      <div>
-        {/* <Navbar /> */}
-        {/* <PaymentPage /> */}
-        {/* <VerifyPaymentPage /> */}
-        {/* <CarouselSlider /> */}
-        <StoreDetailPage/>
-      </div>
-    );
-  }
-=======
 import React from 'react';
 import './App.css';
 //import LandingPage from './components/LandingPage/LandingPage';
@@ -39,7 +18,6 @@ function App() {
       {/* <CarouselSlider /> */}
     </div>
   );
->>>>>>> feature/Pon_VelifyPayment
 }
 
 export default App;
