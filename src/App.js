@@ -5,7 +5,7 @@ import Navbar from './components/LandingPage/Navbar'
 import StoreInfo from "./components/store-detail/StoreInfo";
 import PaymentPage from "./pages/PaymentPage";
 import CarouselSlider from './components/CarouselSlider';
-import VerifyPaymentPage from './components/VerifyPaymentPage';
+import VerifyPaymentPage from './pages/VerifyPaymentPage';
 
 
 function App() {
