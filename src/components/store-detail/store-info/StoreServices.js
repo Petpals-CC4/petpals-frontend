@@ -17,8 +17,8 @@ export class StoreServices extends Component {
     return (
       <Layout>
         <Checkbox.Group onChange={onChange} value={checkedServices}>
-          {service.map(s => (
-            <Card>
+          {service.map((s, service_index) => (
+            <Card key={service_index}>
               <Row type="flex" gutter={16}>
                 <Col>
                   <Checkbox

@@ -27,45 +27,34 @@ class StoreDetailPage extends Component {
         service_id: 1,
         service_name: "อาบน้ำน้อง",
         service_description: "อาบน้ำหมาด้วยแชมพูกำจัดเห็บพรีเมี่ยม",
-        service_price: "2,000"
+        service_price: "2000"
       },
       {
         service_id: 2,
         service_name: "อาบน้ำน้อง",
         service_description: "อาบน้ำหมาด้วยแชมพูกำจัดเห็บพรีเมี่ยม",
-        service_price: "3,000"
+        service_price: "3000"
       },
       {
         service_id: 3,
         service_name: "อาบน้ำน้อง",
         service_description: "อาบน้ำหมาด้วยแชมพูกำจัดเห็บพรีเมี่ยม",
-        service_price: "5,500"
+        service_price: "5500"
       }
     ],
-    total_price: "",
-    visible: false
-  };
-
-  showDrawer = () => {
-    this.setState({
-      visible: true
-    });
-  };
-
-  onClose = () => {
-    this.setState({
-      visible: false
-    });
+    total_price: 0
   };
 
   onChange = checkedValues => {
-    console.log("checked = ", checkedValues);
+    // console.log("checked = ", checkedValues);
     this.setState({
+      total_price: checkedValues.reduce((sum, curr) => (sum += parseFloat(curr.service_price)), 0.0),
       checkedServices: checkedValues
     });
   };
 
   handleClickService = value => () => {
+    // console.log(value)
     let newCheckedServices = [...this.state.checkedServices];
     let isFound = this.state.checkedServices.find(
       service => service.service_id === value.service_id
@@ -77,8 +66,11 @@ class StoreDetailPage extends Component {
         service => service.service_id !== value.service_id
       );
     }
-    console.log(newCheckedServices);
+    let total_price = newCheckedServices.reduce((sum, curr) => (sum += parseFloat(curr.service_price)), 0.0)
+    // console.log(newCheckedServices);
+    // console.log(total_price);
     this.setState({
+      total_price: total_price,
       checkedServices: newCheckedServices
     });
   };
@@ -86,10 +78,11 @@ class StoreDetailPage extends Component {
   handleAffixServicePrice = () => {
     return (
       <Table
+        rowKey={"service_id"}
         columns={columns}
         dataSource={this.state.checkedServices}
         pagination={false}
-      ></Table>
+      />
     );
   };
 
@@ -98,9 +91,7 @@ class StoreDetailPage extends Component {
       <Layout>
         <AffixServicePrice
           handleAffixServicePrice={this.handleAffixServicePrice}
-          onClose={this.onClose}
-          showDrawer={this.showDrawer}
-          visible={this.state.visible}
+          totalPrice={this.state.total_price}
         />
         <StoreInfo
           onChange={this.onChange}
