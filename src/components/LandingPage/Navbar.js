@@ -4,6 +4,8 @@ import PageInfo from './PageInfo'
 import { Anchor } from 'antd'
 import SearchResult from './SearchZone/SearchResult'
 import SearchInput from './SearchZone/SearchInput'
+import './Info.css'
+
 
 const { Header, Footer, Sider, Content } = Layout
 
@@ -25,12 +27,12 @@ export class Navbar extends Component {
 
         return (
             <div>
-                <Layout>
+             
                     <Header style={{
                         display: "flex",
                         flexDirection: "row",
                         width: "100vw",
-                        background: "#40a9ff"
+                        background: "#41DAF0"
 
                     }}>
 
@@ -46,9 +48,10 @@ export class Navbar extends Component {
                         selectedKeys={[this.state.current]} 
                         mode="horizontal" 
                         style={{ 
-                            backgroundColor: "#40a9ff", 
+                            backgroundColor: "#41DAF0", 
                             color: "white"
-                            }}>
+                            }}
+                            className = 'nav'>
                         <Menu.Item key="about">About</Menu.Item>
                         <Menu.Item key="search">Search</Menu.Item>
                         <Menu.Item key="care">Care</Menu.Item>
@@ -57,7 +60,7 @@ export class Navbar extends Component {
                         </Menu.Item>
                         </Menu>
                    </Header>
-                </Layout>
+          
             <PageInfo />
             <SearchInput />
             <SearchResult />
