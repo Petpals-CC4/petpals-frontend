@@ -1,7 +1,12 @@
 import React, { Component } from 'react'
+import { Switch, Route } from 'react-router-dom'
+
 import './App.css';
+
+import NotFound from './components/utils/NotFound'
+
+import LandingPage from './pages/LandingPage';
 // import SearchZone from './components/landing/SearchZone';
-// import LandingPage from './components/LandingPage/LandingPage';
 // import Navbar from './components/landing/Navbar'
 // import StoreInfo from "./components/store-detail/StoreInfo";
 // import PaymentPage from "./pages/PaymentPage";
@@ -19,6 +24,13 @@ class App extends Component {
         {/* <VerifyPaymentPage /> */}
         {/* <CarouselSlider /> */}
         {/* <SearchZone /> */}
+        <Switch>
+          <Route exact path="/" component={LandingPage} />
+          {/* <Route path="/main" component={MainLayout} /> */}
+          {/* <Route path="/signin" component={FirstPage} /> */}
+          {/* <Route path="/signup" component={FirstPage} /> */}
+          <Route component={NotFound} />
+        </Switch>
       </div>
     )
   }
