@@ -1,27 +1,36 @@
 import React, { Component } from "react";
-import { Affix, Card, Button } from "antd";
+import { Affix, Button, Drawer } from "antd";
 
 class AffixServicePrice extends Component {
-  state = {
-    
-  };
   render() {
+    const {
+      handleAffixServicePrice,
+      onClose,
+      showDrawer,
+      visible
+    } = this.props;
     return (
-      <Affix
-        offsetTop={120}
-        onChange={affixed => console.log(affixed)}
-        style={{ position: "absolute", left: "50%" }}
-      >
-        <Card
-          style={{
-            borderRadius: "12px"
-          }}
-        >
-          <Button type="primary" style={{ width: "100%" }}>
+      <>
+        <Affix offsetTop={10} onChange={affixed => console.log(affixed)}>
+          <Button type="primary" style={{ width: "100%" }} onClick={showDrawer}>
             จอง
           </Button>
-        </Card>
-      </Affix>
+        </Affix>
+        <Drawer
+          title="สรุปรายการ"
+          placement="right"
+          closable={false}
+          onClose={onClose}
+          visible={visible}
+          getContainer={false}
+          style={{ position: "absolute" }}
+        >
+          {handleAffixServicePrice()}
+          <Button type="primary" style={{ width: "100%" }}>
+            ยืนยันการจอง
+          </Button>
+        </Drawer>
+        </>
     );
   }
 }

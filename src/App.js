@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import "./App.css";
+import StoreDetailPage from "./pages/StoreDetailPage";
 // import LandingPage from './components/LandingPage/LandingPage';
 // import Navbar from './components/landing/Navbar'
-// import StoreInfo from "./components/store-detail/StoreInfo";
 // import PaymentPage from "./pages/PaymentPage";
 
 class App extends Component {
@@ -10,10 +10,10 @@ class App extends Component {
     return (
       <div>
         {/* <Navbar /> */}
-        {/* <StoreInfo /> */}
         {/* <PaymentPage /> */}
         {/* <VerifyPaymentPage /> */}
         {/* <CarouselSlider /> */}
+        <StoreDetailPage/>
       </div>
     );
   }
