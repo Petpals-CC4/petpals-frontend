@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { Layout, Avatar, Col, Row, Menu } from 'antd';
-import PageInfo from './PageInfo'
+import PageInfo from './/PageInfo'
 import { Anchor } from 'antd'
-import SearchResult from './SearchZone/SearchResult'
-import SearchInput from './SearchZone/SearchInput'
+// import SearchResult from './SearchZone/SearchResult'
+// import SearchInput from './SearchZone/SearchInput'
 import './Info.css'
 
 
@@ -24,7 +24,6 @@ export class Navbar extends Component {
 
     render() {
 
-
         return (
             <div>
              
@@ -35,10 +34,6 @@ export class Navbar extends Component {
                         background: "#41DAF0"
 
                     }}>
-
-                        <div>
-                            <Avatar icon='user' />
-                        </div>
                         <div style={{ minWidth: "10px", maxWidth: "1000px", width: "1000px" }}></div>
                         {/* <div style={{width:"100px",minWidth:"70px"}}>about</div>
                             <div style={{width:"100px",minWidth:"70px"}}>search</div>
@@ -51,19 +46,19 @@ export class Navbar extends Component {
                             backgroundColor: "#41DAF0", 
                             color: "white"
                             }}
-                            className = 'nav'>
-                        <Menu.Item key="about">About</Menu.Item>
-                        <Menu.Item key="search">Search</Menu.Item>
-                        <Menu.Item key="care">Care</Menu.Item>
-                        <Menu.Item key="icon">
-                            <Avatar icon='user' />
-                        </Menu.Item>
+                            >
+                        <Menu.Item key="about" className = 'nav'>เกี่ยวกับเรา</Menu.Item>
+                        <Menu.Item key="search" className = 'nav'>ค้นหา</Menu.Item>
+                        <Menu.Item key="care" className = 'nav'>ร้านรับฝากของเรา    </Menu.Item>
                         </Menu>
+                        <div style={{width:"70px",minWidth:"20px"}}>
+                        <Avatar icon='user' />
+                        </div>
                    </Header>
           
             <PageInfo />
-            <SearchInput />
-            <SearchResult />
+            {/* <SearchInput />
+            <SearchResult /> */}
             </div >
         )
     }
