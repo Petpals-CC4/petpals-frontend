@@ -5,10 +5,10 @@ class CarouselSlider extends Component {
   state = {
     data: {
       image_url: [
-        "https://img.designswan.com/2018/11/JPGroom/5.jpg",
-        "https://img.designswan.com/2018/11/JPGroom/6.jpg",
-        "https://img.designswan.com/2018/11/JPGroom/7.jpg",
-        "https://img.designswan.com/2018/11/JPGroom/8.jpg"
+        "https://uppicimg.com/file/cOfyZoAH.jpg",
+        "https://uppicimg.com/file/Mgm1pv3H.jpg",
+        "https://uppicimg.com/file/1knyTZUD.jpg",
+        "https://uppicimg.com/file/dWmNUAYK.jpg"
       ]
     }
   }
