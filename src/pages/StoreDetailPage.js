@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import { Layout, Table } from "antd";
+import { Layout, Table, Carousel } from "antd";
 
 // ------------------------------Component--------------------------------------------
 
 import AffixServicePrice from "../components/store-detail/AffixServicePrice";
 import StoreInfo from "../components/store-detail/StoreInfo";
+import CarouselSlider from "../components/landing/CarouselSlider";
 
 const columns = [
   {
@@ -89,6 +90,7 @@ class StoreDetailPage extends Component {
   render() {
     return (
       <Layout>
+        <CarouselSlider/>
         <AffixServicePrice
           handleAffixServicePrice={this.handleAffixServicePrice}
           totalPrice={this.state.total_price}

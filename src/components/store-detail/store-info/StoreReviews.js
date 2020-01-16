@@ -21,14 +21,14 @@ export class StoreReviews extends Component {
             align="middle"
           >
             <Col span={2} type="flex" justify="start">
-              <h1 style={{color:"#1DE1EE"}} >รีวิว</h1>
+              <h1 style={{color:"#0F4C81"}} >รีวิว</h1>
             </Col>
             <Col span={2} offset={6} type="flex" justify="end">
               <img
                 src={boneEmptyIcon}
                 style={{ width: "30px", height: "30px" }}
               />
-              <h3 style={{color:"#1DE1EE"}}> 3.5 </h3>
+              <h3 style={{color:"#0F4C81"}}> 3.5 </h3>
             </Col>
           </Row>
         </Card>
