@@ -1,38 +1,33 @@
 import React, { Component } from 'react'
-import { Row, Col, Carousel, Layout, Card } from 'antd'
+import { Carousel } from 'antd'
 
 class CarouselSlider extends Component {
   state = {
-    data: {
-      image_url: [
-        "https://uppicimg.com/file/cOfyZoAH.jpg",
-        "https://uppicimg.com/file/Mgm1pv3H.jpg",
-        "https://uppicimg.com/file/1knyTZUD.jpg",
-        "https://uppicimg.com/file/dWmNUAYK.jpg"
-      ]
-    }
+    image_url: [
+      "https://uppicimg.com/file/cOfyZoAH.jpg",
+      "https://uppicimg.com/file/Mgm1pv3H.jpg",
+      "https://uppicimg.com/file/1knyTZUD.jpg",
+      "https://uppicimg.com/file/dWmNUAYK.jpg"
+    ]
   }
   render() {
     return (
-      <Layout>
-        <Card>
-          <Row className="row-carousel">
-            <Col >
-              <Carousel autoplay>
-                {
-                  this.state.data.image_url.map(url => (
-                    <div className="slide-pet" >
-                      <img src={url} style={{ maxWidth: "100%", display: "block", margin: "auto" }}
-                      />
-                    </div>
-                  ))
-                }
-              </Carousel>
-            </Col>
-          </Row>
-        </Card>
-      </Layout>
-
+      <Carousel autoplay>
+        {
+          this.state.image_url.map(url => (
+            <div
+              key={url}
+              className="setCenterImg"
+            >
+              <img
+                src={url}
+                style={{ width: "100%" }}
+                alt="cover"
+              />
+            </div>
+          ))
+        }
+      </Carousel>
     )
   }
 }

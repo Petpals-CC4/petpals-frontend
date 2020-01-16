@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
-import { Layout, Avatar, Menu, Row, Col } from 'antd';
+import { Layout, Avatar, Col, Row, Menu } from 'antd';
+import './Info.css'
 
 const { Header } = Layout
 
 class Navbar extends Component {
+
   state = {
     current: 'about',
   };
@@ -15,6 +17,7 @@ class Navbar extends Component {
     });
   };
 
+  // TODO: Responsive Header Tab
   render() {
     return (
       <Layout>
@@ -37,7 +40,7 @@ class Navbar extends Component {
                     }}>
                     <Menu.Item key="about">เกี่ยวกับเรา</Menu.Item>
                     <Menu.Item key="search">ค้นหา</Menu.Item>
-                    <Menu.Item key="care">ร้</Menu.Item>
+                    <Menu.Item key="care">ร้านรับฝากของเรา</Menu.Item>
                   </Menu>
                 </Col>
                 <Col>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Row, Col, Upload, Icon, Card, Form, Select, Button, Input } from 'antd'
+import { Row, Col, Upload, Icon, Form, Select, Button, Input } from 'antd'
 
 const { Option } = Select
 
@@ -13,8 +13,12 @@ function getBase64(img, callback) {
 export class VerifyPaymentPage extends Component {
   state = {
     data: {
-      verifiedSlip: "",
-      bank: ""
+      user_id: 5,
+      service_id: 5,
+      start_date: '2020-12-31',
+      end_date: '2020-12-31',
+      payment_name: '',
+      total_price: '3000 บาท'
     },
     loading: false,
   }
@@ -55,13 +59,13 @@ export class VerifyPaymentPage extends Component {
     const { imageUrl } = this.state;
     return (
       <div style={{ margin: '2em' }}>
-        <Form style={{ display: 'block', marginLeft: 'auto', marginRight: 'auto', width: '30%' }}>
-          <Row >
+        <Form >
+          <Row type="flex" justify='center'>
             <Col >
               <Upload listType="picture-card"
                 onChange={this.handleChange} >
-                {this.state.data.verifiedSlip}
-                {imageUrl ? <img src={imageUrl}  style={{ width: '100%' }} /> : uploadButton}
+               
+                {imageUrl ? <img src={imageUrl} style={{ width: '100%' }} /> : uploadButton}
               </Upload>
             </Col>
           </Row>
@@ -83,14 +87,14 @@ export class VerifyPaymentPage extends Component {
               <Form.Item label="จำนวนเงิน:" className={"formItemShowText"} {...formVerifyLayout}>
                 <Input
                   placeholder="จำนวนเงินที่โอน"
-                />
+                />{this.state.total_price}
               </Form.Item>
             </Col>
             <Col >
               <Form.Item label="ชื่อ:" className={"formItemShowText"} {...formVerifyLayout}>
                 <Input
                   placeholder="ชื่อ"
-                />
+                />{this.state.payment_name}
               </Form.Item>
             </Col>
             <Col>

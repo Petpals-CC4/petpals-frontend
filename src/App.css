@@ -1,4 +1,11 @@
- .ant-menu-horizontal > .ant-menu-item-selected {
+.justifyCenter,
+.setCenterImg {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+}
+
+.ant-menu-horizontal > .ant-menu-item-selected {
   color: white !important;
   border-bottom: 2px solid white !important;
 }
@@ -30,4 +37,8 @@
 }
 .not-found-page .ant-result-image {
   margin: initial;
+}
+
+.setCenterImg {
+  height: 500px;
 }
