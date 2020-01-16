@@ -19,10 +19,10 @@ export class StoreBio extends Component {
           <Row gutter={[8,8]}>
             <Col span= {18}>
               <Row>
-                <h1 style={{color:"#1DE1EE"}}>{this.state.store.store_Name}</h1>
+                <h1 style={{color:"#0F4C81"}}>{this.state.store.store_Name}</h1>
               </Row>
               <Row>
-                <p style={{color:"#1DE1EE"}}>{this.state.store.store_Description}</p>
+                <p style={{color:"#0F4C81"}}>{this.state.store.store_Description}</p>
               </Row>
             </Col>
             <Col span={6}>

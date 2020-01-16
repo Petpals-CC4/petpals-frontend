@@ -52,11 +52,11 @@ export class StoreUserComment extends Component {
             }
         }
       return <Card key={fIndex}>
-        <h4 style={{color:"#1DE1EE"}}>
+        <h4 style={{color:"#0F4C81"}}>
           {f.user.firstname}&emsp;{f.user.lastname}
         </h4>
-        <h5 style={{color:"#1DE1EE"}}>{f.create_at}</h5>
-        <p style={{color:"#1DE1EE"}}>{f.comment}</p>
+        <h5 style={{color:"#0F4C81"}}>{f.create_at}</h5>
+        <p style={{color:"#0F4C81"}}>{f.comment}</p>
         {boneRender.map((bone, index) => {
             return bone ? (
               <img

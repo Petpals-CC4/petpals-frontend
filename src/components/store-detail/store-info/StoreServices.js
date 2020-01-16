@@ -1,18 +1,12 @@
 import React, { Component } from "react";
 import { Layout, Card, Checkbox, Row, Col } from "antd";
 
-// function onChange(checkedValues) {
-//   console.log("checked = ", checkedValues);
-// }
-
 export class StoreServices extends Component {
   render() {
     const {
       onChange,
-      handleClickService,
       service,
       checkedServices,
-      total_price
     } = this.props;
     return (
       <Layout>
@@ -23,17 +17,15 @@ export class StoreServices extends Component {
                 <Col>
                   <Checkbox
                     value={s}
-                    checked={checkedServices.find(
-                      service => service.service_id === s.service_id
-                    )}
-                  />
+                    checked={this.state.checkedServices.find((service) => (service.service_id === s.service_id))}
+                    />
                 </Col>
-                <Col onClick={handleClickService(s)}>
-                  <h4 style={{ color: "#1DE1EE" }}>{s.service_name}</h4>
-                  <h5 style={{ color: "#1DE1EE" }}>รายละเอียดเพิ่มเติม</h5>
-                  <p style={{ color: "#1DE1EE" }}>{s.service_description}</p>
+                <Col onClick={this.handleClickService(s)}>
+                  <h4 style={{ color: "#0F4C81" }}>{s.service_name}</h4>
+                  <h5 style={{ color: "#0F4C81" }}>รายละเอียดเพิ่มเติม</h5>
+                  <p style={{ color: "#0F4C81" }}>{s.service_description}</p>
                   <br />
-                  <h5 style={{ color: "#1DE1EE" }}>
+                  <h5 style={{ color: "#0F4C81" }}>
                     ราคา {s.service_price} บาท
                   </h5>
                 </Col>
