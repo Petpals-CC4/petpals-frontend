@@ -4,6 +4,8 @@ import './App.css';
 import Navbar from './components/LandingPage/Navbar'
 import StoreInfo from "./components/store-detail/StoreInfo";
 import PaymentPage from "./pages/PaymentPage";
+import CarouselSlider from './components/CarouselSlider';
+import VerifyPaymentPage from './components/VerifyPaymentPage';
 
 
 function App() {
@@ -12,7 +14,7 @@ function App() {
       {/* <Navbar></Navbar> */}
       {/* <StoreInfo /> */}
       {/* <PaymentPage /> */}
-      {/* <VerifyPaymentPage /> */}
+      <VerifyPaymentPage />
       {/* <CarouselSlider /> */}
     </div>
   );
