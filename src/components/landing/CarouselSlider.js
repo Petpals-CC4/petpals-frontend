@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Row, Col, Carousel, Layout, Card } from 'antd'
 
-export class CarouselSlider extends Component {
+class CarouselSlider extends Component {
   state = {
     data: {
       image_url: [

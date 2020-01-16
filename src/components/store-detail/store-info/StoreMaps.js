@@ -24,11 +24,11 @@ export class StoreMaps extends Component {
             align="middle"
           >
             <Col span={12}>
-              <h4 style={{color:"#1DE1EE"}}>Address: {this.state.data.Address}</h4>
+              <h4 style={{color:"#0F4C81"}}>Address: {this.state.data.Address}</h4>
             </Col>
             <Col span={12}>
               <div>
-                <h4 style={{color:"#1DE1EE"}}>
+                <h4 style={{color:"#0F4C81"}}>
                   <img
                     src={phoneIcon}
                     alt="phoneIcon"

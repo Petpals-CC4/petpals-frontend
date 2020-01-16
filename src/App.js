@@ -1,60 +1,27 @@
-import React from 'react';
+import React, { Component } from 'react'
 import './App.css';
-//import LandingPage from './components/LandingPage/LandingPage';
-import Navbar from './components/LandingPage/Navbar'
-import StoreInfo from "./components/store-detail/StoreInfo";
-import PaymentPage from "./pages/PaymentPage";
-import CarouselSlider from './components/CarouselSlider';
-import VerifyPaymentPage from './pages/VerifyPaymentPage';
+// import SearchZone from './components/landing/SearchZone';
+// import LandingPage from './components/LandingPage/LandingPage';
+// import Navbar from './components/landing/Navbar'
+// import StoreInfo from "./components/store-detail/StoreInfo";
+// import PaymentPage from "./pages/PaymentPage";
+// import CarouselSlider from './components/CarouselSlider';
+// import VerifyPaymentPage from './components/VerifyPaymentPage';
 
-
-function App() {
-  return (
-    <div>
-      {/* <Navbar></Navbar> */}
-      {/* <StoreInfo /> */}
-      {/* <PaymentPage /> */}
-      <VerifyPaymentPage />
-      {/* <CarouselSlider /> */}
-    </div>
-  );
+class App extends Component {
+  render() {
+    return (
+      <div>
+        {/* <Navbar /> */}
+        {/* <LandingPage /> */}
+        {/* <StoreInfo /> */}
+        {/* <PaymentPage /> */}
+        {/* <VerifyPaymentPage /> */}
+        {/* <CarouselSlider /> */}
+        {/* <SearchZone /> */}
+      </div>
+    )
+  }
 }
 
 export default App
-
-
-
-
-
-
-
-
-
-
-
-// import React from 'react';
-// import logo from './logo.svg';
-// import './App.css';
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
-
-// export default App;

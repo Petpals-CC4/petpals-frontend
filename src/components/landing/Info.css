@@ -1,0 +1,38 @@
+.text{
+    color: 000000;
+    font-size: 20px;
+    font-weight: 700;
+    font-family: 'Kanit';
+}
+
+.point{
+    color: #2F5FED;
+    font-family: 'Kanit';
+    font-weight: 700;
+    font-size: 17px;
+}
+
+.aodeatil {
+    color: #808080;
+    font-family: 'Kanit';
+    font-size: 10px;
+}
+
+.nav {
+    font-family: 'Kanit';
+}
+
+.top {
+    font-size: 50px;
+    letter-spacing: 2px;
+    word-spacing: 2px;
+    color: #000000;
+    font-weight: 700;
+}
+
+.moc {
+    color: 000000;
+    font-size: 10px;
+    font-weight: 700;
+    font-family: 'Kanit'
+}
