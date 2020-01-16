@@ -1,67 +1,58 @@
 import React, { Component } from 'react'
 import { Layout, Avatar, Col, Row, Menu } from 'antd';
-import PageInfo from './/PageInfo'
-import { Anchor } from 'antd'
-// import SearchResult from './SearchZone/SearchResult'
-// import SearchInput from './SearchZone/SearchInput'
 import './Info.css'
 
+const { Header } = Layout
 
-const { Header, Footer, Sider, Content } = Layout
+class Navbar extends Component {
 
-export class Navbar extends Component {
+  state = {
+    current: 'about',
+  };
 
-    state = {
-        current: 'about',
-    };
+  handleClick = e => {
+    // console.log('click ', e);
+    this.setState({
+      current: e.key,
+    });
+  };
 
-    handleClick = e => {
-        console.log('click ', e);
-        this.setState({
-            current: e.key,
-        });
-    };
-
-    render() {
-
-        return (
-            <div>
-             
-                    <Header style={{
-                        display: "flex",
-                        flexDirection: "row",
-                        width: "100vw",
-                        background: "#41DAF0"
-
+  // TODO: Responsive Header Tab
+  render() {
+    return (
+      <Layout>
+        <Header style={{ background: "#0F4C81" }}>
+          <Row type="flex" justify="space-between" align="middle">
+            <Col>
+              <Avatar icon='user' />
+            </Col>
+            <Col>
+              <Row type="flex" align="middle" gutter={16}>
+                <Col>
+                  <Menu
+                    onClick={this.handleClick}
+                    selectedKeys={[this.state.current]}
+                    mode="horizontal"
+                    style={{
+                      borderBottom: "0px",
+                      backgroundColor: "#0F4C81",
+                      color: "white",
                     }}>
-                        <div style={{ minWidth: "10px", maxWidth: "1000px", width: "1000px" }}></div>
-                        {/* <div style={{width:"100px",minWidth:"70px"}}>about</div>
-                            <div style={{width:"100px",minWidth:"70px"}}>search</div>
-                            <div style={{width:"100px",minWidth:"70px"}}>care</div>
-                            <div style={{width:"100px",minWidth:"70px"}}>icon</div> */}
-                        <Menu onClick={this.handleClick} 
-                        selectedKeys={[this.state.current]} 
-                        mode="horizontal" 
-                        style={{ 
-                            backgroundColor: "#41DAF0", 
-                            color: "white"
-                            }}
-                            >
-                        <Menu.Item key="about" className = 'nav'>เกี่ยวกับเรา</Menu.Item>
-                        <Menu.Item key="search" className = 'nav'>ค้นหา</Menu.Item>
-                        <Menu.Item key="care" className = 'nav'>ร้านรับฝากของเรา    </Menu.Item>
-                        </Menu>
-                        <div style={{width:"70px",minWidth:"20px"}}>
-                        <Avatar icon='user' />
-                        </div>
-                   </Header>
-          
-            <PageInfo />
-            {/* <SearchInput />
-            <SearchResult /> */}
-            </div >
-        )
-    }
+                    <Menu.Item key="about">เกี่ยวกับเรา</Menu.Item>
+                    <Menu.Item key="search">ค้นหา</Menu.Item>
+                    <Menu.Item key="care">ร้านรับฝากของเรา</Menu.Item>
+                  </Menu>
+                </Col>
+                <Col>
+                  <Avatar icon='user' />
+                </Col>
+              </Row>
+            </Col>
+          </Row>
+        </Header>
+      </Layout>
+    )
+  }
 }
 
 export default Navbar

@@ -1,38 +1,22 @@
-.text{
-    color: 000000;
-    font-size: 20px;
-    font-weight: 700;
-    font-family: 'Kanit';
+.text {
+  color: #000000;
+  font-size: 1.6rem;
+  font-weight: 700;
 }
 
-.point{
-    color: #2F5FED;
-    font-family: 'Kanit';
-    font-weight: 700;
-    font-size: 17px;
+.point {
+  color: #0F4C81;
+  font-weight: 700;
+  font-size: 1.4rem;
 }
 
-.aodeatil {
-    color: #808080;
-    font-family: 'Kanit';
-    font-size: 10px;
-}
-
-.nav {
-    font-family: 'Kanit';
-}
-
-.top {
-    font-size: 50px;
-    letter-spacing: 2px;
-    word-spacing: 2px;
-    color: #000000;
-    font-weight: 700;
+.aodetail {
+  color: #808080;
+  font-size: 1rem;
 }
 
 .moc {
-    color: 000000;
-    font-size: 10px;
-    font-weight: 700;
-    font-family: 'Kanit'
+  color: #000000;
+  font-size: 1rem;
+  font-weight: 700;
 }
