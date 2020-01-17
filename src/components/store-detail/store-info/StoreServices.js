@@ -7,6 +7,7 @@ export class StoreServices extends Component {
       onChange,
       service,
       checkedServices,
+      handleClickService
     } = this.props;
     return (
       <Layout>
@@ -17,10 +18,10 @@ export class StoreServices extends Component {
                 <Col>
                   <Checkbox
                     value={s}
-                    checked={this.state.checkedServices.find((service) => (service.service_id === s.service_id))}
+                    checked={checkedServices.find((service) => (service.service_id === s.service_id))}
                     />
                 </Col>
-                <Col onClick={this.handleClickService(s)}>
+                <Col onClick={handleClickService(s)}>
                   <h4 style={{ color: "#0F4C81" }}>{s.service_name}</h4>
                   <h5 style={{ color: "#0F4C81" }}>รายละเอียดเพิ่มเติม</h5>
                   <p style={{ color: "#0F4C81" }}>{s.service_description}</p>
