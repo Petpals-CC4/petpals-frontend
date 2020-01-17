@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 import SearchInput from './search-zone/SearchInput'
 import SearchResult from './search-zone/SearchResult'
+import { Row, Col } from 'antd'
 
 class SearchZone extends Component {
   state = {
@@ -26,21 +27,48 @@ class SearchZone extends Component {
       },
     ],
     guideText: ["ตัดขน", "ตัดเล็บ", "อาบน้ำ", "ออกกำลังกาย", "ลูบหัว", "เดินเล่น"],
+    searchObj: {
+      searchText: "",
+      startDate: null,
+      endDate: null,
+    },
+    showSelectedRange: false
   }
 
-  handleSearch = (value) => {
-    console.log("search:", value)
+  handleSearch = (searchObj) => {
+    this.setState({ showSelectedRange: true, searchObj })
+  }
+
+  handleClearSearch = () => {
+    this.setState({
+      searchObj: {
+        searchText: "",
+        startDate: null,
+        endDate: null,
+      }
+    })
   }
 
   render() {
     return (
       <div style={{ margin: "2em" }}>
-        <div style={{ marginBottom: "2em" }}>
-          <SearchInput onSearch={this.handleSearch} guideText={this.state.guideText} />
-        </div>
-        <div>
-          <SearchResult storeResultList={this.state.storeResultList} />
-        </div>
+        <Row gutter={[16, 16]}>
+          <Col xs={24} sm={{ span: 20, offset: 2 }} md={{ span: 16, offset: 4 }}>
+            <SearchInput
+              onSearch={this.handleSearch}
+              guideText={this.state.guideText}
+              searchObj={this.state.searchObj}
+            />
+          </Col>
+          <Col xs={24} sm={{ span: 20, offset: 2 }} md={{ span: 16, offset: 4 }}>
+            <SearchResult
+              storeResultList={this.state.storeResultList}
+              showSelectedRange={this.state.showSelectedRange}
+              selectedSearch={this.state.searchObj}
+              onClearSearch={this.handleClearSearch}
+            />
+          </Col>
+        </Row>
       </div>
     )
   }

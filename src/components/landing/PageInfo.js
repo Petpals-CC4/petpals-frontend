@@ -26,18 +26,16 @@ class PageInfo extends Component {
   render() {
     return (
       <div>
-        <div style={{ textAlign: "center" }}>
-          <div className="text" style={{ margin: "1.2em 0px", padding: "0px 8px" }}>
-            ค้นหาบริการที่ดีที่สุดเพื่อเพื่อนเเสนรักของคุณ <br />
+        <div id="about" style={{ textAlign: "center", paddingTop: "64px" }}>
+          <div className="point" style={{ margin: "1.2em 0px", padding: "0px 8px" }}>
+            ค้นหาบริการที่ดีที่สุดเพื่อเพื่อนแสนรักของคุณ <br />
             จากผู้ให้บริการมืออาชีพ
           </div>
-
           <CarouselSlider />
+        </div>
 
-          <div className="text" style={{ margin: "1.2em 0px", padding: "0px 8px" }}>
-            เสียงตอบรับจากลูกค้าของเรา
-          </div>
-
+        <div id="feedback" className="text" style={{ textAlign: "center", margin: "1.2em 0px", padding: "0px 8px" }}>
+          เสียงตอบรับจากลูกค้าของเรา
           {this.state.exampleFeedback.map(item => {
             return (
               <div key={item.id} style={{ padding: "0px 8px" }}>
@@ -51,7 +49,7 @@ class PageInfo extends Component {
           })}
         </div>
 
-        <div className="text" style={{ textAlign: "center" }}>ค้นหาเลย</div>
+        <div id="search" className="text" style={{ textAlign: "center" }}>มาหา Nanny ที่ตรงใจกันเลย</div>
       </div>
     )
   }

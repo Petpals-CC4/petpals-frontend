@@ -1,4 +1,4 @@
-# Petpals
+# PetPals
 
 ## 📘 Description
 
@@ -15,12 +15,12 @@ A Group Final-Project in CodeCamp 4 (2019).
 
 ```mermaid
 graph LR;
-  Petpals --> Petpals-backend;
-  Petpals-backend --> Petpals;
-  Petpals-backend -->|JWT| PassportJS;
-  PassportJS -->|Authentication| Petpals-backend;
-  Petpals-backend --> Sequelize;
-  Sequelize --> Petpals-backend;
+  PetPals --> PetPals-backend;
+  PetPals-backend --> PetPals;
+  PetPals-backend -->|JWT| PassportJS;
+  PassportJS -->|Authentication| PetPals-backend;
+  PetPals-backend --> Sequelize;
+  Sequelize --> PetPals-backend;
   Sequelize --> MySQL;
   MySQL --> Sequelize;
 ```
@@ -34,14 +34,14 @@ graph LR;
 ## 🏷 Version
 
 - Current Version: 0.1.0
-- For the versions available, see the [tags on this repository.](https://github.com/Petpals-CC4/petpals-frontend/tags)
+- For the versions available, see the [tags on this repository.](https://github.com/PetPals-CC4/petpals-frontend/tags)
 
 ## 💡 Getting Started
 
 1️⃣ Clone this project by
 
   ```bash
-    git clone https://github.com/Petpals-CC4/petpals-frontend.git
+    git clone https://github.com/PetPals-CC4/petpals-frontend.git
   ```
 
 2️⃣ Run Commands
@@ -64,7 +64,7 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 ## 😎 Author
 
-Petpals Team - Codecamp 4 (2019)
+PetPals Team - Codecamp 4 (2019)
 
 ## 🚩 Created at
 
