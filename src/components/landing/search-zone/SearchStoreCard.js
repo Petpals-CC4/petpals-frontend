@@ -39,7 +39,7 @@ class SearchStoreCard extends Component {
               <strong style={{ marginLeft: "2px" }}>{parseFloat(score).toFixed(1)}</strong>
             </Row>
           </Col>
-          <Col xs={18}>
+          <Col xs={{span: 17, offset: 1}}>
             <Row>
               <Typography.Paragraph ellipsis={{ rows: 1 }} style={{ margin: 0 }}>
                 <strong>{name}</strong>

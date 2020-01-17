@@ -14,6 +14,17 @@
   color: whitesmoke !important;
   border-bottom: 2px solid whitesmoke !important;
 } 
+
+.ant-menu-horizontal > .ant-menu-item > a {
+  color: whitesmoke !important;
+}
+
+.fixedNav {
+  position: fixed;
+  width: 100%;
+  z-index: 999;
+}
+
 .formItemShowText {
   width: 100%;
   margin-bottom: 4px !important;

@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { Layout, Avatar, Col, Row, Menu } from 'antd';
 import './Info.css'
 
+import { ReactComponent as Logo } from '../../images/patpals_logo.svg'
+
 const { Header } = Layout
 
 class Navbar extends Component {
@@ -9,6 +11,37 @@ class Navbar extends Component {
   state = {
     current: 'about',
   };
+
+  getActiveID = () => {
+    let listMenu = [
+      "about",
+      "feedback",
+      "search"
+    ]
+    for (let index = 0; index < listMenu.length; index++) {
+      const menu = listMenu[index];
+      let menuHtml = document.getElementById(menu)
+      let yPosMenu = menuHtml.getBoundingClientRect().y
+      if (yPosMenu >= 0) {
+        return menu
+      }
+    }
+  }
+
+  handleScroll = () => {
+    let nowActive = this.getActiveID()
+    this.setState({
+      current: nowActive
+    })
+  }
+
+  componentDidMount = () => {
+    window.addEventListener('scroll', this.handleScroll);
+  }
+
+  componentWillUnmount = () => {
+    window.removeEventListener('scroll', this.handleScroll);
+  }
 
   handleClick = e => {
     // console.log('click ', e);
@@ -20,11 +53,11 @@ class Navbar extends Component {
   // TODO: Responsive Header Tab
   render() {
     return (
-      <Layout>
+      <Layout className="fixedNav">
         <Header style={{ background: "#0F4C81" }}>
           <Row type="flex" justify="space-between" align="middle">
             <Col>
-              <Avatar icon='user' />
+              <Logo style={{ height: "48px", display: "flex" }} />
             </Col>
             <Col>
               <Row type="flex" align="middle" gutter={16}>
@@ -38,13 +71,13 @@ class Navbar extends Component {
                       backgroundColor: "#0F4C81",
                       color: "white",
                     }}>
-                    <Menu.Item key="about">เกี่ยวกับเรา</Menu.Item>
-                    <Menu.Item key="search">ค้นหา</Menu.Item>
-                    <Menu.Item key="care">ร้านรับฝากของเรา</Menu.Item>
+                    <Menu.Item key="about"><a href="#about">เกี่ยวกับเรา</a></Menu.Item>
+                    <Menu.Item key="feedback"><a href="#feedback">รีวิว</a></Menu.Item>
+                    <Menu.Item key="search"><a href="#search">ค้นหา</a></Menu.Item>
                   </Menu>
                 </Col>
                 <Col>
-                  <Avatar icon='user' />
+                  <Avatar icon='user' style={{ backgroundColor: '#e7e6e1', color: "#0F4C81" }} />
                 </Col>
               </Row>
             </Col>
