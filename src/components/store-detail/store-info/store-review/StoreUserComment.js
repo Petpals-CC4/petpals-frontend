@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Card, Layout } from "antd";
-import moment from 'moment'
 
 // --------------------------------image-----------------------------------
 
@@ -75,12 +74,14 @@ export class StoreUserComment extends Component {
             src={boneIcon}
             key={index}
             style={{ width: "15px", height: "15px" }}
+            alt="bone"
           />
         ) : (
             <img
               src={boneEmptyIcon}
               key={index}
               style={{ width: "15px", height: "15px" }}
+              alt="empty_bone"
             />
           );
       })}
