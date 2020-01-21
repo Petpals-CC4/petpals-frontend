@@ -46,3 +46,10 @@ export const withCommas = (number) => {
   return number
 }
 // ## convert numbers
+
+// ## Convert Date
+const moment = require('moment')
+export const dateFormat = (date) => {
+  return moment(date).format("YYYY-MM-DD HH:mm:ss")
+}
+// ## Convert Date

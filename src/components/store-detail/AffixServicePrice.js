@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Button, Drawer } from "antd";
+import { Button, Drawer, Table } from "antd";
+import { withCommas } from "../../utils";
 
 class AffixServicePrice extends Component {
   state = {
@@ -8,44 +9,75 @@ class AffixServicePrice extends Component {
 
   handleShowDrawer = () => {
     console.log("object")
-    this.setState({visible: true})
+    this.setState({ visible: true })
   }
-  
+
   handleHideDrawer = () => {
     console.log("object")
-    this.setState({visible: false})
+    this.setState({ visible: false })
   }
 
   render() {
     const {
-      handleAffixServicePrice,
-      totalPrice
+      checkedServices
     } = this.props;
-    
+
+    // console.log(checkedServices)
+
+    const columns = [
+      {
+        title: "ชื่อบริการ",
+        dataIndex: "service_name",
+        key: "service_name"
+      },
+      {
+        title: "ราคา",
+        dataIndex: "service_price",
+        key: "service_price",
+        align: "right",
+        render: (price) => {
+          return <span style={{ textAlign: "right" }}>{withCommas(price)} บาท</span>
+        }
+      }
+    ];
+
+    const sumPrice = checkedServices.length ?
+      checkedServices.reduce((total, current) => total += parseFloat(current.service_price), 0)
+      : 0.0
 
     return (
       <>
         <Button
-            block
-            type="primary"
-            onClick={this.handleShowDrawer}
-            style={{position: "fixed", bottom: 0, zIndex: 999 }}
-            >
-            จอง
+          block
+          type="primary"
+          onClick={this.handleShowDrawer}
+          style={{ position: "fixed", bottom: 0, zIndex: 999 }}
+        >
+          จอง
         </Button>
         <Drawer
           title="สรุปรายการ"
           placement="right"
+          width={400}
           onClose={this.handleHideDrawer}
           visible={this.state.visible}
         >
-          {handleAffixServicePrice()}
-          ยอดรวม {totalPrice} บาท
-          <Button type="primary" style={{ width: "100%" }} disabled={totalPrice <= 0}>
+
+          <Table
+            rowKey={"id"}
+            columns={columns}
+            dataSource={checkedServices}
+            pagination={false}
+          />
+
+          <div>
+            ยอดรวม {withCommas(sumPrice)} บาท
+          </div>
+          <Button type="primary" style={{ width: "100%" }} disabled={sumPrice <= 0.0}>
             ยืนยันการจอง
           </Button>
         </Drawer>
-        </>
+      </>
     );
   }
 }

@@ -3,18 +3,21 @@ import { Carousel } from 'antd'
 
 class CarouselSlider extends Component {
   state = {
-    image_url: [
-      "https://uppicimg.com/file/cOfyZoAH.jpg",
-      "https://uppicimg.com/file/Mgm1pv3H.jpg",
-      "https://uppicimg.com/file/1knyTZUD.jpg",
-      "https://uppicimg.com/file/dWmNUAYK.jpg"
-    ]
+    // image_url: [
+    //   "https://uppicimg.com/file/cOfyZoAH.jpg",
+    //   "https://uppicimg.com/file/Mgm1pv3H.jpg",
+    //   "https://uppicimg.com/file/1knyTZUD.jpg",
+    //   "https://uppicimg.com/file/dWmNUAYK.jpg"
+    // ]
   }
   render() {
+    const {
+      images
+    } = this.props
     return (
       <Carousel autoplay>
         {
-          this.state.image_url.map(url => (
+          images ? images.map(url => (
             <div
               key={url}
               className="setCenterImg"
@@ -26,6 +29,7 @@ class CarouselSlider extends Component {
               />
             </div>
           ))
+          : ""
         }
       </Carousel>
     )

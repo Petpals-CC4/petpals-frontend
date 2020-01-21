@@ -27,7 +27,7 @@ class App extends Component {
         {/* <SearchZone /> */}
         <Switch>
           <Route exact path="/" component={LandingPage} />
-          <Route path="/storedetailpage" component={StoreDetailPage} />
+          <Route path="/store_detail/:id" component={StoreDetailPage} />
           <Route path="/payment" component={PaymentPage} />
           <Route path="/verifypaymentpage" component={VerifyPaymentPage} />
           {/* <Route path="/main" component={MainLayout} /> */}

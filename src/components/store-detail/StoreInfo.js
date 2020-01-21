@@ -7,24 +7,26 @@ import StoreReviews from "./store-info/StoreReviews";
 class StoreInfo extends Component {
   render() {
     const {
+      storeData,
       onChange,
       handleClickService,
-      service,
       checkedServices,
-      total_price
     } = this.props;
     return (
       <>
-        <StoreBio />
+        <StoreBio
+          name={storeData.store_name}
+          description={storeData.store_description}
+          imageUrl={storeData.profile_image_url}
+          />
         <StoreServices
           onChange={onChange}
           handleClickService={handleClickService}
-          service={service}
+          services={storeData.service}
           checkedServices={checkedServices}
-          total_price={total_price}
         />
         <StoreMaps />
-        <StoreReviews />
+        <StoreReviews feedback_score={storeData.feedback_score} feedbacks={storeData.feedback} />
       </>
     );
   }
