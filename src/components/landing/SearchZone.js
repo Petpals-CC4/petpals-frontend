@@ -4,6 +4,8 @@ import SearchInput from './search-zone/SearchInput'
 import SearchResult from './search-zone/SearchResult'
 import { Row, Col } from 'antd'
 
+import Axios from '../../utils/api.service'
+
 class SearchZone extends Component {
   state = {
     storeResultList: [
@@ -46,6 +48,14 @@ class SearchZone extends Component {
         startDate: null,
         endDate: null,
       }
+    })
+  }
+
+  componentDidMount = async () => {
+    let result = await Axios.get("/landingpage")
+    // console.log(result.data);
+    this.setState({
+      storeResultList: result ? result.data : []
     })
   }
 

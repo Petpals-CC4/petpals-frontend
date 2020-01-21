@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, withRouter } from 'react-router-dom'
 
 import './App.css';
 
@@ -15,6 +15,7 @@ import PaymentPage from "./pages/PaymentPage";
 
 class App extends Component {
   render() {
+    window.appHistory = this.props.history
     return (
       <div>
         {/* <Navbar /> */}
@@ -37,4 +38,4 @@ class App extends Component {
   }
 }
 
-export default App
+export default withRouter(App)

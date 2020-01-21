@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Row, Avatar, Col, Typography, Card } from 'antd'
+import { Row, Avatar, Col, Typography, Card, Button } from 'antd'
 
 import boneIcon from "../../../images/boneicon2.png"
 
@@ -50,12 +50,12 @@ class SearchStoreCard extends Component {
                 {description}
               </Typography.Paragraph>
             </Row>
-            <Row>{services.map(item => {
-              return (
-                <span>{item}</span>
-              )
-            })}</Row>
-            {price ? <Row style={{ textAlign: "right" }}>ราคา <strong>{withCommas(parseFloat(price).toFixed(2))}</strong> บาท</Row> : ""}
+            <Row gutter={[4, 4]} type="flex">{services.map(item => (
+                <Col key={item.id}>
+                  <Button type="primary" shape="round" size="small">{item.service_name}</Button>
+                </Col>
+              ))}</Row>
+            {price ? <Row style={{ textAlign: "right", marginTop: "1em" }}>ราคาเริ่มต้น <strong>{withCommas(parseFloat(price).toFixed(2))}</strong> บาท</Row> : ""}
           </Col>
         </Row>
       </Card>

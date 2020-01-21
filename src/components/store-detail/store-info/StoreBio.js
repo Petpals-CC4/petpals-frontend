@@ -29,6 +29,7 @@ export class StoreBio extends Component {
               <img
                 src={this.state.store.image_url}
                 style={{ width: "60px", height: "60px", borderRadius:'50%' }}
+                alt="store_image"
               />
             </Col>
           </Row>

@@ -5,6 +5,7 @@ import SearchStoreCard from './SearchStoreCard'
 export class SearchResult extends Component {
   render() {
     const { storeResultList, showSelectedRange, selectedSearch, onClearSearch } = this.props
+    // console.log(storeResultList)
     return (
       <div>
         {(showSelectedRange && selectedSearch && selectedSearch.startDate && selectedSearch.endDate) ?

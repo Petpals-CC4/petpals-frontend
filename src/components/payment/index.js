@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Row, Col, Button, Form, DatePicker, Input, Select, Divider } from 'antd'
+import { Row, Col, Button, Form, Select, Divider } from 'antd'
 
 import StoreBio from '../store-detail/store-info/StoreBio'
 
@@ -54,7 +54,11 @@ class Payment extends Component {
     return (
       <div style={{ margin: "2em" }}>
         <div style={{ marginBottom: "2em" }}>
-          <StoreBio />
+          <Row type="flex" justify="center">
+            <Col xs={24} sm={14}>
+              <StoreBio />
+            </Col>
+          </Row>
         </div>
         <div>
           <Form onSubmit={this.handleSubmit} layout="horizontal" hideRequiredMark>
