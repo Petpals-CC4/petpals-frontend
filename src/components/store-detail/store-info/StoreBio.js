@@ -13,7 +13,7 @@ export class StoreBio extends Component {
     }
   };
 
-  handleApiStoreBio = async () => {
+  componentDidMount = async () => {
 let result = await axios.get(
   `/shopdetail/${service_id}`
 )
