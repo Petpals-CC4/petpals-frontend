@@ -49,7 +49,10 @@ class StoreDetailPage extends Component {
   onChange = checkedValues => {
     // console.log("checked = ", checkedValues);
     this.setState({
-      total_price: checkedValues.reduce((sum, curr) => (sum += parseFloat(curr.service_price)), 0.0),
+      total_price: checkedValues.reduce(
+        (sum, curr) => (sum += parseFloat(curr.service_price)),
+        0.0
+      ),
       checkedServices: checkedValues
     });
   };
@@ -67,7 +70,10 @@ class StoreDetailPage extends Component {
         service => service.service_id !== value.service_id
       );
     }
-    let total_price = newCheckedServices.reduce((sum, curr) => (sum += parseFloat(curr.service_price)), 0.0)
+    let total_price = newCheckedServices.reduce(
+      (sum, curr) => (sum += parseFloat(curr.service_price)),
+      0.0
+    );
     // console.log(newCheckedServices);
     // console.log(total_price);
     this.setState({
@@ -87,10 +93,26 @@ class StoreDetailPage extends Component {
     );
   };
 
+  handleGetApistoredetail = () => {
+    axios
+      .get(`/shopdetail/${service_id}`)
+      .then(function(response) {
+        // handle success
+        console.log(response);
+      })
+      .catch(function(error) {
+        // handle error
+        console.log(error);
+      })
+      .finally(function() {
+        // always executed
+      });
+  };
+
   render() {
     return (
       <Layout>
-        <CarouselSlider/>
+        <CarouselSlider />
         <AffixServicePrice
           handleAffixServicePrice={this.handleAffixServicePrice}
           totalPrice={this.state.total_price}
