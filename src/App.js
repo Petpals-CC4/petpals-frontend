@@ -12,6 +12,7 @@ import VerifyPaymentPage from './pages/VerifyPaymentPage';
 import ShopDetailEditPage from './pages/ShopDetailEditPage';
 
 import AuthPage from './pages/AuthPage';
+import FeedbackPage from './pages/FeedbackPage'
 
 class App extends Component {
   render() {
@@ -30,6 +31,7 @@ class App extends Component {
           <Route path="/verify_payment" component={VerifyPaymentPage} />
           <Route path="/signin" component={AuthPage} />
           <Route path="/signup" component={AuthPage} />
+          <Route path="/feedback" component={FeedbackPage} />
           <Route component={NotFound} />
         </Switch>
       </div>

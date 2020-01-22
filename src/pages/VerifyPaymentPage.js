@@ -14,7 +14,7 @@ export class VerifyPaymentPage extends Component {
   state = {
     data: {
       user_id: 5,
-      service_id: 5,
+      service_id: 3,
       start_date: '2020-12-31',
       end_date: '2020-12-31',
       payment_name: '',
