@@ -22,28 +22,32 @@ class SearchStoreCard extends Component {
 
     return (
       <Card style={{ margin: "16px 0px", cursor: "pointer" }} onClick={onClick}>
-        <Row gutter={16} type="flex" justify="center">
+        <Row gutter={32} type="flex" justify="center">
           <Col>
             <Row type="flex" justify="end" align="middle" style={{ marginBottom: "8px" }}>
               {imgUrl ?
-                <Avatar src={imgUrl} size="large" />
-                : <Avatar style={{ backgroundColor: '#0F4C81' }} icon="shop" size="large" />
+                <Avatar src={imgUrl} size={64} />
+                : <Avatar style={{ backgroundColor: '#0F4C81' }} icon="shop" size={64} />
               }
             </Row>
-            <Row type="flex" justify="end" align="middle">
-              <img
-                src={boneIcon}
-                style={{ width: "15px", height: "15px" }}
-                alt="icon"
-              />
-              <strong style={{ marginLeft: "2px" }}>{parseFloat(score).toFixed(1)}</strong>
+            <Row type="flex" justify="center" align="middle">
+              <div className="justifyCenter">
+                <img
+                  src={boneIcon}
+                  style={{ width: "1.3em", height: "1.3em" }}
+                  alt="icon"
+                />
+                <strong style={{ marginLeft: "2px", fontSize: "1.3em" }}>
+                  {parseFloat(score).toFixed(1)}
+                </strong>
+              </div>
             </Row>
           </Col>
-          <Col xs={{span: 17, offset: 1}}>
+          <Col xs={{ span: 18 }}>
             <Row>
-              <Typography.Paragraph ellipsis={{ rows: 1 }} style={{ margin: 0 }}>
+              <Typography.Title level={4} ellipsis={{ rows: 1 }} style={{ margin: 0 }}>
                 <strong>{name}</strong>
-              </Typography.Paragraph>
+              </Typography.Title>
             </Row>
             <Row>
               <Typography.Paragraph ellipsis={{ rows: 2 }}>
@@ -51,10 +55,10 @@ class SearchStoreCard extends Component {
               </Typography.Paragraph>
             </Row>
             <Row gutter={[4, 4]} type="flex">{services.map(item => (
-                <Col key={item.id}>
-                  <Button type="primary" shape="round" size="small">{item.service_name}</Button>
-                </Col>
-              ))}</Row>
+              <Col key={item.id}>
+                <Button type="primary" shape="round" size="small">{item.service_name}</Button>
+              </Col>
+            ))}</Row>
             {price ? <Row style={{ textAlign: "right", marginTop: "1em" }}>ราคาเริ่มต้น <strong>{withCommas(parseFloat(price).toFixed(2))}</strong> บาท</Row> : ""}
           </Col>
         </Row>
