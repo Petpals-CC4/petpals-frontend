@@ -18,7 +18,7 @@ export class SearchResult extends Component {
               <Button type="ghost" icon="close" onClick={onClearSearch} />
             </Button.Group>
           </>
-          : ""
+          : <h3 style={{marginTop: "1em"}}>ร้านค้าแนะนำ</h3>
         }
         {storeResultList.map((store) => (
           <SearchStoreCard

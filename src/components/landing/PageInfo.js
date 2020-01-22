@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { Divider } from "antd";
-import CarouselSlider from "./CarouselSlider"
+
 import "./Info.css"
+import CarouselSlider from "./CarouselSlider"
 import FeedbackZone from "./feedback-zone";
 import AboutZone from "./about-zone";
 
@@ -17,14 +17,14 @@ class PageInfo extends Component {
         store_name: "ร้าน Groom your pals",
         store_location: "กรุงเทพ เขตบางรัก",
         store_service: "บริการตัดขนของร้าน สะอาด เรียบร้อย แฮปปี้ มากๆ :>",
-        customer_name: "- Sudarat Chinchange"
+        customer_name: "– Sudarat Chinchange"
       },
       {
         id: 2,
         store_name: "ร้าน Groom your pals",
         store_location: "กรุงเทพ เขตบางรัก",
         store_service: "บริการตัดขนของร้าน สะอาด เรียบร้อย แฮปปี้ มากๆ :>",
-        customer_name: "- Sudarat Chinchange"
+        customer_name: "– Sudarat Chinchange"
       },
     ]
   }
