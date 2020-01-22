@@ -25,16 +25,10 @@ class StoreBank extends Component {
         <Row>
           <Col>
             <Row type="flex" justify="space-around" align="middle">
-              <h1
-                style={{
-                  fontSize: "30px",
-                  color: "#0F4C81",
-                  fontWeight: "900"
-                }}
-              >
+              <h1 style={{fontSize: "30px",color: "#0F4C81",fontWeight: "900"}}>
                 รายการบัญชีธนาคารพี่เลี้ยง
               </h1>
-              <Button type="primary" onClick={this.showDrawer}>
+              <Button type="primary" block onClick={this.showDrawer}>
                 เพิ่มบัญชีธนาคาร
               </Button>
             </Row>

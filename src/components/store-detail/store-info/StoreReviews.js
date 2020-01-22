@@ -34,6 +34,7 @@ export class StoreReviews extends Component {
               <img
                 src={boneEmptyIcon}
                 style={{ width: "30px", height: "30px" }}
+                alt="empty_bone"
               />
               <h3 style={{ color: "#0F4C81" }}> {feedback_score ? feedback_score.toFixed(2) : "0.0"} </h3>
             </Col>

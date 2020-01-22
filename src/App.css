@@ -1,9 +1,4 @@
-.justifyCenter,
-.setCenterImg {
-  display: flex !important;
-  justify-content: center;
-  align-items: center;
-}
+/* ANTD */
 
 .ant-menu-horizontal > .ant-menu-item-selected {
   color: white !important;
@@ -17,6 +12,57 @@
 
 .ant-menu-horizontal > .ant-menu-item > a {
   color: whitesmoke !important;
+}
+
+/* CUSTOM */
+
+.fullMinHeight {
+  min-height: 100vh !important;
+}
+
+.justifyStart {
+  display: flex !important;
+  justify-content: flex-start !important;
+  align-items: center !important;  
+}
+.justifyEnd {
+  display: flex !important;
+  justify-content: flex-end !important;
+  align-items: center !important;  
+}
+.justifyCenter,
+.setCenterImg {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;  
+}
+.justifySpaceBetween {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;  
+}
+
+.setCenterImg {
+  max-height: 500px;
+}
+
+.textCenter,
+#signin-signup-form {
+  text-align: center;
+}
+
+#signin-signup-form .signin-signup-form {
+  min-width: 320px;
+  max-width: 320px;
+}
+#signin-signup-form .signin-signup-form-remember {
+  float: left;
+}
+#signin-signup-form .signin-signup-form-forgot {
+  float: right;
+}
+#signin-signup-form .signin-signup-form-button {
+  width: 100%;
 }
 
 .fixedNav {
@@ -48,8 +94,4 @@
 }
 .not-found-page .ant-result-image {
   margin: initial;
-}
-
-.setCenterImg {
-  height: 500px;
 }

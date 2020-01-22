@@ -6,27 +6,18 @@ import './App.css';
 import NotFound from './components/utils/NotFound'
 
 import LandingPage from './pages/LandingPage';
-// import SearchZone from './components/landing/SearchZone';
-// import Navbar from './components/landing/Navbar'
 import StoreDetailPage from "./pages/StoreDetailPage";
 import PaymentPage from "./pages/PaymentPage";
-// import CarouselSlider from './components/CarouselSlider';
 import VerifyPaymentPage from './pages/VerifyPaymentPage';
 import ShopDetailEditPage from './pages/ShopDetailEditPage';
 
+import AuthPage from './pages/AuthPage';
 
 class App extends Component {
   render() {
     window.appHistory = this.props.history
     return (
       <div>
-        {/* <Navbar /> */}
-        {/* <LandingPage /> */}
-        {/* <StoreInfo /> */}
-        {/* <PaymentPage /> */}
-        {/* <VerifyPaymentPage /> */}
-        {/* <CarouselSlider /> */}
-        {/* <SearchZone /> */}
         <Switch>
           <Route exact path="/" component={LandingPage} />
           <Route path="/store_detail/:id" component={StoreDetailPage} />
@@ -36,6 +27,9 @@ class App extends Component {
           {/* <Route path="/main" component={MainLayout} /> */}
           {/* <Route path="/signin" component={FirstPage} /> */}
           {/* <Route path="/signup" component={FirstPage} /> */}
+          <Route path="/verify_payment" component={VerifyPaymentPage} />
+          <Route path="/signin" component={AuthPage} />
+          <Route path="/signup" component={AuthPage} />
           <Route component={NotFound} />
         </Switch>
       </div>
