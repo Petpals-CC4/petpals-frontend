@@ -6,7 +6,8 @@ import './App.css';
 // import StoreInfo from "./components/store-detail/StoreInfo";
 // import PaymentPage from "./pages/PaymentPage";
 // import CarouselSlider from './components/CarouselSlider';
-import VerifyPaymentPage from './pages/VerifyPaymentPage';
+// import VerifyPaymentPage from './pages/VerifyPaymentPage';
+import FeedbackPage from './pages/FeedbackPage'
 
 class App extends Component {
   render() {
@@ -16,7 +17,8 @@ class App extends Component {
         {/* <LandingPage /> */}
         {/* <StoreInfo /> */}
         {/* <PaymentPage /> */}
-        <VerifyPaymentPage />
+        {/* <VerifyPaymentPage /> */}
+        <FeedbackPage />
         {/* <CarouselSlider /> */}
         {/* <SearchZone /> */}
       </div>
