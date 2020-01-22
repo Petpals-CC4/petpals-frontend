@@ -32,16 +32,7 @@ class AddStoreBank extends Component {
     });
   };
 
-  //   if (true) {
-  //     message.success("Create bank accout is success.Have a nice day!!");
-  //   } else {
-  //     message.error("Sorry!! can't create new account something worng");
-  //   }
-  // };
-  // bank_name: req.body.bank_name,
-  //     account_name: req.body.account_name,
-  //     account_number: req.body.account_number,
-  //     store_id: req.body.store_id
+ 
 
   render() {
     const { getFieldDecorator, getFieldsError } = this.props.form;
