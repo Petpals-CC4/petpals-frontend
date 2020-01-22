@@ -12,6 +12,8 @@ import StoreDetailPage from "./pages/StoreDetailPage";
 import PaymentPage from "./pages/PaymentPage";
 // import CarouselSlider from './components/CarouselSlider';
 import VerifyPaymentPage from './pages/VerifyPaymentPage';
+import ShopDetailEditPage from './pages/ShopDetailEditPage';
+
 
 class App extends Component {
   render() {
@@ -30,6 +32,7 @@ class App extends Component {
           <Route path="/store_detail/:id" component={StoreDetailPage} />
           <Route path="/payment" component={PaymentPage} />
           <Route path="/verifypaymentpage" component={VerifyPaymentPage} />
+          <Route path="/shopdetaileditpage/:id"component={ShopDetailEditPage}/>
           {/* <Route path="/main" component={MainLayout} /> */}
           {/* <Route path="/signin" component={FirstPage} /> */}
           {/* <Route path="/signup" component={FirstPage} /> */}
