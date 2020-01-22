@@ -4,40 +4,47 @@ import moment from 'moment'
 
 export class SearchInput extends Component {
   state = {
-    searchText: "",
-    startValue: null,
-    endValue: null,
     endOpen: false,
+    searchObj: {
+      searchText: "",
+      startDate: null,
+      endDate: null,
+    }
   }
 
-  disabledStartDate = startValue => {
-    const { endValue } = this.state;
-    if (!startValue || !endValue) {
-      return false;
+  disabledStartDate = startDate => {
+    const { searchObj } = this.state;
+    const { endDate } = searchObj
+    if (!startDate || !endDate) {
+      return startDate < moment().subtract(1, 'days');
     }
-    return startValue.valueOf() > endValue.valueOf() && startValue < moment().subtract(1, 'days')
+    return startDate.valueOf() > endDate.valueOf() || startDate < moment().subtract(1, 'days')
   };
 
-  disabledEndDate = endValue => {
-    const { startValue } = this.state;
-    if (!endValue || !startValue) {
-      return false;
+  disabledEndDate = endDate => {
+    const { searchObj } = this.state;
+    const { startDate } = searchObj
+    if (!endDate || !startDate) {
+      return endDate < moment().subtract(1, 'days');
     }
-    return endValue.valueOf() <= startValue.valueOf();
+    return endDate.valueOf() <= startDate.valueOf();
   };
 
   onChange = (field, value) => {
-    this.setState({
-      [field]: value,
-    });
+    this.setState((state) => ({
+      searchObj: {
+        ...state.searchObj,
+        [field]: value
+      }
+    }))
   };
 
   onStartChange = value => {
-    this.onChange('startValue', value);
+    this.onChange('startDate', value);
   };
 
   onEndChange = value => {
-    this.onChange('endValue', value);
+    this.onChange('endDate', value);
   };
 
   handleStartOpenChange = open => {
@@ -51,20 +58,41 @@ export class SearchInput extends Component {
   };
 
   handleChangeSearch = (e) => {
-    this.setState({
-      searchText: e.target.value
-    })
+    this.setState((state) => ({
+      searchObj: {
+        ...state.searchObj,
+        searchText: e.target.value
+      }
+    }))
   }
 
   handleClickGuideText = (index) => () => {
-    this.setState({
-      searchText: this.props.guideText[index]
+    this.setState((state) => ({
+      searchObj: {
+        ...state.searchObj,
+        searchText: this.props.guideText[index]
+      }
+    }))
+    this.props.onSearch({
+      ...this.state.searchObj,
+      searchText: this.props.guideText[index],
     })
-    this.props.onSearch(this.props.guideText[index])
+  }
+
+  componentDidUpdate = (prevProps, prevState) => {
+    if (this.props.searchObj !== prevProps.searchObj && this.props.searchObj !== prevState.searchObj) {
+      this.setState((state) => ({
+        searchObj: {
+          ...state.searchObj,
+          searchText: this.props.searchObj.searchText
+        }
+      }))
+    }
   }
 
   render() {
-    const { startValue, endValue, endOpen } = this.state;
+    const { searchObj, endOpen } = this.state;
+    const { searchText, startDate, endDate } = searchObj
     return (
       <div>
         <Row gutter={[8, 8]} style={{ marginBottom: "8px" }}>
@@ -72,7 +100,7 @@ export class SearchInput extends Component {
             <DatePicker
               disabledDate={this.disabledStartDate}
               format="YYYY-MM-DD"
-              value={startValue}
+              value={startDate}
               placeholder="วันเริ่มต้น"
               onChange={this.onStartChange}
               onOpenChange={this.handleStartOpenChange}
@@ -83,7 +111,7 @@ export class SearchInput extends Component {
             <DatePicker
               disabledDate={this.disabledEndDate}
               format="YYYY-MM-DD"
-              value={endValue}
+              value={endDate}
               placeholder="วันสิ้นสุด"
               open={endOpen}
               onChange={this.onEndChange}
@@ -97,9 +125,10 @@ export class SearchInput extends Component {
               onSearch={this.props.onSearch}
               style={{ width: "100%" }}
               placeholder="ค้นหาบริการ"
-              value={this.state.searchText}
+              value={searchText}
               enterButton
               allowClear
+              disabled={!startDate || !endDate}
             />
           </Col>
         </Row>
@@ -107,7 +136,12 @@ export class SearchInput extends Component {
           {this.props.guideText.map((text, index) => {
             return (
               <Col key={index}>
-                <Button type="primary" shape="round" onClick={this.handleClickGuideText(index)}>
+                <Button
+                  type="primary"
+                  shape="round"
+                  onClick={this.handleClickGuideText(index)}
+                  disabled={!startDate || !endDate}
+                  >
                   {text}
                 </Button>
               </Col>

@@ -3,26 +3,22 @@ import { Button } from 'antd'
 import SearchStoreCard from './SearchStoreCard'
 
 export class SearchResult extends Component {
-  state = {
-    startDate: "2020-01-01",
-    endDate: "2020-01-20",
-    isHideFilter: false,
-  }
-
   render() {
-    const { isHideFilter, startDate, endDate } = this.state
-    const { storeResultList } = this.props
+    const { storeResultList, showSelectedRange, selectedSearch, onClearSearch } = this.props
+    // console.log(storeResultList)
     return (
       <div>
-        <span>ผลลัพธ์การค้นหา</span>
-        {!isHideFilter ?
-          <Button.Group shape="round" style={{ width: "100%" }}>
-            <Button type="primary" icon="calendar">
-              {`${startDate} ~ ${endDate}`}
-            </Button>
-            <Button type="ghost" icon="close" />
-          </Button.Group>
-          : ""
+        {(showSelectedRange && selectedSearch && selectedSearch.startDate && selectedSearch.endDate) ?
+          <>
+            <h3 style={{marginTop: "1em"}}>ผลลัพธ์การค้นหา</h3>
+            <Button.Group shape="round" style={{ width: "100%" }}>
+              <Button type="primary" icon="calendar">
+                {`${selectedSearch.startDate.format("YYYY-MM-DD")} ~ ${selectedSearch.endDate.format("YYYY-MM-DD")}`}
+              </Button>
+              <Button type="ghost" icon="close" onClick={onClearSearch} />
+            </Button.Group>
+          </>
+          : <h3 style={{marginTop: "1em"}}>ร้านค้าแนะนำ</h3>
         }
         {storeResultList.map((store) => (
           <SearchStoreCard

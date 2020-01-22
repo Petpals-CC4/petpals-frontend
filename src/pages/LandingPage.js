@@ -1,15 +1,20 @@
 import React, { Component } from 'react'
 import PageInfo from '../components/landing/PageInfo'
 import Navbar from '../components/landing/Navbar'
+import SearchZone from '../components/landing/SearchZone'
+import FooterZone from '../components/landing/FooterZone'
 
-export class LandingPage extends Component {
-    render() {
-        return (
-            <div>
-                <PageInfo></PageInfo>
-            </div>
-        )
-    }
+class LandingPage extends Component {
+  render() {
+    return (
+      <div>
+        <Navbar />
+        <PageInfo />
+        <SearchZone />
+        <FooterZone />
+      </div>
+    )
+  }
 }
 
 export default LandingPage

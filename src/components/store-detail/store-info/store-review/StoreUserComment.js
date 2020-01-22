@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import {Card, Layout} from "antd";
+import { Card, Layout } from "antd";
 
 // --------------------------------image-----------------------------------
 
 import boneIcon from "../../../../images/boneicon2.png"
 import boneEmptyIcon from "../../../../images/boneicon3.png";
+import { dateFormat } from "../../../../utils";
 
 export class StoreUserComment extends Component {
   state = {
@@ -42,44 +43,55 @@ export class StoreUserComment extends Component {
   // ------------------------------------handle-function--------------------------------------
 
   handleCommentCardFont = () => {
-    return this.state.feedback.map((f, fIndex) => {
-        let boneRender = []
-        for (let index = 0; index < 5; index++) {
-            if (index < parseInt(f.rating)) {
-                boneRender.push(true);
-            } else {
-                boneRender.push(false);
-            }
-        }
-      return <Card key={fIndex}>
-        <h4 style={{color:"#0F4C81"}}>
-          {f.user.firstname}&emsp;{f.user.lastname}
-        </h4>
-        <h5 style={{color:"#0F4C81"}}>{f.create_at}</h5>
-        <p style={{color:"#0F4C81"}}>{f.comment}</p>
-        {boneRender.map((bone, index) => {
-            return bone ? (
-              <img
-                src={boneIcon}
-                key={index}
-                style={{ width: "15px", height: "15px" }}
-              />
-            ) : (
-              <img
-                src={boneEmptyIcon}
-                key={index}
-                style={{ width: "15px", height: "15px" }}
-              />
-            );
-          })}
-      </Card>
-    });
+    const {
+      rating,
+      comment,
+      fullname,
+      createdAt
+    } = this.props
+    // console.log(rating,
+    //   comment,
+    //   fullname,
+    //   createdAt);
+    // return ""
+    let boneRender = []
+    for (let index = 0; index < 5; index++) {
+      if (index < parseInt(rating)) {
+        boneRender.push(true);
+      } else {
+        boneRender.push(false);
+      }
+    }
+    return <Card>
+      <h4 style={{ color: "#0F4C81" }}>
+        {fullname}
+      </h4>
+      <h5 style={{ color: "#0F4C81" }}>{dateFormat(createdAt)}</h5>
+      <p style={{ color: "#0F4C81" }}>{comment}</p>
+      {boneRender.map((bone, index) => {
+        return bone ? (
+          <img
+            src={boneIcon}
+            key={index}
+            style={{ width: "15px", height: "15px" }}
+            alt="bone"
+          />
+        ) : (
+            <img
+              src={boneEmptyIcon}
+              key={index}
+              style={{ width: "15px", height: "15px" }}
+              alt="empty_bone"
+            />
+          );
+      })}
+    </Card>
   };
 
   render() {
     return (
       <Layout>
-          {this.handleCommentCardFont()} 
+        {this.handleCommentCardFont()}
       </Layout>
     );
   }

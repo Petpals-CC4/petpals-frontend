@@ -65,7 +65,7 @@ export class VerifyPaymentPage extends Component {
               <Upload listType="picture-card"
                 onChange={this.handleChange} >
                
-                {imageUrl ? <img src={imageUrl} style={{ width: '100%' }} />  : uploadButton}
+                {imageUrl ? <img src={imageUrl} style={{ width: '100%' }} alt="upload" /> : uploadButton}
               </Upload>
             </Col>
           </Row>
