@@ -16,7 +16,7 @@ export class Signup extends Component {
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         // console.log('Received values of form: ', values);
-        this.signUp(values.username, values.password, values.remember)
+        this.signUp(values.username, values.password)
       }
     });
   }
@@ -32,8 +32,8 @@ export class Signup extends Component {
     }))
   }
 
-  signUp = (username, password, remember) => {
-    Axios.post("/signup", { username, password })
+  signUp = (username, password) => {
+    Axios.post(`/signup${this.state.isStoreRegister ? "_store" : ""}`, { username, password })
       .then(result => {
         // console.log(result.data)
         message.success(result.data.message)
@@ -79,12 +79,12 @@ export class Signup extends Component {
           </Button>
         </div>
         <Avatar src="OwlsomeLogo2.png" shape="square" size={200} />
-        <Typography.Title level={2} className="textCenter">
+        <Typography.Title level={2} className="textCenter" style={{ marginTop: "1em" }}>
           {this.state.isStoreRegister ? "ลงทะเบียนพี่เลี้ยง" : "ลงทะเบียนผู้ใช้งาน"}
         </Typography.Title>
         <Form onSubmit={this.handleSubmit} className="signin-signup-form">
-          {/* <Form.Item hasFeedback>
-            {getFieldDecorator('email', {
+          <Form.Item hasFeedback>
+            {getFieldDecorator('username', {
               rules: [
                 {
                   type: 'email',
@@ -101,8 +101,8 @@ export class Signup extends Component {
                 placeholder="Email"
               />,
             )}
-          </Form.Item> */}
-          <Form.Item>
+          </Form.Item>
+          {/* <Form.Item>
             {getFieldDecorator('username', {
               rules: [{ required: true, message: 'Please input your username!' }],
             })(
@@ -111,7 +111,7 @@ export class Signup extends Component {
                 placeholder="Username"
               />,
             )}
-          </Form.Item>
+          </Form.Item> */}
           <Form.Item hasFeedback>
             {getFieldDecorator('password', {
               rules: [

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import { Card, Avatar, Typography, Input, Form, Icon, Button, Checkbox, message } from 'antd';
 
 import Axios from '../../utils/api.service'
@@ -93,4 +93,4 @@ const mapDispatchToProps = {
   ...authAction
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Form.create({ name: 'signin' })(Signin))
+export default connect(mapStateToProps, mapDispatchToProps)(Form.create({ name: 'signin' })(withRouter(Signin)))

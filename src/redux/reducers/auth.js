@@ -1,11 +1,12 @@
 import jwtDecode from 'jwt-decode'
+import { TOKEN } from '../../utils/constants';
 
 // #############
 // ## REDUCER ##
 // #############
 
 const initialState = () => {
-  const token = sessionStorage.getItem("ACCESS_TOKEN");
+  const token = sessionStorage.getItem(TOKEN);
   if (token) {
     return jwtDecode(token)
   } else {
@@ -26,14 +27,14 @@ export default (state = initialState(), action) => {
     case "SIGNIN":
       const token = action.payload.token
       const user = jwtDecode(token)
-      sessionStorage.setItem("ACCESS_TOKEN", token)
+      sessionStorage.setItem(TOKEN, token)
       return {
         ...state,
         role: user.role
       }
 
     case "SIGNOUT":
-      sessionStorage.removeItem("ACCESS_TOKEN")
+      sessionStorage.removeItem(TOKEN)
       return {
         ...state,
         role: "guest"
