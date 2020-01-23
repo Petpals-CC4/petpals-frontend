@@ -1,27 +1,36 @@
 import React, { Component } from 'react'
-import { Divider } from 'antd'
+import { Card, Row, Typography, Col } from 'antd'
 
 class FeedbackZone extends Component {
   render() {
     const {
-      feedback
+      feedbacks
     } = this.props
+    // console.log(feedbacks)
     return (
-      <div id="feedback" className="text" style={{ textAlign: "center", margin: "1.2em 0px", padding: "0px 8px" }}>
-        เสียงตอบรับจากลูกค้าของเรา
-        {feedback ? feedback.map(item => {
+      <div id="feedback" style={{ margin: "1.2em 1.6em", padding: "0px 8px" }}>
+        <div className="text" style={{ marginBottom: "1em", textAlign: "center" }}>เสียงตอบรับจากลูกค้าของเรา</div>
+        <Row type="flex" gutter={[16, 16]} style={{ flexWrap: "nowrap", overflowX: "auto" }}>
+          {feedbacks.map(item => {
             return (
-              <div key={item.id} style={{ padding: "0px 8px" }}>
-                <div className="point">{item.store_name}</div>
-                <div className="aodetail">{item.store_location}</div>
-                <div className="moc">{item.store_service}</div>
-                <div className="aodetail" style={{ padding: "8px" }}>{item.customer_name}</div>
-                <Divider />
-              </div>
+              <Col xs={20} sm={16} md={10}>
+                <Card
+                  hoverable
+                  className="quote-feedback"
+                  style={{ height: "100%" }}
+                >
+                  <div className="store-name">{item.storeName}</div>
+                  <div className="point">{item.rating}</div>
+                  <Typography.Paragraph ellipsis={{ rows: 5 }} className="comment">
+                    {item.comment}
+                  </Typography.Paragraph>
+                  <div className="customer"> – {item.customerName}</div>
+                </Card>
+              </Col>
             )
-          }) : ""
-        }
-        </div>
+          })}
+        </Row>
+      </div>
     )
   }
 }

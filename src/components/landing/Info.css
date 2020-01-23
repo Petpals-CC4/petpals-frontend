@@ -4,19 +4,20 @@
   font-weight: 700;
 }
 
-.point {
+.store-name {
   color: #0F4C81;
   font-weight: 700;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
 }
 
-.aodetail {
+.comment,
+.customer {
   color: #808080;
   font-size: 1rem;
 }
 
-.moc {
-  color: #000000;
-  font-size: 1rem;
-  font-weight: 700;
+.customer {
+  color: #0F4C81;
+  font-weight: 600;
+  padding: "8px";
 }

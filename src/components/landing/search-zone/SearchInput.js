@@ -58,12 +58,17 @@ export class SearchInput extends Component {
   };
 
   handleChangeSearch = (e) => {
+    let searchText = e.target.value
     this.setState((state) => ({
       searchObj: {
         ...state.searchObj,
-        searchText: e.target.value
+        searchText
       }
     }))
+  }
+
+  handleSearch = (e) => {
+    this.props.onSearch(this.state.searchObj)
   }
 
   handleClickGuideText = (index) => () => {
@@ -122,7 +127,7 @@ export class SearchInput extends Component {
           <Col xs={24}>
             <Input.Search
               onChange={this.handleChangeSearch}
-              onSearch={this.props.onSearch}
+              onSearch={this.handleSearch}
               style={{ width: "100%" }}
               placeholder="ค้นหาบริการ"
               value={searchText}

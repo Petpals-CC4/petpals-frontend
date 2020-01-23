@@ -14,6 +14,14 @@
   color: whitesmoke !important;
 }
 
+.ant-list-grid .ant-row {
+  display: flex;
+}
+
+.ant-list-grid .ant-col > .ant-list-item {
+  height: calc(100% - 16px);
+}
+
 /* CUSTOM */
 
 .fullMinHeight {
@@ -94,4 +102,19 @@
 }
 .not-found-page .ant-result-image {
   margin: initial;
+}
+
+.quote-feedback {
+  padding-left: 52px !important;
+}
+.quote-feedback::before {
+  content: "\f10d";
+  font-family: 'Font Awesome\ 5 Free'; 
+  font-weight: 900;
+  position: absolute;
+  top: 8px;
+  left: 16px;
+  font-size: 44px;
+  color: #f0f0f0;
+  line-height: normal;
 }
