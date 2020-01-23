@@ -51,61 +51,84 @@ export class Signin extends Component {
   render() {
     const { getFieldDecorator } = this.props.form;
     return (
-      <Row>
-        <Col xs={24}>
-          <Card id="signin-signup-form" style={{ width: "90%", borderRadius:"12px",height:"90%"}}>
-            <Avatar src="/PicCorgi1.svg" shape="square" size={200} />
-            <Typography.Title level={2} className="textCenter" style={{color:"#0F4C81"}}>
+      <Row type="flex" justify="space-around" align="middle">
+        <Col>
+          <Card id="signin-signup-form">
+            <Avatar src="/PicCorgi1.svg" shape="square" size={150} />
+            <Typography.Title
+              level={2}
+              className="textCenter"
+              style={{ color: "#0F4C81" }}
+            >
               ลงชื่อเข้าใช้
             </Typography.Title>
             <Form onSubmit={this.handleSubmit} className="signin-signup-form">
-              <Form.Item>
-                {getFieldDecorator("username", {
-                  rules: [{ required: true, message: "กรุณาใส่ชื่อผู้ใช้!" }]
-                })(
-                  <Input
-                    prefix={
-                      <Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />
-                    }
-                    placeholder="ชื่อผู้ใช้"
-                  />
-                )}
-              </Form.Item>
-              <Form.Item>
-                {getFieldDecorator("password", {
-                  rules: [{ required: true, message: "กรุณาใส่รหัสผ่าน!" }]
-                })(
-                  <Input.Password
-                    prefix={
-                      <Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />
-                    }
-                    placeholder="รหัสผ่าน"
-                  />
-                )}
-              </Form.Item>
-              <Form.Item>
-                {getFieldDecorator("remember", {
-                  valuePropName: "checked",
-                  initialValue: false
-                })(
-                  <Checkbox className="signin-signup-form-remember">
-                    จดจำรหัสผ่าน
-                  </Checkbox>
-                )}
-                <Link to="/" className="signin-signup-form-forgot">
-                  ลืมรหัสผ่าน
-                </Link>
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  className="signin-signup-form-button"
-                >
-                  ลงชื่อเข้าใช้
-                </Button>{" "}
-                <Link to="/signup" onClick={this.props.onChangeMode("signup")}>
-                  สมัครเลย!
-                </Link>
-              </Form.Item>
+              <Row gutter={[8, 8]}>
+                <Col span={24}>
+                  <Form.Item>
+                    {getFieldDecorator("username", {
+                      rules: [
+                        { required: true, message: "กรุณาใส่ชื่อผู้ใช้!" }
+                      ]
+                    })(
+                      <Input
+                        prefix={
+                          <Icon
+                            type="user"
+                            style={{ color: "rgba(0,0,0,.25)" }}
+                          />
+                        }
+                        placeholder="ชื่อผู้ใช้"
+                      />
+                    )}
+                  </Form.Item>
+                </Col>
+                <Col span={24}>
+                  <Form.Item>
+                    {getFieldDecorator("password", {
+                      rules: [{ required: true, message: "กรุณาใส่รหัสผ่าน!" }]
+                    })(
+                      <Input.Password
+                        prefix={
+                          <Icon
+                            type="lock"
+                            style={{ color: "rgba(0,0,0,.25)" }}
+                          />
+                        }
+                        placeholder="รหัสผ่าน"
+                      />
+                    )}
+                  </Form.Item>
+                </Col>
+                <Col span={24}>
+                  <Form.Item>
+                    {getFieldDecorator("remember", {
+                      valuePropName: "checked",
+                      initialValue: false
+                    })(
+                      <Checkbox className="signin-signup-form-remember">
+                        จดจำรหัสผ่าน
+                      </Checkbox>
+                    )}
+                    <Link to="/" className="signin-signup-form-forgot">
+                      ลืมรหัสผ่าน
+                    </Link>
+                    <Button
+                      type="primary"
+                      htmlType="submit"
+                      className="signin-signup-form-button"
+                    >
+                      ลงชื่อเข้าใช้
+                    </Button>
+                    <Link
+                      to="/signup"
+                      onClick={this.props.onChangeMode("signup")}
+                    >
+                      สมัครเลย!
+                    </Link>
+                  </Form.Item>
+                </Col>
+              </Row>
             </Form>
           </Card>
         </Col>

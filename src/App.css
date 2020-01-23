@@ -52,14 +52,16 @@
 }
 
 #signin-signup-form .signin-signup-form {
-  min-width: 320px;
-  max-width: 320px;
+  min-width: 300px;
+  max-width: 300px;
 }
 #signin-signup-form .signin-signup-form-remember {
   float: left;
+  margin-left: 10px;
 }
 #signin-signup-form .signin-signup-form-forgot {
   float: right;
+  margin-right: 10px;
 }
 #signin-signup-form .signin-signup-form-button {
   width: 100%;

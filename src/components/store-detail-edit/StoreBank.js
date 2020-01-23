@@ -18,9 +18,9 @@ class StoreBank extends Component {
     const me = this;
     confirm({
       title: "คุณยืนยันจะแก้ไขบัญชีธนาคารนี้ใช่หรือไม่?",
-      okText: "Yes",
+      okText: "ใช่",
       okType: "success",
-      cancelText: "No",
+      cancelText: "ไม่",
       onOk() {
         me.updateBank(obj);
       },
@@ -42,9 +42,9 @@ class StoreBank extends Component {
     const me = this;
     confirm({
       title: "คุณยืนยันจะลบบัญชีธนาคารนี้ใช่หรือไม่?",
-      okText: "Yes",
+      okText: "ใช่",
       okType: "danger",
-      cancelText: "No",
+      cancelText: "ไม่",
       onOk() {
         me.deleteBank(id);
       },
