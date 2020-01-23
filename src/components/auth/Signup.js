@@ -76,7 +76,7 @@ export class Signup extends Component {
             <span>{this.state.isStoreRegister ? "ลงทะเบียนผู้ใช้งาน คลิ๊ก!" : "ลงทะเบียนเป็นพี่เลี้ยง คลิ๊ก!"}</span>
           </Button>
         </div>
-        <Avatar src="OwlsomeLogo2.png" shape="square" size={200} />
+        <Avatar src="/PicCorgi3.svg" shape="square" size={150} style={{width:'auto'}} />
         <Typography.Title level={2} className="textCenter" style={{ marginTop: "1em" }}>
           {this.state.isStoreRegister ? "ลงทะเบียนพี่เลี้ยง" : "ลงทะเบียนผู้ใช้งาน"}
         </Typography.Title>
