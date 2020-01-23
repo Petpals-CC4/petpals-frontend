@@ -42,14 +42,14 @@ export class Signup extends Component {
       }).catch(err => {
         // err.response.status
         // console.error(err)
-        message.error(err.response.data.message || "Please try again later")
+        message.error(err.response.data.message || "กรุณาลองใหม่อีกครั้ง")
       })
   }
 
   compareToFirstPassword = (rule, value, callback) => {
     const { form } = this.props;
     if (value && value !== form.getFieldValue('password')) {
-      callback('Two passwords that you enter is inconsistent!');
+      callback('กรุณากรอกรหัสผ่านให้ตรงกัน');
     } else {
       callback();
     }
@@ -67,8 +67,6 @@ export class Signup extends Component {
     const { getFieldDecorator } = this.props.form;
     return (
       <Card id="signin-signup-form">
-        <div style={{ position: "absolute", zIndex: "10", marginLeft: "-24px" }}>
-        </div>
         <div style={{ marginLeft: "-24px", textAlign: "left", marginBottom: "1em" }}>
           <Button
             onClick={this.handleClickToggleStoreRegister}
@@ -78,7 +76,7 @@ export class Signup extends Component {
             <span>{this.state.isStoreRegister ? "ลงทะเบียนผู้ใช้งาน คลิ๊ก!" : "ลงทะเบียนเป็นพี่เลี้ยง คลิ๊ก!"}</span>
           </Button>
         </div>
-        <Avatar src="OwlsomeLogo2.png" shape="square" size={200} />
+        <Avatar src="/PicCorgi3.svg" shape="square" size={150} style={{width:'auto'}} />
         <Typography.Title level={2} className="textCenter" style={{ marginTop: "1em" }}>
           {this.state.isStoreRegister ? "ลงทะเบียนพี่เลี้ยง" : "ลงทะเบียนผู้ใช้งาน"}
         </Typography.Title>
@@ -88,17 +86,17 @@ export class Signup extends Component {
               rules: [
                 {
                   type: 'email',
-                  message: 'The input is not valid E-mail!',
+                  message: 'อีเมลล์ไม่ถูกต้อง!',
                 },
                 {
                   required: true,
-                  message: 'Please input your E-mail!',
+                  message: 'กรุณาใส่อีเมลล์ของคุณ!',
                 },
               ],
             })(
               <Input
                 prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                placeholder="Email"
+                placeholder="อีเมลล์"
               />,
             )}
           </Form.Item>
@@ -117,26 +115,26 @@ export class Signup extends Component {
               rules: [
                 {
                   required: true,
-                  message: 'Please input your password!',
+                  message: 'กรุณาใส่รหัสผ่าน!',
                 },
                 {
                   validator: this.validateToNextPassword,
                 },
               ],
-            })(<Input.Password prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Please input your password!" />)}
+            })(<Input.Password prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="รหัสผ่าน" />)}
           </Form.Item>
           <Form.Item hasFeedback>
             {getFieldDecorator('confirm', {
               rules: [
                 {
                   required: true,
-                  message: 'Please confirm your password!',
+                  message: 'กรุณายืนยันรหัสผ่าน',
                 },
                 {
                   validator: this.compareToFirstPassword,
                 },
               ],
-            })(<Input.Password prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Please confirm your password!" onBlur={this.handleConfirmBlur} />)}
+            })(<Input.Password prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="ยืนยันรหัสผ่าน" onBlur={this.handleConfirmBlur} />)}
           </Form.Item>
           <Form.Item>
             {/* {getFieldDecorator('remember', {
@@ -149,10 +147,10 @@ export class Signup extends Component {
             </Link> */}
 
             <Button type="primary" htmlType="submit" className="signin-signup-form-button">
-              Sign up
+              สมัคร
             </Button>
 
-            Or <Link to="/signin" onClick={this.props.onChangeMode("signin")}>Back to Sign in!</Link>
+            Or <Link to="/signin" onClick={this.props.onChangeMode("signin")}>กลับไปหน้าลงชื่อเข้าใช้!</Link>
 
           </Form.Item>
         </Form>
