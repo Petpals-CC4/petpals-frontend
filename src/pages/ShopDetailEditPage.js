@@ -1,11 +1,15 @@
 import React, { Component } from 'react'
+import { Layout } from 'antd';
+
+import StoreDetailPage from "../pages/StoreDetailPage"
+
 
 class ShopDetailEditPage extends Component {
   render() {
     return (
-      <div>
-        
-      </div>
+      <Layout>
+        <StoreDetailPage />
+      </Layout>
     )
   }
 }
