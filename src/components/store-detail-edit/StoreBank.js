@@ -1,7 +1,11 @@
 import React, { Component } from "react";
-import { Layout, Drawer, Card, Button, Row, Col, Modal } from "antd";
+import { Drawer, Card, Button, Row, Col, Modal } from "antd";
+import axios from "../../utils/api.service";
 
 import AddStoreBank from "./store-bank/AddStoreBank";
+import EditStoreBank from "./store-bank/EditStoreBank";
+
+import { withRouter } from "react-router-dom";
 
 const { confirm } = Modal;
 class StoreBank extends Component {
@@ -10,39 +14,54 @@ class StoreBank extends Component {
     drawerEditVisible: false
   };
 
-  hasErrors(fieldsError) {
-    return Object.keys(fieldsError).some(field => fieldsError[field]);
-  }
-
-  handleSubmit = e => {
-    e.preventDefault();
-    this.props.form.validateFields(async (err, values) => {
-      if (!err) {
-        let result = await axios.put(`/bank/:id`, {
-          bank_name: values.bank_name,
-          account_name: values.account_name,
-          account_number: values.account_number,
-          store_id: values.store_id
-        });
-        console.log(result.data);
-        console.log("Received values of form: ", values);
+  showUpdateConfirm = obj => {
+    const me = this;
+    confirm({
+      title: "คุณยืนยันจะแก้ไขบัญชีธนาคารนี้ใช่หรือไม่?",
+      okText: "Yes",
+      okType: "success",
+      cancelText: "No",
+      onOk() {
+        me.updateBank(obj);
+      },
+      onCancel() {
+        console.log("Cancel");
       }
     });
   };
 
-  showDeleteConfirm = () => {
+  updateBank = async obj => {
+    console.log(obj);
+    let result = await axios.put(`/bank/${this.props.match.params.id}`, obj);
+    console.log(result.data);
+    this.getBank();
+    this.onEditDrawerclose();
+  };
+
+  showDeleteConfirm = id => () => {
+    const me = this;
     confirm({
       title: "คุณยืนยันจะลบบัญชีธนาคารนี้ใช่หรือไม่?",
       okText: "Yes",
       okType: "danger",
       cancelText: "No",
       onOk() {
-        console.log("OK");
+        me.deleteBank(id);
       },
       onCancel() {
         console.log("Cancel");
       }
     });
+  };
+
+  deleteBank = async id => {
+    let result = await axios.delete(`/bank/${id}`, {
+      data: {
+        store_id: "1"
+      }
+    });
+    console.log(result.data);
+    this.getBank();
   };
 
   showDrawer = () => {
@@ -67,33 +86,68 @@ class StoreBank extends Component {
     });
   };
 
-  render() {
-    const { bankAccounts } = this.props;
+  componentDidMount = () => {
+    this.getBank();
+  };
 
+  getBank = async () => {
+    let result = await axios.get(`/bank/${this.props.match.params.id}`);
+    console.log(result.data);
+    this.setState({
+      bankAccounts: result ? result.data : []
+    });
+  };
+
+  render() {
+    const { bankAccounts } = this.state;
     return (
-      <Layout>
+      <>
         <Row>
           <Col>
             <Row type="flex" justify="space-around" align="middle">
               <h1
                 style={{
-                  fontSize: "30px",
+                  fontSize: "20px",
                   color: "#0F4C81",
-                  fontWeight: "900"
+                  fontWeight: "900",
+                  paddingTop: "20px"
                 }}
               >
                 รายการบัญชีธนาคารพี่เลี้ยง
               </h1>
-              <Button type="primary" block onClick={this.showDrawer}>
+              <Button
+                type="primary"
+                block
+                onClick={this.showDrawer}
+                style={{ marginTop: "10px", marginBottom: "10px" }}
+              >
                 เพิ่มบัญชีธนาคาร
               </Button>
             </Row>
-            <Row>
-              <Col>
-                {bankAccounts
-                  ? bankAccounts.map(bankAccount => (
-                      <Card key={bankAccount.id} style={{ width: "90hv" }}>
-                        <Row gutter={[16, 16]}>
+            <Row
+              type="flex"
+              gutter={[16, 32]}
+            >
+              {bankAccounts
+                ? bankAccounts.map(bankAccount => (
+                    <Col xs={24} sm={12} md={8} xl={4} >
+                      <Card
+                        size="default"
+                        key={bankAccount.id}
+                        style={{
+                          width: "100%",
+                          marginBottom: "10px",
+                          marginRight: "5px",
+                          marginLeft: "5px",
+                          borderRadius: "12px"
+                        }}
+                      >
+                        <Row
+                          gutter={[16, 16]}
+                          type="flex"
+                          justify="space-around"
+                          align="middle"
+                        >
                           <Col span={24}>
                             <h3>{bankAccount.bank_name}</h3>
                           </Col>
@@ -105,21 +159,30 @@ class StoreBank extends Component {
                           </Col>
                         </Row>
                         <Row gutter={[16, 16]}>
-                          <Col span={12}>
+                          <Col span={24}>
                             <Button
-                              onClick={this.showDeleteConfirm}
+                              onClick={this.showDeleteConfirm(bankAccount.id)}
                               type="dashed"
+                              block
                               style={{ color: "#cc0a0a", marginRight: "20px" }}
                             >
                               ลบบัญชีธนาคาร
                             </Button>
-                            <Button type="primary" onClick={this.showEditDrawer}>แก้ไขบัญชีธนาคาร</Button>
+                          </Col>
+                          <Col span={24}>
+                            <Button
+                              type="primary"
+                              block
+                              onClick={this.showEditDrawer}
+                            >
+                              แก้ไขบัญชีธนาคาร
+                            </Button>
                           </Col>
                         </Row>
                       </Card>
-                    ))
-                  : ""}
-              </Col>
+                    </Col>
+                  ))
+                : ""}
             </Row>
           </Col>
         </Row>
@@ -130,6 +193,7 @@ class StoreBank extends Component {
           closable={false}
           onClose={this.onDrawerclose}
           visible={this.state.drawerVisible}
+          title="เพิ่มบัญชี"
         >
           <AddStoreBank />
         </Drawer>
@@ -140,48 +204,13 @@ class StoreBank extends Component {
           closable={false}
           onClose={this.onEditDrawerclose}
           visible={this.state.drawerEditVisible}
+          title="แก้ไขบัญชี"
         >
-               <Form onSubmit={this.handleSubmit}>
-        <Row gutter={[8, 8]} type="flex" justify="space-around" align="middle">
-          <Col span={24}>
-            <Form.Item>
-              {getFieldDecorator("bank_name", {
-                rules: [{ required: true, message: "กรุณาใส่ชื่อธนาคาร" }]
-              })(<Input placeholder="ธนาคาร" />)}
-            </Form.Item>
-          </Col>
-          <Col span={24}>
-            <Form.Item>
-              {getFieldDecorator("account_name", {
-                rules: [{ required: true, message: "ชื่อเจ้าของบัญชี" }]
-              })(<Input placeholder="ชื่อเจ้าของบัญชี" />)}
-            </Form.Item>
-          </Col>
-          <Col span={24}>
-            <Form.Item>
-              {getFieldDecorator("account_number", {
-                rules: [{ required: true, message: "เลขที่บัญชี" }]
-              })(<Input placeholder="เลขที่บัญชี" />)}
-            </Form.Item>
-          </Col>
-          <Col span={24}>
-            <Form.Item>
-              <Button
-                htmlType="submit"
-                block
-                disabled={hasErrors(getFieldsError())}
-                type="primary"
-              >
-                ยืนยันการแก้ไข
-              </Button>
-            </Form.Item>
-          </Col>
-        </Row>
-      </Form>
+          <EditStoreBank showUpdateConfirm={this.showUpdateConfirm} />
         </Drawer>
-      </Layout>
+      </>
     );
   }
 }
 
-export default StoreBank;
+export default withRouter(StoreBank);
