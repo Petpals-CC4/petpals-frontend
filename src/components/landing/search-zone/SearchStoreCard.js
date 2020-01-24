@@ -15,10 +15,11 @@ class SearchStoreCard extends Component {
       description,
       score,
       services,
-      price,
       imgUrl,
       onClick // fn
     } = this.props
+
+    const price = (services.length > 0 && services[0].service_price !== undefined) ? services[0].service_price : undefined
 
     return (
       <Card style={{ margin: "16px 0px", cursor: "pointer" }} onClick={onClick}>

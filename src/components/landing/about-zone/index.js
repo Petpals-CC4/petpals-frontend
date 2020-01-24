@@ -32,7 +32,7 @@ export class AboutZone extends Component {
     ]
     return (
       <div style={{ margin: "1.2em 0px", padding: "0px 8px" }}>
-        <Row type="flex" justify="center" gutter={[32, 32]} style={{ margin: "3em" }}>
+        <Row type="flex" justify="center" gutter={[32, 32]} style={{ margin: "3em 3em 1em 3em" }}>
           {contents.map(content => {
             return (
               <Col key={content.id}>

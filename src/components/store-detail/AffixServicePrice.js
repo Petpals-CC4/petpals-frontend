@@ -1,26 +1,24 @@
 import React, { Component } from "react";
-import { Button, Drawer, Table } from "antd";
+import { Button, Drawer, Table, Row, Col } from "antd";
 import { withCommas } from "../../utils";
 
 class AffixServicePrice extends Component {
   state = {
     visible: false
-  }
+  };
 
   handleShowDrawer = () => {
-    console.log("object")
-    this.setState({ visible: true })
-  }
+    console.log("object");
+    this.setState({ visible: true });
+  };
 
   handleHideDrawer = () => {
-    console.log("object")
-    this.setState({ visible: false })
-  }
+    console.log("object");
+    this.setState({ visible: false });
+  };
 
   render() {
-    const {
-      checkedServices
-    } = this.props;
+    const { checkedServices } = this.props;
 
     // console.log(checkedServices)
 
@@ -35,15 +33,20 @@ class AffixServicePrice extends Component {
         dataIndex: "service_price",
         key: "service_price",
         align: "right",
-        render: (price) => {
-          return <span style={{ textAlign: "right" }}>{withCommas(price)} บาท</span>
+        render: price => {
+          return (
+            <span style={{ textAlign: "right" }}>{withCommas(price)} บาท</span>
+          );
         }
       }
     ];
 
-    const sumPrice = checkedServices.length ?
-      checkedServices.reduce((total, current) => total += parseFloat(current.service_price), 0)
-      : 0.0
+    const sumPrice = checkedServices.length
+      ? checkedServices.reduce(
+          (total, current) => (total += parseFloat(current.service_price)),
+          0
+        )
+      : 0.0;
 
     return (
       <>
@@ -55,6 +58,7 @@ class AffixServicePrice extends Component {
         >
           จอง
         </Button>
+
         <Drawer
           title="สรุปรายการ"
           placement="right"
@@ -62,20 +66,26 @@ class AffixServicePrice extends Component {
           onClose={this.handleHideDrawer}
           visible={this.state.visible}
         >
-
-          <Table
-            rowKey={"id"}
-            columns={columns}
-            dataSource={checkedServices}
-            pagination={false}
-          />
-
-          <div>
-            ยอดรวม {withCommas(sumPrice)} บาท
-          </div>
-          <Button type="primary" style={{ width: "100%" }} disabled={sumPrice <= 0.0}>
-            ยืนยันการจอง
-          </Button>
+          <Row gutter={[16,16]}>
+            <Col span={24}>
+              <Table
+                rowKey={"id"}
+                columns={columns}
+                dataSource={checkedServices}
+                pagination={false}
+              />
+            </Col>
+            <Col span={24}>ยอดรวม {withCommas(sumPrice)} บาท</Col>
+            <Col span={24}>
+              <Button
+                type="primary"
+                style={{ width: "100%" }}
+                disabled={sumPrice <= 0.0}
+              >
+                ยืนยันการจอง
+              </Button>
+            </Col>
+          </Row>
         </Drawer>
       </>
     );

@@ -1,11 +1,19 @@
 import React, { Component } from 'react'
 import { Button } from 'antd'
 import SearchStoreCard from './SearchStoreCard'
+import { withRouter } from 'react-router-dom'
 
 export class SearchResult extends Component {
+  handleClickStore = (id) => (e) => {
+    this.props.history.push(`/store_detail/${id}`)
+  }
   render() {
-    const { storeResultList, showSelectedRange, selectedSearch, onClearSearch } = this.props
-    // console.log(storeResultList)
+    const {
+      storeResultList,
+      showSelectedRange,
+      selectedSearch,
+      onClearSearch
+    } = this.props
     return (
       <div>
         {(showSelectedRange && selectedSearch && selectedSearch.startDate && selectedSearch.endDate) ?
@@ -28,8 +36,7 @@ export class SearchResult extends Component {
             score={store.feedback_score}
             imgUrl={store.profile_image_url}
             services={store.services}
-            price={store.price}
-            onClick={(e) => { console.log(e) }}
+            onClick={this.handleClickStore(store.id)}
           />
         ))}
       </div>
@@ -37,4 +44,4 @@ export class SearchResult extends Component {
   }
 }
 
-export default SearchResult
+export default withRouter(SearchResult)

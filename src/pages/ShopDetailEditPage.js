@@ -6,6 +6,7 @@ import EditStoreService from "../components/store-service-edit/EditStoreService"
 
 
 class ShopDetailEditPage extends Component {
+
   render() {
     return (
       <Layout>
@@ -16,4 +17,4 @@ class ShopDetailEditPage extends Component {
   }
 }
 
-export default ShopDetailEditPage
+export default ShopDetailEditPage;

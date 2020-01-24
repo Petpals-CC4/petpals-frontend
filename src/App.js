@@ -5,13 +5,14 @@ import './App.css';
 
 // import NotFound from './components/utils/NotFound'
 
-// import LandingPage from './pages/LandingPage';
-// import StoreDetailPage from "./pages/StoreDetailPage";
-// import PaymentPage from "./pages/PaymentPage";
-// import VerifyPaymentPage from './pages/VerifyPaymentPage';
-// import AuthPage from './pages/AuthPage';
-// import FeedbackPage from './pages/FeedbackPage'
-import ShopDetailEditPage from './pages/ShopDetailEditPage'
+import LandingPage from './pages/LandingPage';
+import StoreDetailPage from "./pages/StoreDetailPage";
+import PaymentPage from "./pages/PaymentPage";
+import VerifyPaymentPage from './pages/VerifyPaymentPage';
+import ShopDetailEditPage from './pages/ShopDetailEditPage';
+
+import AuthPage from './pages/AuthPage';
+import FeedbackPage from './pages/FeedbackPage'
 
 class App extends Component {
   render() {
@@ -22,6 +23,11 @@ class App extends Component {
           {/* <Route exact path="/" component={LandingPage} />
           <Route path="/store_detail/:id" component={StoreDetailPage} />
           <Route path="/payment" component={PaymentPage} />
+          <Route path="/verifypaymentpage" component={VerifyPaymentPage} />
+          <Route path="/shopdetaileditpage/:id"component={ShopDetailEditPage}/>
+          {/* <Route path="/main" component={MainLayout} /> */}
+          {/* <Route path="/signin" component={FirstPage} /> */}
+          {/* <Route path="/signup" component={FirstPage} /> */}
           <Route path="/verify_payment" component={VerifyPaymentPage} />
           <Route path="/signin" component={AuthPage} />
           <Route path="/signup" component={AuthPage} />
