@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Button, Input, Row, Col, Form } from "antd";
-import axios from "../../../utils/api.service";
+// import Axios from "../../../utils/api.service";
 import { withRouter } from "react-router-dom";
 
 function hasErrors(fieldsError) {
@@ -22,7 +22,7 @@ class EditStoreBank extends Component {
           account_number: values.account_number,
           store_id: "1"
         })
-        // let result = await axios.put(`/bank/${this.props.match.params.id}`, {
+        // let result = await Axios.put(`/bank/${this.props.match.params.id}`, {
         //   bank_name: values.bank_name,
         //   account_name: values.account_name,
         //   account_number: values.account_number,

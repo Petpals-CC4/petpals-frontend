@@ -5,14 +5,13 @@ import './App.css';
 
 import NotFound from './components/utils/NotFound'
 
+import AuthPage from './pages/AuthPage';
 import LandingPage from './pages/LandingPage';
-import StoreDetailPage from "./pages/StoreDetailPage";
+import FeedbackPage from './pages/FeedbackPage'
 import PaymentPage from "./pages/PaymentPage";
 import VerifyPaymentPage from './pages/VerifyPaymentPage';
+import StoreDetailPage from "./pages/StoreDetailPage";
 import ShopDetailEditPage from './pages/ShopDetailEditPage';
-
-import AuthPage from './pages/AuthPage';
-import FeedbackPage from './pages/FeedbackPage'
 
 class App extends Component {
   render() {
@@ -22,12 +21,8 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={LandingPage} />
           <Route path="/store_detail/:id" component={StoreDetailPage} />
+          <Route path="/store_detail/edit/:id"component={ShopDetailEditPage}/>
           <Route path="/payment" component={PaymentPage} />
-          <Route path="/verifypaymentpage" component={VerifyPaymentPage} />
-          <Route path="/shopdetaileditpage/:id"component={ShopDetailEditPage}/>
-          {/* <Route path="/main" component={MainLayout} /> */}
-          {/* <Route path="/signin" component={FirstPage} /> */}
-          {/* <Route path="/signup" component={FirstPage} /> */}
           <Route path="/verify_payment" component={VerifyPaymentPage} />
           <Route path="/signin" component={AuthPage} />
           <Route path="/signup" component={AuthPage} />

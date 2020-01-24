@@ -85,13 +85,15 @@ export class SearchInput extends Component {
   }
 
   componentDidUpdate = (prevProps, prevState) => {
-    if (this.props.searchObj !== prevProps.searchObj && this.props.searchObj !== prevState.searchObj) {
-      this.setState((state) => ({
+    if (
+      JSON.stringify(this.props.searchObj) !== JSON.stringify(prevProps.searchObj) &&
+      JSON.stringify(this.props.searchObj) !== JSON.stringify(prevState.searchObj)
+    ) {
+      this.setState({
         searchObj: {
-          ...state.searchObj,
-          searchText: this.props.searchObj.searchText
+          ...this.props.searchObj,
         }
-      }))
+      })
     }
   }
 

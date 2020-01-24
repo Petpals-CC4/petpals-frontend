@@ -46,13 +46,13 @@ class StoreDetailPage extends Component {
     // console.log(value)
     let newCheckedServices = [...this.state.checkedServices];
     let isFound = this.state.checkedServices.find(
-      service => service.service_id === value.service_id
+      service => service.id === value.id
     );
     if (!isFound) {
       newCheckedServices = [...this.state.checkedServices, value];
     } else {
       newCheckedServices = this.state.checkedServices.filter(
-        service => service.service_id !== value.service_id
+        service => service.id !== value.id
       );
     }
     this.setState({
@@ -61,7 +61,7 @@ class StoreDetailPage extends Component {
   };
 
   componentDidMount = async () => {
-    let result = await axios.get(`/shopdetail/${this.props.match.params.id}`)
+    let result = await axios.get(`/shop_detail/${this.props.match.params.id}`)
     // console.log(result.data)
     this.setState({
       storeData: result ? result.data : {}

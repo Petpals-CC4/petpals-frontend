@@ -1,6 +1,11 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+
 import { Button, Drawer, Table } from "antd";
+
 import { withCommas } from "../../utils";
+import { actions as paymentAction } from "../../redux/reducers/payment";
 
 class AffixServicePrice extends Component {
   state = {
@@ -15,6 +20,11 @@ class AffixServicePrice extends Component {
   handleHideDrawer = () => {
     console.log("object")
     this.setState({ visible: false })
+  }
+
+  handleClick = () => {
+    this.props.setCart(this.props.checkedServices)
+    this.props.history.push("/payment")
   }
 
   render() {
@@ -62,7 +72,6 @@ class AffixServicePrice extends Component {
           onClose={this.handleHideDrawer}
           visible={this.state.visible}
         >
-
           <Table
             rowKey={"id"}
             columns={columns}
@@ -73,7 +82,12 @@ class AffixServicePrice extends Component {
           <div>
             ยอดรวม {withCommas(sumPrice)} บาท
           </div>
-          <Button type="primary" style={{ width: "100%" }} disabled={sumPrice <= 0.0}>
+          <Button
+            type="primary"
+            style={{ width: "100%" }}
+            disabled={sumPrice <= 0.0}
+            onClick={this.handleClick}
+          >
             ยืนยันการจอง
           </Button>
         </Drawer>
@@ -82,4 +96,12 @@ class AffixServicePrice extends Component {
   }
 }
 
-export default AffixServicePrice;
+const mapStateToProps = (state) => ({
+
+})
+
+const mapDispatchToProps = {
+  ...paymentAction
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(AffixServicePrice))

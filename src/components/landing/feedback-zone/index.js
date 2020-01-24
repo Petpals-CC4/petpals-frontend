@@ -13,7 +13,7 @@ class FeedbackZone extends Component {
         <Row type="flex" gutter={[16, 16]} style={{ flexWrap: "nowrap", overflowX: "auto" }}>
           {feedbacks.map(item => {
             return (
-              <Col xs={20} sm={16} md={10}>
+              <Col xs={20} sm={16} md={10} key={item.storeName}>
                 <Card
                   hoverable
                   className="quote-feedback"
