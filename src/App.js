@@ -3,7 +3,7 @@ import { Switch, Route, withRouter } from 'react-router-dom'
 
 import './App.css';
 
-import NotFound from './components/utils/NotFound'
+// import NotFound from './components/utils/NotFound'
 
 import AuthPage from './pages/AuthPage';
 import LandingPage from './pages/LandingPage';
@@ -19,15 +19,16 @@ class App extends Component {
     return (
       <div>
         <Switch>
-          <Route exact path="/" component={LandingPage} />
+          {/* <Route exact path="/" component={LandingPage} />
           <Route path="/store_detail/:id" component={StoreDetailPage} />
           <Route path="/store_detail/edit/:id"component={ShopDetailEditPage}/>
           <Route path="/payment" component={PaymentPage} />
           <Route path="/verify_payment" component={VerifyPaymentPage} />
           <Route path="/signin" component={AuthPage} />
           <Route path="/signup" component={AuthPage} />
-          <Route path="/feedback" component={FeedbackPage} />
-          <Route component={NotFound} />
+          <Route path="/feedback" component={FeedbackPage} /> */}
+          <Route path="/shopdetaileditpage" component={ShopDetailEditPage} />
+          {/* <Route component={NotFound} /> */}
         </Switch>
       </div>
     )

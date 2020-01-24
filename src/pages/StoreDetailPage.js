@@ -12,26 +12,6 @@ class StoreDetailPage extends Component {
   state = {
     storeData: {},
     checkedServices: [],
-    // service: [
-    //   {
-    //     service_id: 1,
-    //     service_name: "อาบน้ำน้อง",
-    //     service_description: "อาบน้ำหมาด้วยแชมพูกำจัดเห็บพรีเมี่ยม",
-    //     service_price: "2000"
-    //   },
-    //   {
-    //     service_id: 2,
-    //     service_name: "อาบน้ำน้อง",
-    //     service_description: "อาบน้ำหมาด้วยแชมพูกำจัดเห็บพรีเมี่ยม",
-    //     service_price: "3000"
-    //   },
-    //   {
-    //     service_id: 3,
-    //     service_name: "อาบน้ำน้อง",
-    //     service_description: "อาบน้ำหมาด้วยแชมพูกำจัดเห็บพรีเมี่ยม",
-    //     service_price: "5500"
-    //   }
-    // ]
   };
 
   onChange = checkedValues => {
