@@ -8,8 +8,6 @@ const columns = [
         customer_phone: 'customer_phone'
     }
 ]
-
-
 export class OrderListed extends Component {
     state = {
         dataSource: [
@@ -30,7 +28,6 @@ export class OrderListed extends Component {
             },
         ]
 }
-
     // componentDidMount = async () => {
     //     let result = await Axios.get(`/shopdetail/${this.props.match.params.id}`)
     //     // console.log(result.data)
@@ -38,7 +35,6 @@ export class OrderListed extends Component {
     //       storeData: result ? result.data : {}
     //     })
     //   }
-
     render() {
         // const {
         //     Orders,
@@ -50,10 +46,10 @@ export class OrderListed extends Component {
                  <div>
                  <Table dataSource={this.state.dataSource} columns={columns} />;
                  </div>
-                 <></>
+                 <div>รายการที่สำเร็จเเล้ว</div>
+                 <Table dataSource={this.state.dataSource} columns={columns} />;
             </div>
         )
     }
 }
-
 export default OrderListed

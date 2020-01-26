@@ -12,10 +12,6 @@ export class OrderProgress extends Component {
                 <Step title="In Progress" description="This is a description." />
                 <Step title="Waiting" description="This is a description." />
                 </Steps>
-                <div>
-                    
-                </div>
-
             </div>
         )
     }
