@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux'
-import { Layout } from "antd";
+import { Layout, Typography } from "antd";
 
 // ------------------------------Component--------------------------------------------
 
@@ -9,7 +9,6 @@ import StoreInfo from "../components/store-detail/StoreInfo";
 import CarouselSlider from "../components/landing/CarouselSlider";
 import FooterZone from "../components/landing/FooterZone";
 import axios from "../utils/api.service";
-import { Typography, Col, Row } from "antd";
 
 class StoreDetailPage extends Component {
   state = {

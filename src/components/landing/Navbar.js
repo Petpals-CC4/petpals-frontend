@@ -1,14 +1,11 @@
 import React, { Component } from 'react'
+import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Layout, Col, Row, Menu, Button, Dropdown, Divider } from 'antd';
 import './Info.css'
 
 import { ReactComponent as Logo } from '../../images/patpals_logo.svg'
-import { TOKEN } from '../../utils/constants'
-import { parseJwt } from '../../utils';
-
 import { actions as authAction } from '../../redux/reducers/auth'
-import { withRouter, Link } from 'react-router-dom';
 
 const { Header } = Layout
 
