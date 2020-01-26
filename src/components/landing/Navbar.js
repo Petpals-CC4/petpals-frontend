@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import { Layout, Col, Row, Menu, Button, Dropdown } from 'antd';
+import { Layout, Col, Row, Menu, Button, Dropdown, Divider } from 'antd';
 import './Info.css'
 
 import { ReactComponent as Logo } from '../../images/patpals_logo.svg'
@@ -15,19 +15,18 @@ const { Header } = Layout
 class Navbar extends Component {
 
   state = {
-    current: 'about',
-    username: ""
+    current: "about",
   };
 
-  getUserDetail = () => {
-    const data = parseJwt(sessionStorage.getItem(TOKEN))
-    console.log(data)
-    this.setState({
-      // user_id: data.id,
-      username: data ? data.username : "",
-      // role: data.role
-    })
-  }
+  // getUserDetail = () => {
+  //   const data = parseJwt(sessionStorage.getItem(TOKEN))
+  //   console.log(data)
+  //   this.setState({
+  //     // user_id: data.id,
+  //     username: data ? data.username : "",
+  //     role: data ? data.role : "guest"
+  //   })
+  // }
 
   getActiveID = () => {
     let listMenu = [
@@ -58,18 +57,30 @@ class Navbar extends Component {
       current: e.key,
     });
   };
+
+  handleClickViewStore = () => {
+    this.goto("/store_detail")
+  }
+  
+  handleClickEditStore = () => {
+    this.goto("/store_detail/edit")
+  }
   
   handleClickSignin = () => {
-    this.props.history.push("/signin")
+    this.goto("/signin")
   }
   
   handleClickSignout = async () => {
     await this.props.signout()
-    await this.getUserDetail()
+    // await this.getUserDetail()
+  }
+
+  goto = (path = "/") => {
+    this.props.history.push(path)
   }
   
   componentDidMount = () => {
-    this.getUserDetail()
+    // this.getUserDetail()
     window.addEventListener('scroll', this.handleScroll);
   }
 
@@ -80,13 +91,35 @@ class Navbar extends Component {
   // TODO: Responsive Header Tab
   render() {
     const {
-      username
-    } = this.state
+      username,
+      role
+    } = this.props
 
     const userMenu = (
       <Menu style={{minWidth: "200px"}}>
         <Menu.Item disabled>
           <span>{username}</span>
+        </Menu.Item>
+        <Menu.Item onClick={this.handleClickSignout} style={{
+          backgroundColor: "crimson",
+          color: "white",
+        }}>
+          <span>ลงชื่อออก</span>
+        </Menu.Item>
+      </Menu>
+    );
+
+    const storeMenu = (
+      <Menu style={{minWidth: "200px"}}>
+        <Menu.Item disabled>
+          <span>{username}</span>
+        </Menu.Item>
+        <Divider style={{margin: "4px 0px"}} />
+        <Menu.Item onClick={this.handleClickViewStore}>
+          <span>ดูร้านค้าของฉัน</span>
+        </Menu.Item>
+        <Menu.Item onClick={this.handleClickEditStore}>
+          <span>ตั้งค่าหน้าร้านค้าของฉัน</span>
         </Menu.Item>
         <Menu.Item onClick={this.handleClickSignout} style={{
           backgroundColor: "crimson",
@@ -132,8 +165,8 @@ class Navbar extends Component {
                   </Menu>
                 </Col>
                 <Col>
-                  {username !== "" ?
-                    <Dropdown overlay={userMenu} placement="bottomRight">
+                  {username ?
+                    <Dropdown overlay={role === "store" ? storeMenu : userMenu} placement="bottomRight">
                       <Button type="primary" shape="circle" style={{ backgroundColor: '#e7e6e1', color: "#0F4C81" }}>
                         {username.slice(0, 3)}
                       </Button>
@@ -152,8 +185,9 @@ class Navbar extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  
+const mapStateToProps = ({auth}) => ({
+  username: auth.username,
+  role: auth.role,
 })
 
 const mapDispatchToProps = {

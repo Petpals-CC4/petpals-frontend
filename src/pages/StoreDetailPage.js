@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from 'react-redux'
 import { Layout } from "antd";
 
 // ------------------------------Component--------------------------------------------
@@ -41,17 +42,23 @@ class StoreDetailPage extends Component {
   };
 
   componentDidMount = async () => {
-    let result = await axios.get(`/shop_detail/${this.props.match.params.id}`)
-    // console.log(result.data)
-    this.setState({
-      storeData: result ? result.data : {}
-    })
+    let store_id = this.props.match.params.store_id ? this.props.match.params.store_id : this.props.store_id
+    console.log(store_id);
+    if (!store_id) {
+      this.props.history.push("/not_found")
+    } else {
+      let result = await axios.get(`/shop_detail/${store_id}`)
+      // console.log(result.data)
+      this.setState({
+        storeData: result ? result.data : {}
+      })
+    }
   }
 
   render() {
     return (
       <Layout>
-        <CarouselSlider images={this.state.storeData.store_images}/>
+        <CarouselSlider images={this.state.storeData.store_images} />
         <StoreInfo
           storeData={this.state.storeData}
           onChange={this.onChange}
@@ -66,4 +73,12 @@ class StoreDetailPage extends Component {
   }
 }
 
-export default StoreDetailPage;
+const mapStateToProps = ({ auth }) => ({
+  store_id: auth.store_id
+})
+
+const mapDispatchToProps = {
+
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(StoreDetailPage)

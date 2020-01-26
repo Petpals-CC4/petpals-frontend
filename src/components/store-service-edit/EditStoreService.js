@@ -17,9 +17,9 @@ export class EditStoreService extends Component {
     const me = this;
     confirm({
       title: "คุณยืนยันจะแก้ไขบริการนี้ใช่หรือไม่?",
-      okText: "Yes",
+      okText: "ยืนยัน",
       okType: "success",
-      cancelText: "No",
+      cancelText: "ยกเลิก",
       onOk() {
         me.updateService(obj);
       },
@@ -41,9 +41,9 @@ export class EditStoreService extends Component {
     const me = this;
     confirm({
       title: "คุณยืนยันจะลบบริการนี้ใช่หรือไม่?",
-      okText: "Yes",
-      okType: "success",
-      cancelText: "No",
+      okText: "ใช่ ฉันจะลบ",
+      okType: "danger",
+      cancelText: "ยกเลิก",
       onOk() {
         me.deleteService(id);
       },
@@ -90,10 +90,8 @@ export class EditStoreService extends Component {
   };
 
   getService = async () => {
-    // console.log(this.props.match.params.id)
-    // let result = await axios.get(`/service`);
-    let result = await axios.get(`/service/${this.props.match.params.id}`)
-    console.log(result.data);
+    let result = await axios.get(`/service`)
+    // console.log(result.data);
     this.setState({
       serviceLists: result ? result.data : []
     });
@@ -131,7 +129,7 @@ export class EditStoreService extends Component {
             >
               {serviceLists
                 ? serviceLists.map(serviceList => (
-                  <Col xs={24} sm={12} md={8} xl={4} >
+                  <Col key={serviceList.id} xs={24} sm={12} md={8} xl={4}>
                     <Card
                       size="default"
                       key={serviceList.id}
