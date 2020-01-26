@@ -16,19 +16,21 @@ export class StoreMaps extends Component {
 
   render() {
     return (
-      <Layout>
-        <Card>
-          <Row
-            gutter={[2, 8]}
-            type="flex"
-            align="middle"
+      <Row gutter={[8, 8]} type="flex" justify="center" align="middle">
+        <Col>
+          <Card
+            style={{
+              margin: "16px 0px",
+              cursor: "pointer",
+              borderRadius: "12px"
+            }}
           >
-            <Col span={12}>
-              <h4 style={{color:"#0F4C81"}}>Address: {this.state.data.Address}</h4>
-            </Col>
-            <Col span={12}>
-              <div>
-                <h4 style={{color:"#0F4C81"}}>
+            <Row gutter={[8, 8]} type="flex" justify="center" align="middle">
+              <Col span={24} className="textCenter">
+                <h3 className="textCenter">
+                  Address: {this.state.data.Address}
+                </h3>
+                <h3 className="textCenter">
                   <img
                     src={phoneIcon}
                     alt="phoneIcon"
@@ -36,19 +38,23 @@ export class StoreMaps extends Component {
                   />
                   &nbsp;
                   {this.state.data.User_Phone}
-                </h4>
-              </div>
-            </Col>
-          </Row>
-          <Row style={{display: "flex", justifyContent: "center"}}>
-            <img
-              src={googleMap}
-              alt="googleMap"
-              style={{ width: "80%", height: "10%" }}
-            />
-          </Row>
-        </Card>
-      </Layout>
+                </h3>
+              </Col>
+            </Row>
+            <Row type="flex" justify="center" align="middle" gutter={[8, 8]}>
+              <Col span={24}>
+                <div className="setCenterImg">
+                  <img
+                    src={googleMap}
+                    alt="googleMap"
+                    style={{ width: "100%" }}
+                  />
+                </div>
+              </Col>
+            </Row>
+          </Card>
+        </Col>
+      </Row>
     );
   }
 }

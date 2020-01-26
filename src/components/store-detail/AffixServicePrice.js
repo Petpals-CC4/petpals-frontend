@@ -61,10 +61,9 @@ class AffixServicePrice extends Component {
     return (
       <>
         <Button
-          block
           type="primary"
           onClick={this.handleShowDrawer}
-          style={{ position: "fixed", bottom: 0, zIndex: 999 }}
+          style={{ position: "fixed", bottom: "20px", zIndex: "999", width:"30%"}}
         >
           จอง
         </Button>

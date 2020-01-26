@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Layout, Row, Col, Card } from "antd";
+import {Row, Col, Typography} from "antd";
 
 // ------------------------Icon------------------------------
 
@@ -11,47 +11,54 @@ import StoreUserComment from "./store-review/StoreUserComment";
 
 export class StoreReviews extends Component {
   render() {
-    const {
-      feedback_score,
-      feedbacks
-    } = this.props
+    const { feedback_score, feedbacks } = this.props;
 
     // console.log(feedbacks);
 
     return (
-      <Layout style={{ marginBottom: "24px" }}>
-        <Card>
-          <Row
-            gutter={[8, 8]}
-            type="flex"
-            justify="space-around"
-            align="middle"
-          >
-            <Col span={2} type="flex" justify="start">
-              <h1 style={{ color: "#0F4C81" }} >รีวิว</h1>
-            </Col>
-            <Col span={2} offset={6} type="flex" justify="end">
-              <img
-                src={boneEmptyIcon}
-                style={{ width: "30px", height: "30px" }}
-                alt="empty_bone"
-              />
-              <h3 style={{ color: "#0F4C81" }}> {feedback_score ? feedback_score.toFixed(2) : "0.0"} </h3>
-            </Col>
-          </Row>
-        </Card>
-        {feedbacks ? feedbacks.map((feedback) => (
-          <Row key={feedback.id}>
-            <StoreUserComment
-              rating={feedback.rating}
-              comment={feedback.comment}
-              fullname={feedback.fullname}
-              createdAt={feedback.createdAt}
+      <>
+        <Row
+          gutter={[16, 16]}
+          type="flex"
+          justify="center"
+          align="middle"
+          style={{marginTop: "20px" }}
+        >
+          <Col>
+            <Typography.Title
+              ellipsis={{ rows: 1 }}
+              style={{ margin: 0 }}
+            >
+              <h2>รีวิว</h2>
+            </Typography.Title>
+          </Col>
+          <Col>
+            <img
+              src={boneEmptyIcon}
+              style={{ width: "20px", height: "20px" }}
+              alt="empty_bone"
             />
-          </Row>
-        )) : ""
-        }
-      </Layout>
+            <h3 style={{ color: "#0F4C81" }}>
+              {feedback_score ? feedback_score.toFixed(2) : "0.0"}
+            </h3>
+          </Col>
+        </Row>
+
+        {feedbacks
+          ? feedbacks.map(feedback => (
+              <Row key={feedback.id} gutter={[8, 8]}>
+                <Col span={24}>
+                  <StoreUserComment
+                    rating={feedback.rating}
+                    comment={feedback.comment}
+                    fullname={feedback.fullname}
+                    createdAt={feedback.createdAt}
+                  />
+                </Col>
+              </Row>
+            ))
+          : ""}
+      </>
     );
   }
 }

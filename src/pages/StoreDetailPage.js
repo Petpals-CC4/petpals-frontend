@@ -7,18 +7,23 @@ import { Layout } from "antd";
 import AffixServicePrice from "../components/store-detail/AffixServicePrice";
 import StoreInfo from "../components/store-detail/StoreInfo";
 import CarouselSlider from "../components/landing/CarouselSlider";
+import FooterZone from "../components/landing/FooterZone";
 import axios from "../utils/api.service";
+import { Typography, Col, Row } from "antd";
 
 class StoreDetailPage extends Component {
   state = {
     storeData: {},
-    checkedServices: [],
+    checkedServices: []
   };
 
   onChange = checkedValues => {
     // console.log("checked = ", checkedValues);
     this.setState({
-      totalPrice: checkedValues.reduce((sum, curr) => (sum += parseFloat(curr.service_price)), 0.0),
+      totalPrice: checkedValues.reduce(
+        (sum, curr) => (sum += parseFloat(curr.service_price)),
+        0.0
+      ),
       checkedServices: checkedValues
     });
   };
@@ -58,6 +63,18 @@ class StoreDetailPage extends Component {
   render() {
     return (
       <Layout>
+        <div>
+          <Typography.Title
+            level={3}
+            className="textCenter"
+            style={{ marginTop: "10px" }}
+          >
+            ยินดีต้อนรับ
+          </Typography.Title>
+          <Typography.Title level={4} className="textCenter">
+            เชิญเลือกบริการสำหรับน้องได้ที่นี่
+          </Typography.Title>
+        </div>
         <CarouselSlider images={this.state.storeData.store_images} />
         <StoreInfo
           storeData={this.state.storeData}
@@ -65,9 +82,8 @@ class StoreDetailPage extends Component {
           handleClickService={this.handleClickService}
           checkedServices={this.state.checkedServices}
         />
-        <AffixServicePrice
-          checkedServices={this.state.checkedServices}
-        />
+        <FooterZone />
+        <AffixServicePrice checkedServices={this.state.checkedServices} />
       </Layout>
     );
   }
