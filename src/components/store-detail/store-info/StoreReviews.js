@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {Row, Col, Typography} from "antd";
+import { Row, Col, Typography } from "antd";
 
 // ------------------------Icon------------------------------
 
@@ -22,41 +22,42 @@ export class StoreReviews extends Component {
           type="flex"
           justify="center"
           align="middle"
-          style={{marginTop: "20px" }}
+          style={{ marginTop: "20px" }}
         >
           <Col>
-            <Typography.Title
-              ellipsis={{ rows: 1 }}
-              style={{ margin: 0 }}
-            >
-              <h2>รีวิว</h2>
+            <Typography.Title style={{ margin: 0 }}>
+              รีวิว
             </Typography.Title>
           </Col>
-          <Col>
-            <img
-              src={boneEmptyIcon}
-              style={{ width: "20px", height: "20px" }}
-              alt="empty_bone"
-            />
-            <h3 style={{ color: "#0F4C81" }}>
-              {feedback_score ? feedback_score.toFixed(2) : "0.0"}
-            </h3>
+          <Col className="justifyCenter">
+            <div>
+              <img
+                src={boneEmptyIcon}
+                style={{ width: "1.4em", height: "1.4em" }}
+                alt="empty_bone"
+              />
+            </div>
+            <div>
+              <span style={{ color: "#0F4C81", fontSize: "1.4em", paddingLeft: "4px" }}>
+                {feedback_score ? feedback_score.toFixed(2) : "0.0"}
+              </span>
+            </div>
           </Col>
         </Row>
 
         {feedbacks
           ? feedbacks.map(feedback => (
-              <Row key={feedback.id} gutter={[8, 8]}>
-                <Col span={24}>
-                  <StoreUserComment
-                    rating={feedback.rating}
-                    comment={feedback.comment}
-                    fullname={feedback.fullname}
-                    createdAt={feedback.createdAt}
-                  />
-                </Col>
-              </Row>
-            ))
+            <Row key={feedback.id} gutter={[8, 8]}>
+              <Col span={24}>
+                <StoreUserComment
+                  rating={feedback.rating}
+                  comment={feedback.comment}
+                  fullname={feedback.fullname}
+                  createdAt={feedback.createdAt}
+                />
+              </Col>
+            </Row>
+          ))
           : ""}
       </>
     );

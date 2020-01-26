@@ -14,9 +14,10 @@ const initialState = () => {
   const cart = sessionStorage.getItem(CART);
   // const reservingDate = sessionStorage.getItem(RESERVING_DATE);
   if (cart) {
+    let cartJSON = JSON.parse(cart)
     return {
       ...state,
-      cart
+      cart: cartJSON
     }
   } else {
     return {
@@ -34,7 +35,7 @@ export default (state = initialState(), action) => {
         ...state,
         cart: action.payload.cart
       }
-    
+
     case "SET_RESERVING_DATE":
       sessionStorage.setItem(RESERVING_DATE, JSON.stringify(action.payload));
       return {

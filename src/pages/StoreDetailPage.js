@@ -82,14 +82,15 @@ class StoreDetailPage extends Component {
           checkedServices={this.state.checkedServices}
         />
         <FooterZone />
-        <AffixServicePrice checkedServices={this.state.checkedServices} />
+        {!this.props.store_id && <AffixServicePrice checkedServices={this.state.checkedServices} />}
       </Layout>
     );
   }
 }
 
 const mapStateToProps = ({ auth }) => ({
-  store_id: auth.store_id
+  store_id: auth.store_id,
+  role: auth.role
 })
 
 const mapDispatchToProps = {

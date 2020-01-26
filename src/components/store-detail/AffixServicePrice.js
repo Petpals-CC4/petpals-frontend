@@ -9,7 +9,8 @@ import { actions as paymentAction } from "../../redux/reducers/payment";
 
 class AffixServicePrice extends Component {
   state = {
-    visible: false
+    visible: false,
+    cartItems: []
   };
 
   handleShowDrawer = () => {
@@ -27,10 +28,19 @@ class AffixServicePrice extends Component {
     this.props.history.push("/payment")
   }
 
-  render() {
-    const { checkedServices } = this.props;
+  componentDidMount = () => {
+    const { checkedServices, cartList } = this.props
+    console.log("checkedServices", checkedServices);
+    console.log("cartList", cartList);
+    this.setState({
+      cartItems: checkedServices.length === 0 ? cartList : checkedServices
+    })
+  }
 
-    // console.log(checkedServices)
+  render() {
+    const { cartItems } = this.state;
+
+    console.log(cartItems)
 
     const columns = [
       {
@@ -48,14 +58,29 @@ class AffixServicePrice extends Component {
             <span style={{ textAlign: "right" }}>{withCommas(price)} บาท</span>
           );
         }
+      },
+      {
+        title: "",
+        key: "actions",
+        render: (_, serviceObj) => {
+          return (
+            <Button
+              icon="delete"
+              shape="circle"
+              type="danger"
+              ghost
+              onClick={() => { console.log(serviceObj) }}
+            />
+          )
+        }
       }
     ];
 
-    const sumPrice = checkedServices.length
-      ? checkedServices.reduce(
-          (total, current) => (total += parseFloat(current.service_price)),
-          0
-        )
+    const sumPrice = cartItems.length
+      ? cartItems.reduce(
+        (total, current) => (total += parseFloat(current.service_price)),
+        0
+      ).toFixed(2)
       : 0.0;
 
     return (
@@ -63,7 +88,7 @@ class AffixServicePrice extends Component {
         <Button
           type="primary"
           onClick={this.handleShowDrawer}
-          style={{ position: "fixed", bottom: "20px", zIndex: "999", width:"30%"}}
+          style={{ position: "fixed", bottom: "20px", zIndex: "999", width: "30%" }}
         >
           จอง
         </Button>
@@ -75,16 +100,24 @@ class AffixServicePrice extends Component {
           onClose={this.handleHideDrawer}
           visible={this.state.visible}
         >
-          <Row gutter={[16,16]}>
+          <Row>
             <Col span={24}>
               <Table
                 rowKey={"id"}
                 columns={columns}
-                dataSource={checkedServices}
+                dataSource={cartItems}
                 pagination={false}
               />
             </Col>
-            <Col span={24}>ยอดรวม {withCommas(sumPrice)} บาท</Col>
+          </Row>
+
+          <Row gutter={[16, 16]} style={{ marginTop: "2em" }}>
+            <Col span={24}>
+              <Row type="flex" justify="space-between">
+                <Col style={{ fontSize: "1.8em" }}>ยอดรวม</Col>
+                <Col style={{ fontSize: "1.8em" }}>{withCommas(sumPrice)} บาท</Col>
+              </Row>
+            </Col>
             <Col span={24}>
               <Button
                 type="primary"
@@ -102,8 +135,8 @@ class AffixServicePrice extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-
+const mapStateToProps = ({ payment }) => ({
+  cartList: payment.cart
 })
 
 const mapDispatchToProps = {

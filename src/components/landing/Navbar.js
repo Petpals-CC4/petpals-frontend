@@ -78,7 +78,6 @@ class Navbar extends Component {
 
   componentDidMount = () => {
     // this.getUserDetail()
-    console.log("objectobjectobjectobjectobjectobject", this.props);
     window.addEventListener('scroll', this.handleScroll);
   }
 
