@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Layout, Col, Row, Menu, Button, Dropdown, Divider } from 'antd';
+import { Layout, Col, Row, Menu, Button, Dropdown } from 'antd';
 import './Info.css'
 
 import { ReactComponent as Logo } from '../../images/patpals_logo.svg'
@@ -47,7 +47,7 @@ class Navbar extends Component {
       current: nowActive
     })
   }
-  
+
   handleClick = e => {
     // console.log('click ', e);
     this.setState({
@@ -58,15 +58,15 @@ class Navbar extends Component {
   handleClickViewStore = () => {
     this.goto("/store_detail")
   }
-  
+
   handleClickEditStore = () => {
     this.goto("/store_detail/edit")
   }
-  
+
   handleClickSignin = () => {
     this.goto("/signin")
   }
-  
+
   handleClickSignout = async () => {
     await this.props.signout()
     // await this.getUserDetail()
@@ -75,9 +75,10 @@ class Navbar extends Component {
   goto = (path = "/") => {
     this.props.history.push(path)
   }
-  
+
   componentDidMount = () => {
     // this.getUserDetail()
+    console.log("objectobjectobjectobjectobjectobject", this.props);
     window.addEventListener('scroll', this.handleScroll);
   }
 
@@ -93,11 +94,11 @@ class Navbar extends Component {
     } = this.props
 
     const userMenu = (
-      <Menu style={{minWidth: "200px"}}>
-        <Menu.Item disabled>
+      <Menu style={{ minWidth: "200px" }}>
+        <Menu.Item key="username" disabled>
           <span>{username}</span>
         </Menu.Item>
-        <Menu.Item onClick={this.handleClickSignout} style={{
+        <Menu.Item key="signout" onClick={this.handleClickSignout} style={{
           backgroundColor: "crimson",
           color: "white",
         }}>
@@ -107,18 +108,18 @@ class Navbar extends Component {
     );
 
     const storeMenu = (
-      <Menu style={{minWidth: "200px"}}>
-        <Menu.Item disabled>
+      <Menu style={{ minWidth: "200px" }}>
+        <Menu.Item key="username" disabled>
           <span>{username}</span>
         </Menu.Item>
-        <Divider style={{margin: "4px 0px"}} />
-        <Menu.Item onClick={this.handleClickViewStore}>
+        <Menu.Divider />
+        <Menu.Item key="store" onClick={this.handleClickViewStore}>
           <span>ดูร้านค้าของฉัน</span>
         </Menu.Item>
-        <Menu.Item onClick={this.handleClickEditStore}>
+        <Menu.Item key="store_edit" onClick={this.handleClickEditStore}>
           <span>ตั้งค่าหน้าร้านค้าของฉัน</span>
         </Menu.Item>
-        <Menu.Item onClick={this.handleClickSignout} style={{
+        <Menu.Item key="signout" onClick={this.handleClickSignout} style={{
           backgroundColor: "crimson",
           color: "white",
         }}>
@@ -126,10 +127,10 @@ class Navbar extends Component {
         </Menu.Item>
       </Menu>
     );
-    
+
     const guestMenu = (
-      <Menu>
-        <Menu.Item onClick={this.handleClickSignin}>
+      <Menu style={{ minWidth: "200px" }}>
+        <Menu.Item key="signin" onClick={this.handleClickSignin}>
           <span>ลงชื่อเข้าใช้</span>
         </Menu.Item>
       </Menu>
@@ -163,12 +164,22 @@ class Navbar extends Component {
                 </Col>
                 <Col>
                   {username ?
-                    <Dropdown overlay={role === "store" ? storeMenu : userMenu} placement="bottomRight">
+                    <Dropdown
+                      getPopupContainer={trigger => trigger.parentNode}
+                      overlay={role === "store" ? storeMenu : userMenu}
+                      placement="bottomRight"
+                      trigger={['click']}
+                    >
                       <Button type="primary" shape="circle" style={{ backgroundColor: '#e7e6e1', color: "#0F4C81" }}>
                         {username.slice(0, 3)}
                       </Button>
                     </Dropdown>
-                    : <Dropdown overlay={guestMenu} placement="bottomRight">
+                    : <Dropdown
+                      getPopupContainer={trigger => trigger.parentNode}
+                      overlay={guestMenu}
+                      placement="bottomRight"
+                      trigger={['click']}
+                    >
                       <Button type="primary" shape="circle" icon="user" style={{ backgroundColor: '#e7e6e1', color: "#0F4C81" }} />
                     </Dropdown>
                   }
@@ -182,7 +193,7 @@ class Navbar extends Component {
   }
 }
 
-const mapStateToProps = ({auth}) => ({
+const mapStateToProps = ({ auth }) => ({
   username: auth.username,
   role: auth.role,
 })

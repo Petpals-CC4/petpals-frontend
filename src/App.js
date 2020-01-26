@@ -28,7 +28,7 @@ class App extends Component {
           <Route path="/store_detail/:store_id" component={StoreDetailPage} />
           <Route path="/feedback" component={FeedbackPage} />
           <Route path="/payment" component={PaymentPage} />
-          <Route path="/dashboard_nanny/" component= {DashboardPage} />
+          <Route path="/dashboard_nanny/" component={DashboardPage} />
           <Route path="/verify_payment" component={VerifyPaymentPage} />
           <Route exact path="/not_found" component={NotFound} />
           <Route component={NotFound} />
