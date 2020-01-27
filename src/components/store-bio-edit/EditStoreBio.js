@@ -27,7 +27,7 @@ export class EditStoreBio extends Component {
     edditingBio = async (Obj) => {
         try {
             // { store_name: "", store_description: "" }
-            let result = await Axios.put(`/store`, Obj)
+            let result = await Axios.put(`/store_bio`, Obj)
             console.log(result.data);
             message.success('เเก้ไขสำเร็จ')
         } catch (err) {
@@ -39,7 +39,7 @@ export class EditStoreBio extends Component {
     }
     
     getBio = async () => {
-        let result = await Axios.get('/store')
+        let result = await Axios.get('/store_bio')
         console.log(result.data);
         this.setState({
             StoreBio: result ? result.data : []
@@ -61,11 +61,10 @@ export class EditStoreBio extends Component {
                     key={StoreBio.id}
                     >
                     <AdjustStoreBio
-                     bio_id={StoreBio.bio_id}
                      bio_storename={StoreBio.bio_storename}
-                     bio_name={StoreBio.bio_name}
-                     bio_detail={StoreBio.bio_detil}
-                     bio_phone={StoreBio.bio_phone} />
+                     bio_description={StoreBio.store_description}
+                     bio_store_images={StoreBio.profile_image_url}
+                     />
                     </Col>
                        
                   )) 
