@@ -2,93 +2,12 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import Axios from "../../utils/api.service";
 
-import { Drawer, Card, Button, Row, Col, Modal, Typography, message } from "antd";
+import { Button, Row, Col, Typography, message } from "antd";
 
 import CardStoreBank from './store-bank/CardStoreBank';
-
-// import AddStoreServiceDrawer from './edit-store-service/AddStoreServiceDrawer';
-// import AddStoreBank from "./store-bank/AddStoreBank";
-// import EditStoreBank from "./store-bank/EditStoreBank";
-
-const { confirm } = Modal;
+import AddStoreBankDrawer from './store-bank/AddStoreBankDrawer';
 
 class StoreBank extends Component {
-  // state = {
-  //   drawerVisible: false,
-  //   drawerEditVisible: false
-  // };
-
-  // showUpdateConfirm = obj => {
-  //   const me = this;
-  //   confirm({
-  //     title: "คุณยืนยันจะแก้ไขบัญชีธนาคารนี้ใช่หรือไม่?",
-  //     okText: "ใช่",
-  //     okType: "success",
-  //     cancelText: "ไม่",
-  //     onOk() {
-  //       me.updateBank(obj);
-  //     },
-  //     onCancel() {
-  //       console.log("Cancel");
-  //     }
-  //   });
-  // };
-
-  // updateBank = async obj => {
-  //   console.log(obj);
-  //   let result = await axios.put(`/bank/${this.props.match.params.id}`, obj);
-  //   console.log(result.data);
-  //   this.getBank();
-  //   this.onEditDrawerclose();
-  // };
-
-  // showDeleteConfirm = id => () => {
-  //   const me = this;
-  //   confirm({
-  //     title: "คุณยืนยันจะลบบัญชีธนาคารนี้ใช่หรือไม่?",
-  //     okText: "ใช่",
-  //     okType: "danger",
-  //     cancelText: "ไม่",
-  //     onOk() {
-  //       me.deleteBank(id);
-  //     },
-  //     onCancel() {
-  //       console.log("Cancel");
-  //     }
-  //   });
-  // };
-
-  // deleteBank = async id => {
-  //   let result = await axios.delete(`/bank/${id}`, {
-  //     data: {
-  //       store_id: "1"
-  //     }
-  //   });
-  //   console.log(result.data);
-  //   this.getBank();
-  // };
-
-  // showDrawer = () => {
-  //   this.setState({
-  //     drawerVisible: true
-  //   });
-  // };
-  // onDrawerclose = () => {
-  //   this.setState({
-  //     drawerVisible: false
-  //   });
-  // };
-
-  // showEditDrawer = () => {
-  //   this.setState({
-  //     drawerEditVisible: true
-  //   });
-  // };
-  // onEditDrawerclose = () => {
-  //   this.setState({
-  //     drawerEditVisible: false
-  //   });
-  // };
 
   state = {
     bankLists: [],
@@ -107,8 +26,17 @@ class StoreBank extends Component {
     });
   };
 
-  componentDidMount = () => {
+  createBank = async obj => {
+    try {
+      let result = await Axios.post(`/bank`, obj);
+      console.log(result.data);
+      message.success("เพิ่มรายการสำเร็จ");
+    } catch (error) {
+      message.error("ไม่สามารถเพิ่มรายการได้");
+    }
+
     this.getBank();
+    this.handleCloseDrawer("drawerAddVisible")();
   };
 
   getBank = async () => {
@@ -117,6 +45,10 @@ class StoreBank extends Component {
     this.setState({
       bankLists: result ? result.data : []
     });
+  };
+
+  componentDidMount = () => {
+    this.getBank();
   };
 
   render() {
@@ -150,24 +82,23 @@ class StoreBank extends Component {
                 key={bankList.id}
                 xs={24} sm={12} md={8} xl={4}
               >
-                {console.log(bankList)}
                 <CardStoreBank
-                  service_id={bankList.id}
-                  service_name={bankList.service_name}
-                  service_description={bankList.service_description}
-                  service_price={bankList.service_price}
-                  refreshService={this.getService}
+                  bank_id={bankList.id}
+                  bank_name={bankList.bank_name}
+                  account_name={bankList.account_name}
+                  account_number={bankList.account_number}
+                  refreshBank={this.getBank}
                 />
               </Col>
             ))
             : ""}
         </Row>
 
-        {/* <AddStoreServiceDrawer
+        <AddStoreBankDrawer
           visible={this.state.drawerAddVisible}
           handleCloseDrawer={this.handleCloseDrawer("drawerAddVisible")}
-          handleClickSave={this.createService}
-        /> */}
+          handleClickSave={this.createBank}
+        />
       </div>
     );
   }

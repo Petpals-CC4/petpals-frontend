@@ -1,34 +1,25 @@
-import React, { Component } from "react";
-import { Col, Card, Row, Button, Modal, Drawer } from "antd";
-import axios from "../../../utils/api.service";
-import EditStoreBank from "./EditStoreBankDrawer";
+import React, { Component } from 'react'
+import { Button, Card, Modal, message, Typography, Row, Col } from 'antd'
+
+import EditStoreBankDrawer from "./EditStoreBankDrawer"
+import Axios from '../../../utils/api.service'
+// import { withCommas } from '../../../utils'
 
 const { confirm } = Modal;
 
-class ShowBank extends Component {
+class CardStoreBank extends Component {
   state = {
-    bankAccounts: [],
+    drawerVisible: false,
     drawerEditVisible: false
-  };
-
-  showEditDrawer = () => {
-    this.setState({
-      drawerEditVisible: true
-    });
-  };
-  onEditDrawerclose = () => {
-    this.setState({
-      drawerEditVisible: false
-    });
   };
 
   showUpdateConfirm = obj => {
     const me = this;
     confirm({
       title: "คุณยืนยันจะแก้ไขบัญชีธนาคารนี้ใช่หรือไม่?",
-      okText: "ใช่",
+      okText: "ยืนยัน",
       okType: "success",
-      cancelText: "ไม่",
+      cancelText: "ยกเลิก",
       onOk() {
         me.updateBank(obj);
       },
@@ -39,20 +30,26 @@ class ShowBank extends Component {
   };
 
   updateBank = async obj => {
-    console.log(obj);
-    let result = await axios.put(`/bank/${obj.bank_id}`, obj);
-    console.log(result.data);
-    this.getBank();
-    this.onEditDrawerclose();
+    // console.log(obj);
+    try {
+      let result = await Axios.put(`/bank/${obj.bank_id}`, obj);
+      console.log(result.data);
+      message.success("แก้ไขรายการสำเร็จ")
+    } catch (error) {
+      message.error("ไม่สามารถแก้ไขรายการได้")
+    }
+
+    this.props.refreshBank();
+    this.handleClickClose("drawerEditVisible")()
   };
 
-  showDeleteConfirm = id => () => {
+  showDeleteConfirm = (id) => () => {
     const me = this;
     confirm({
       title: "คุณยืนยันจะลบบัญชีธนาคารนี้ใช่หรือไม่?",
-      okText: "ใช่",
+      okText: "ใช่ ฉันจะลบ",
       okType: "danger",
-      cancelText: "ไม่",
+      cancelText: "ยกเลิก",
       onOk() {
         me.deleteBank(id);
       },
@@ -63,85 +60,93 @@ class ShowBank extends Component {
   };
 
   deleteBank = async id => {
-    let result = await axios.delete(`/bank/${id}`, {
-      data: {
-        store_id: "1"
-      }
-    });
-    console.log(result.data);
-    this.getBank();
+    try {
+      let result = await Axios.delete(`/bank/${id}`);
+      console.log(result.data);
+      message.success("ลบรายการสำเร็จ")
+    } catch (error) {
+      message.error("ไม่สามารถลบรายการได้")
+    }
+    this.props.refreshBank();
   };
 
-
+  handleClick = (drawer_name) => (e) => {
+    this.setState({
+      [drawer_name]: true
+    })
+  }
+  handleClickClose = (drawer_name) => (e) => {
+    this.setState({
+      [drawer_name]: false
+    })
+  }
 
   render() {
-    const { bankAccounts } = this.state;
+    const {
+      bank_id,
+      bank_name,
+      account_name,
+      account_number,
+    } = this.props
     return (
-      <Row type="flex" justify="space-around" align="middle" gutter={[8, 8]}>
-
-        <Card
-          size="default"
-          key={bankAccount.id}
-          style={{
-            width: "100%",
-            marginBottom: "10px",
-            marginRight: "5px",
-            marginLeft: "5px",
-            borderRadius: "12px"
-          }}
-        >
-          <Row
-            gutter={[16, 16]}
-            type="flex"
-            justify="space-around"
-            align="middle"
-          >
-            <Col span={24}>
-              <h3>{bankAccount.bank_name}</h3>
-            </Col>
-            <Col span={24}>
-              <p>{bankAccount.account_name}</p>
-            </Col>
-            <Col span={24}>
-              <p>{bankAccount.account_number}</p>
-            </Col>
-          </Row>
-          <Row gutter={[16, 16]}>
-            <Col span={24}>
+      <Card
+        key={bank_id}
+        hoverable
+        style={{
+          width: "100%",
+          borderRadius: "12px",
+          height: "100%"
+        }}
+        bodyStyle={{
+          height: "100%"
+        }}
+      >
+        {/* {`#${bank_id}`} */}
+        <Row type="flex" justify="space-between" style={{ flexDirection: "column", height: "100%" }}>
+          <Col span={24}>
+            <Typography.Title level={4} ellipsis>{bank_name}</Typography.Title>
+            <span style={{ color: "rgba(0, 0, 0, 0.45)" }}>ชื่อบัญชี:</span>
+            <Typography.Paragraph ellipsis={{ rows: 3 }}>
+              {account_name}
+            </Typography.Paragraph>
+            <span style={{ color: "rgba(0, 0, 0, 0.45)" }}>เลขที่บัญชี:</span>
+            <Typography.Paragraph>{account_number}</Typography.Paragraph>
+          </Col>
+          <Col span={24}>
+            <Button.Group style={{ display: "flex" }}>
               <Button
-                onClick={this.showDeleteConfirm(bankAccount.id)}
                 type="dashed"
-                block
-                style={{ color: "#cc0a0a", marginRight: "20px" }}
+                style={{ flex: 1 }}
+                onClick={this.handleClick("drawerEditVisible")}
               >
-                ลบบัญชีธนาคาร
-                      </Button>
-            </Col>
-            <Col span={24}>
+                แก้ไขบัญชี
+              </Button>
               <Button
-                type="primary"
-                block
-                onClick={this.showEditDrawer}
-              >
-                แก้ไขบัญชีธนาคาร
-                      </Button>
-            </Col>
-          </Row>
-        </Card>
+                type="danger"
+                icon="delete"
+                ghost
+                onClick={this.showDeleteConfirm(bank_id)}
+              />
+            </Button.Group>
+          </Col>
+        </Row>
 
-        <Drawer
-          placement="right"
-          width="400px"
-          closable={false}
-          onClose={this.onEditDrawerclose}
+        <EditStoreBankDrawer
           visible={this.state.drawerEditVisible}
-          title="แก้ไขบัญชี"
-        >
-          <EditStoreBank showUpdateConfirm={this.showUpdateConfirm} />
-        </Drawer>
-      </Row>
+          bankDetail={
+            {
+              bank_id,
+              bank_name,
+              account_name,
+              account_number
+            }
+          }
+          handleCloseDrawer={this.handleClickClose("drawerEditVisible")}
+          handleClickSave={this.showUpdateConfirm}
+        />
+      </Card>
     );
   }
 }
 
-export default ShowBank;
+export default CardStoreBank;
