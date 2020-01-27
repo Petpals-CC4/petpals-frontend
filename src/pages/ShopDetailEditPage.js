@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-// import StoreDetailPage from "../pages/StoreDetailPage"
+
 import EditStoreService from "../components/store-service-edit/EditStoreService";
 import StoreBank from "../components/store-detail-edit/StoreBank";
 import FooterZone from "../components/landing/FooterZone";

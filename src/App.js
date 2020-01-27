@@ -3,16 +3,16 @@ import { Switch, Route, withRouter } from 'react-router-dom'
 
 import './App.css';
 
-// import NotFound from './components/utils/NotFound'
-
-import LandingPage from './pages/LandingPage';
-import StoreDetailPage from "./pages/StoreDetailPage";
-import PaymentPage from "./pages/PaymentPage";
-import VerifyPaymentPage from './pages/VerifyPaymentPage';
-import ShopDetailEditPage from './pages/ShopDetailEditPage';
+import NotFound from './components/utils/NotFound'
 
 import AuthPage from './pages/AuthPage';
+import LandingPage from './pages/LandingPage';
 import FeedbackPage from './pages/FeedbackPage'
+import PaymentPage from "./pages/PaymentPage";
+import VerifyPaymentPage from './pages/VerifyPaymentPage';
+import StoreDetailPage from "./pages/StoreDetailPage";
+import ShopDetailEditPage from './pages/ShopDetailEditPage';
+import DashboardPage from './components/DashboardNanny/DashboardPage'
 
 class App extends Component {
   render() {
@@ -32,7 +32,6 @@ class App extends Component {
           <Route path="/signin" component={AuthPage} />
           <Route path="/signup" component={AuthPage} />
           <Route path="/feedback" component={FeedbackPage} />
-          <Route path="/shopdetaileditpage" component={ShopDetailEditPage} />
           {/* <Route component={NotFound} /> */}
         </Switch>
       </div>

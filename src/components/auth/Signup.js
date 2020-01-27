@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link, withRouter } from 'react-router-dom'
-import { Card, Avatar, Typography, Input, Form, Icon, Button, message } from 'antd';
+import { Card, Avatar, Typography, Input, Form, Icon, Button, message, Divider } from 'antd';
 
 import Axios from '../../utils/api.service'
 
@@ -136,7 +136,7 @@ export class Signup extends Component {
               ],
             })(<Input.Password prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="ยืนยันรหัสผ่าน" onBlur={this.handleConfirmBlur} />)}
           </Form.Item>
-          <Form.Item>
+          <Form.Item style={{ marginBottom: 0 }}>
             {/* {getFieldDecorator('remember', {
               valuePropName: 'checked',
               initialValue: false,
@@ -147,11 +147,19 @@ export class Signup extends Component {
             </Link> */}
 
             <Button type="primary" htmlType="submit" className="signin-signup-form-button">
-              สมัคร
+              ยืนยันการสมัคร
             </Button>
 
-            Or <Link to="/signin" onClick={this.props.onChangeMode("signin")}>กลับไปหน้าลงชื่อเข้าใช้!</Link>
+            หรือ <Link to="/signin" onClick={this.props.onChangeMode("signin")}>กลับไปหน้าลงชื่อเข้าใช้!</Link>
 
+          </Form.Item>
+          <Divider style={{margin: "8px 0px"}} />
+          <Form.Item style={{ marginBottom: 0 }}>
+            <Link
+              to="/"
+            >
+              กลับเข้าสู่หน้าหลัก
+            </Link>
           </Form.Item>
         </Form>
       </Card>

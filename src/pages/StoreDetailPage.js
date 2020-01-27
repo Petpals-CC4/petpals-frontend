@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { connect } from 'react-redux'
+import { Layout, Typography } from "antd";
 
 // ------------------------------Component--------------------------------------------
 
@@ -7,7 +9,6 @@ import StoreInfo from "../components/store-detail/StoreInfo";
 import CarouselSlider from "../components/landing/CarouselSlider";
 import FooterZone from "../components/landing/FooterZone";
 import axios from "../utils/api.service";
-import { Typography, Col, Row } from "antd";
 
 class StoreDetailPage extends Component {
   state = {
@@ -30,13 +31,13 @@ class StoreDetailPage extends Component {
     // console.log(value)
     let newCheckedServices = [...this.state.checkedServices];
     let isFound = this.state.checkedServices.find(
-      service => service.service_id === value.service_id
+      service => service.id === value.id
     );
     if (!isFound) {
       newCheckedServices = [...this.state.checkedServices, value];
     } else {
       newCheckedServices = this.state.checkedServices.filter(
-        service => service.service_id !== value.service_id
+        service => service.id !== value.id
       );
     }
     this.setState({
@@ -45,16 +46,22 @@ class StoreDetailPage extends Component {
   };
 
   componentDidMount = async () => {
-    let result = await axios.get(`/shopdetail/${this.props.match.params.id}`);
-    // console.log(result.data)
-    this.setState({
-      storeData: result ? result.data : {}
-    });
-  };
+    let store_id = this.props.match.params.store_id ? this.props.match.params.store_id : this.props.store_id
+    console.log(store_id);
+    if (!store_id) {
+      this.props.history.push("/not_found")
+    } else {
+      let result = await axios.get(`/shop_detail/${store_id}`)
+      // console.log(result.data)
+      this.setState({
+        storeData: result ? result.data : {}
+      })
+    }
+  }
 
   render() {
     return (
-      <>
+      <Layout>
         <div>
           <Typography.Title
             level={3}
@@ -75,10 +82,19 @@ class StoreDetailPage extends Component {
           checkedServices={this.state.checkedServices}
         />
         <FooterZone />
-        <AffixServicePrice checkedServices={this.state.checkedServices} />
-      </>
+        {!this.props.store_id && <AffixServicePrice checkedServices={this.state.checkedServices} />}
+      </Layout>
     );
   }
 }
 
-export default StoreDetailPage;
+const mapStateToProps = ({ auth }) => ({
+  store_id: auth.store_id,
+  role: auth.role
+})
+
+const mapDispatchToProps = {
+
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(StoreDetailPage)

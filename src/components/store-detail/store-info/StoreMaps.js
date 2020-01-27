@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Layout, Col, Row, Card } from "antd";
+import { Col, Row, Card } from "antd";
 
 // -----------------------------------------Image-----------------------------------
 

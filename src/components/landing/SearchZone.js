@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
 import SearchInput from './search-zone/SearchInput'
 import SearchResult from './search-zone/SearchResult'
 import { Row, Col } from 'antd'
 
 import Axios from '../../utils/api.service'
+import {actions as paymentAction} from '../../redux/reducers/payment'
 
 class SearchZone extends Component {
   state = {
@@ -60,6 +62,10 @@ class SearchZone extends Component {
   handleSearch = (searchObj) => {
     this.setState({ showSelectedRange: true, searchObj })
     this.findService(searchObj.searchText)
+    this.props.setReservingDate({
+      startDate: searchObj.startDate,
+      endDate: searchObj.endDate
+    })
   }
 
   handleClearSearch = () => {
@@ -71,6 +77,7 @@ class SearchZone extends Component {
       },
       storeResultList: state.storeResultListOriginal.slice()
     }))
+    this.props.setReservingDate() // Clear Selected Data
   }
 
   findService = async (searchText) => {
@@ -103,6 +110,7 @@ class SearchZone extends Component {
   componentDidMount = () => {
     this.getRandomStore()
     this.getGuideText()
+    this.props.setReservingDate() // Clear Selected Date
   }
 
   render() {
@@ -130,4 +138,12 @@ class SearchZone extends Component {
   }
 }
 
-export default SearchZone
+const mapStateToProps = (state) => ({
+  
+})
+
+const mapDispatchToProps = {
+  ...paymentAction
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchZone)

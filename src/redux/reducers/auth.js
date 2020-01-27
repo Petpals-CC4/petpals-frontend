@@ -30,13 +30,12 @@ export default (state = initialState(), action) => {
       sessionStorage.setItem(TOKEN, token)
       return {
         ...state,
-        role: user.role
+        ...user
       }
 
     case "SIGNOUT":
       sessionStorage.removeItem(TOKEN)
       return {
-        ...state,
         role: "guest"
       }
 
