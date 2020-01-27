@@ -8,7 +8,7 @@ import AdjustStoreBio from './edit-store-bio/AdjustStoreBio'
 
 export class EditStoreBio extends Component {
     state = {
-        StoreBio: [],
+        StoreBio: {},
         drawerAddVisible: false
     }
     
@@ -42,7 +42,7 @@ export class EditStoreBio extends Component {
         let result = await Axios.get('/store_bio')
         console.log(result.data);
         this.setState({
-            StoreBio: result ? result.data : []
+            StoreBio: result ? result.data : {}
         });
     };
     
@@ -55,20 +55,18 @@ export class EditStoreBio extends Component {
         return (
             <div>
                 <Row>
-                 {StoreBio
-                  ? StoreBio.map(StoreBio => (
-                    <Col
-                    key={StoreBio.id}
-                    >
+                    <Col>
                     <AdjustStoreBio
-                     bio_storename={StoreBio.bio_storename}
+                     bio_storename={StoreBio.store_name}
                      bio_description={StoreBio.store_description}
                      bio_store_images={StoreBio.profile_image_url}
                      />
                     </Col>
+                 {/* {StoreBio
+                  ? StoreBio.map(StoreBio => (
                        
                   )) 
-                  : ""}
+                  : ""} */}
                  </Row>
                  <div 
                    className="text" 
