@@ -88,10 +88,9 @@ class AffixServicePrice extends Component {
         <Button
           type="primary"
           onClick={this.handleShowDrawer}
-          style={{ position: "fixed", bottom: "20px", zIndex: "999", width: "30%" }}
-        >
-          จอง
-        </Button>
+          className="floatingButton"
+          icon="shopping-cart"
+        />
 
         <Drawer
           title="สรุปรายการ"
