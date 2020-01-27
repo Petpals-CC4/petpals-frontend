@@ -10,37 +10,33 @@ import { actions as paymentAction } from "../../redux/reducers/payment";
 class AffixServicePrice extends Component {
   state = {
     visible: false,
-    cartItems: []
+    // cartItems: []
   };
 
   handleShowDrawer = () => {
-    console.log("object");
     this.setState({ visible: true });
   };
 
   handleHideDrawer = () => {
-    console.log("object");
     this.setState({ visible: false });
   };
 
   handleClick = () => {
-    this.props.setCart(this.props.checkedServices)
+    // this.props.setCart(this.props.checkedServices)
     this.props.history.push("/payment")
   }
 
-  componentDidMount = () => {
-    const { checkedServices, cartList } = this.props
-    console.log("checkedServices", checkedServices);
-    console.log("cartList", cartList);
-    this.setState({
-      cartItems: checkedServices.length === 0 ? cartList : checkedServices
-    })
+  handleClickDelete = (id) => () => {
+    this.props.handleDelete(id)
   }
 
   render() {
-    const { cartItems } = this.state;
+    const { checkedServices, cartList } = this.props
+    // console.log("checkedServices", checkedServices);
+    // console.log("cartList", cartList);
 
-    console.log(cartItems)
+    const cartItems = checkedServices.length === 0 ? cartList : checkedServices
+    // console.log(cartItems)
 
     const columns = [
       {
@@ -69,7 +65,7 @@ class AffixServicePrice extends Component {
               shape="circle"
               type="danger"
               ghost
-              onClick={() => { console.log(serviceObj) }}
+              onClick={this.handleClickDelete(serviceObj.id)}
             />
           )
         }
