@@ -23,7 +23,13 @@ class StoreDetailPage extends Component {
       service => service.id === value.id
     );
     if (!isFound) {
-      newCheckedServices = [...this.state.checkedServices, value];
+      if (this.state.checkedServices.some(service => service.store_id !== value.store_id)) {
+        // eslint-disable-next-line no-restricted-globals
+        let isChangedStore = confirm("คุณต้องการเปลี่ยนร้านค้าใช่หรือไม่ ตะกร้าสินค้าร้านเดิมจะถูกลบทิ้ง")
+        newCheckedServices = isChangedStore ? [value] : [...newCheckedServices]
+      } else {
+        newCheckedServices = [...this.state.checkedServices, value];
+      }
     } else {
       newCheckedServices = this.state.checkedServices.filter(
         service => service.id !== value.id
@@ -51,7 +57,7 @@ class StoreDetailPage extends Component {
     if (!store_id) {
       this.props.history.push("/not_found")
     } else {
-      let result = await axios.get(`/shop_detail/${store_id}`)
+      let result = await axios.get(`/store/${store_id}`)
       // console.log(result.data)
       const { cartList } = this.props
       this.setState({
@@ -59,7 +65,6 @@ class StoreDetailPage extends Component {
         checkedServices: cartList
       })
     }
-
   }
 
   render() {
