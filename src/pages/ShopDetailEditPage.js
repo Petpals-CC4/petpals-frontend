@@ -4,7 +4,7 @@ import React, { Component } from "react";
 import EditStoreService from "../components/store-service-edit/EditStoreService";
 import StoreBank from "../components/store-detail-edit/StoreBank";
 import FooterZone from "../components/landing/FooterZone";
-import StoreAddress from "../components/store-detail-edit/StoreAddress";
+import StoreAddress from "../../src/components/store-detail-edit/store-adress-edit/StoreAddress";
 
 class ShopDetailEditPage extends Component {
   render() {
