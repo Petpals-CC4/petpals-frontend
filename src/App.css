@@ -1,16 +1,16 @@
 /* ANTD */
 
-.ant-menu-horizontal > .ant-menu-item-selected {
+.ant-menu-horizontal>.ant-menu-item-selected {
   color: white !important;
   border-bottom: 2px solid white !important;
 }
 
-.ant-menu-horizontal > .ant-menu-item:hover {
+.ant-menu-horizontal>.ant-menu-item:hover {
   color: whitesmoke !important;
   border-bottom: 2px solid whitesmoke !important;
-} 
+}
 
-.ant-menu-horizontal > .ant-menu-item > a {
+.ant-menu-horizontal>.ant-menu-item>a {
   color: whitesmoke !important;
 }
 
@@ -18,7 +18,7 @@
   display: flex;
 }
 
-.ant-list-grid .ant-col > .ant-list-item {
+.ant-list-grid .ant-col>.ant-list-item {
   height: calc(100% - 16px);
 }
 
@@ -29,6 +29,32 @@
 
 /* CUSTOM */
 
+.doubleSizeSelect>.ant-select-selection.ant-select-selection--single,
+.doubleSizeSelect>.ant-select-selection--single .ant-select-selection__rendered {
+  height: 80px;
+}
+
+.doubleSizeSelect>.ant-select-selection--single .ant-select-selection__rendered>.ant-select-selection-selected-value {
+  margin-top: 0.4em;
+  display: inline-flex !important;
+  align-items: center;
+}
+
+.optionWithIcon {
+  height: 96px;
+  display: flex;
+  align-items: center;
+}
+
+.bankIcon {
+  width: 3em;
+  height: 1.8em;
+  font-size: 2em;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center
+}
+
 .fullMinHeight {
   min-height: 100vh !important;
 }
@@ -36,22 +62,25 @@
 .justifyStart {
   display: flex !important;
   justify-content: flex-start !important;
-  align-items: center !important;  
+  align-items: center !important;
 }
+
 .justifyEnd {
   display: flex !important;
   justify-content: flex-end !important;
-  align-items: center !important;  
+  align-items: center !important;
 }
+
 .justifyCenter {
   display: flex !important;
   justify-content: center !important;
-  align-items: center !important;  
+  align-items: center !important;
 }
+
 .justifySpaceBetween {
   display: flex !important;
   justify-content: space-between !important;
-  align-items: center !important;  
+  align-items: center !important;
 }
 
 .setCenterImg {
@@ -78,14 +107,17 @@
   min-width: 300px;
   max-width: 300px;
 }
+
 #signin-signup-form .signin-signup-form-remember {
   float: left;
   margin-left: 10px;
 }
+
 #signin-signup-form .signin-signup-form-forgot {
   float: right;
   margin-right: 10px;
 }
+
 #signin-signup-form .signin-signup-form-button {
   width: 100%;
 }
@@ -100,10 +132,12 @@
   width: 100%;
   margin-bottom: 4px !important;
 }
+
 .formItemShowText label {
   font-weight: bold;
   color: #0F4C81 !important;
 }
+
 .formItemButton {
   width: 100%;
   margin-top: 4px !important;
@@ -117,6 +151,7 @@
   justify-content: center;
   align-items: center;
 }
+
 .not-found-page .ant-result-image {
   margin: initial;
 }
@@ -124,9 +159,10 @@
 .quote-feedback {
   padding-left: 52px !important;
 }
+
 .quote-feedback::before {
   content: "\f10d";
-  font-family: 'Font Awesome\ 5 Free'; 
+  font-family: 'Font Awesome\ 5 Free';
   font-weight: 900;
   position: absolute;
   top: 8px;
@@ -134,6 +170,17 @@
   font-size: 44px;
   color: #f0f0f0;
   line-height: normal;
+}
+
+.floatingButton {
+  position: fixed !important;
+  bottom: 40px;
+  right: 40px;
+  width: 60px !important;
+  height: 60px !important;
+  border-radius: 50px !important;
+  box-shadow: 2px 2px 3px #999 !important;
+  font-size: 1.6em !important;
 }
 
 @media only screen and (max-device-width: 576px) {
