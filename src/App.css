@@ -29,6 +29,32 @@
 
 /* CUSTOM */
 
+.doubleSizeSelect>.ant-select-selection.ant-select-selection--single,
+.doubleSizeSelect>.ant-select-selection--single .ant-select-selection__rendered {
+  height: 80px;
+}
+
+.doubleSizeSelect>.ant-select-selection--single .ant-select-selection__rendered>.ant-select-selection-selected-value {
+  margin-top: 0.4em;
+  display: inline-flex !important;
+  align-items: center;
+}
+
+.optionWithIcon {
+  height: 96px;
+  display: flex;
+  align-items: center;
+}
+
+.bankIcon {
+  width: 3em;
+  height: 1.8em;
+  font-size: 2em;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center
+}
+
 .fullMinHeight {
   min-height: 100vh !important;
 }

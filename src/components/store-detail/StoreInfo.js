@@ -13,8 +13,14 @@ class StoreInfo extends Component {
       handleClickService,
       checkedServices
     } = this.props;
+    const storeServices = storeData.service ? [...storeData.service].map(service => {
+      return {
+        ...service,
+        store_id: storeData.id
+      }
+    }) : []
     return (
-      <Row gutter={[16,16]} style={{paddingBottom:"40px"}}>
+      <Row gutter={[16, 16]} style={{ paddingBottom: "40px" }}>
         <Col xs={24} sm={{ span: 20, offset: 2 }} md={{ span: 16, offset: 4 }}>
           <StoreBio
             name={storeData.store_name}
@@ -26,7 +32,7 @@ class StoreInfo extends Component {
           <StoreServices
             onChange={onChange}
             handleClickService={handleClickService}
-            services={storeData.service}
+            services={storeServices}
             checkedServices={checkedServices}
           />
         </Col>
