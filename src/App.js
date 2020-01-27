@@ -21,18 +21,17 @@ class App extends Component {
       <div>
         <Switch>
           <Route exact path="/" component={LandingPage} />
-          <Route path="/store_detail/:id" component={StoreDetailPage} />
-          <Route path="/payment" component={PaymentPage} />
-          <Route path="/verifypaymentpage" component={VerifyPaymentPage} />
-          <Route path="/shopdetaileditpage/:id"component={ShopDetailEditPage}/>
-          {/* <Route path="/main" component={MainLayout} /> */}
-          {/* <Route path="/signin" component={FirstPage} /> */}
-          {/* <Route path="/signup" component={FirstPage} /> */}
-          <Route path="/verify_payment" component={VerifyPaymentPage} />
           <Route path="/signin" component={AuthPage} />
           <Route path="/signup" component={AuthPage} />
+          <Route path="/store_detail/edit" component={ShopDetailEditPage} />
+          <Route exact path="/store_detail" component={StoreDetailPage} />
+          <Route path="/store_detail/:store_id" component={StoreDetailPage} />
           <Route path="/feedback" component={FeedbackPage} />
-          {/* <Route component={NotFound} /> */}
+          <Route path="/payment" component={PaymentPage} />
+          <Route path="/dashboard_nanny/" component={DashboardPage} />
+          <Route path="/verify_payment" component={VerifyPaymentPage} />
+          <Route exact path="/not_found" component={NotFound} />
+          <Route component={NotFound} />
         </Switch>
       </div>
     )

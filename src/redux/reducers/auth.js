@@ -35,6 +35,8 @@ export default (state = initialState(), action) => {
 
     case "SIGNOUT":
       sessionStorage.removeItem(TOKEN)
+      // sessionStorage.removeItem(CART)
+      // sessionStorage.removeItem(RESERVING_DATE)
       return {
         role: "guest"
       }
