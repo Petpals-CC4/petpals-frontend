@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
+import DashboardNanny from "../../src/components/DashboardNanny/DashboardNanny"
 
-class DashboardNanny extends Component {
+class DashboardPage extends Component {
   render() {
     return (
       <div>
-        
+        <DashboardNanny />
       </div>
     )
   }
 }
 
-export default DashboardNanny
+export default DashboardPage

@@ -12,7 +12,7 @@ import PaymentPage from "./pages/PaymentPage";
 import VerifyPaymentPage from './pages/VerifyPaymentPage';
 import StoreDetailPage from "./pages/StoreDetailPage";
 import ShopDetailEditPage from './pages/ShopDetailEditPage';
-import DashboardPage from './components/DashboardNanny/DashboardPage'
+import DashboardPage from './pages/DashboardPage'
 
 class App extends Component {
   render() {
@@ -28,7 +28,7 @@ class App extends Component {
           <Route path="/store_detail/:store_id" component={StoreDetailPage} />
           <Route path="/feedback" component={FeedbackPage} />
           <Route path="/payment" component={PaymentPage} />
-          <Route path="/dashboard_nanny/" component={DashboardPage} />
+          <Route path="/dashboard_nanny" component={DashboardPage} />
           <Route path="/verify_payment" component={VerifyPaymentPage} />
           <Route exact path="/not_found" component={NotFound} />
           <Route component={NotFound} />
