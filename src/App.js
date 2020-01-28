@@ -13,9 +13,6 @@ import VerifyPaymentPage from './pages/VerifyPaymentPage';
 import StoreDetailPage from "./pages/StoreDetailPage";
 import ShopDetailEditPage from './pages/ShopDetailEditPage';
 import AdminPage from './pages/AdminPage';
-
-import AuthPage from './pages/AuthPage';
-import FeedbackPage from './pages/FeedbackPage'
 import DashboardPage from './pages/DashboardPage';
 import AdminGuideText from './components/admin/AdminGuideText'
 
