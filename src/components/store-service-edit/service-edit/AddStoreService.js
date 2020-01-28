@@ -31,7 +31,7 @@ export class AddStoreService extends Component {
   render() {
     const { getFieldDecorator, getFieldsError } = this.props.form;
     return (
-      <Form onSubmit={this.handleEditSubmit}>
+      <Form onSubmit={this.handleSubmit}>
         <Row gutter={[8, 8]} type="flex" justify="space-around" align="middle">
           <Col span={24}>
             <Form.Item>
