@@ -51,7 +51,7 @@ axios.interceptors.response.use(
       alert("Session expire, redirect to login");
 
       sessionStorage.removeItem(TOKEN)
-      window.appHistory.push("/")
+      window.appHistory.push("/signin")
     }
 
     throw error;

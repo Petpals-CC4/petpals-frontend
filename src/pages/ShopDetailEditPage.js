@@ -1,19 +1,22 @@
-import React, { Component } from 'react'
-import { Layout } from 'antd';
+import React, { Component } from "react";
 
-// import StoreDetailPage from "../pages/StoreDetailPage"
-import EditStoreService from "../components/store-service-edit/EditStoreService"
-
+import EditStoreBio from "../components/store-bio-edit/EditStoreBio"
+import EditStoreService from "../components/store-service-edit/EditStoreService";
+import StoreBank from "../components/store-detail-edit/StoreBank";
+import FooterZone from "../components/landing/FooterZone";
+import StoreAddress from "../../src/components/store-detail-edit/store-adress-edit/StoreAddress";
 
 class ShopDetailEditPage extends Component {
-
   render() {
     return (
-      <Layout>
-        {/* <StoreDetailPage /> */}
+      <>
+        <EditStoreBio />
+        <StoreAddress />
         <EditStoreService />
-      </Layout>
-    )
+        <StoreBank />
+        <FooterZone />
+      </>
+    );
   }
 }
 

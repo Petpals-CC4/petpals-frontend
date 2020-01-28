@@ -12,7 +12,8 @@ import {
   Checkbox,
   message,
   Row,
-  Col
+  Col,
+  Divider
 } from "antd";
 
 import Axios from "../../utils/api.service";
@@ -42,7 +43,7 @@ export class Signin extends Component {
   };
 
   componentDidUpdate = (prevProps, prevState) => {
-    if (prevProps.role !== this.props.role) {
+    if (prevProps.role !== this.props.role && this.props.role !== "guest") {
       // Found user not a guest
       this.props.history.push("/");
     }
@@ -63,72 +64,72 @@ export class Signin extends Component {
               ลงชื่อเข้าใช้
             </Typography.Title>
             <Form onSubmit={this.handleSubmit} className="signin-signup-form">
-              <Row gutter={[8, 8]}>
-                <Col span={24}>
-                  <Form.Item>
-                    {getFieldDecorator("username", {
-                      rules: [
-                        { required: true, message: "กรุณาใส่ชื่อผู้ใช้!" }
-                      ]
-                    })(
-                      <Input
-                        prefix={
-                          <Icon
-                            type="user"
-                            style={{ color: "rgba(0,0,0,.25)" }}
-                          />
-                        }
-                        placeholder="ชื่อผู้ใช้"
+              <Form.Item>
+                {getFieldDecorator("username", {
+                  rules: [
+                    { required: true, message: "กรุณาใส่ชื่อผู้ใช้!" }
+                  ]
+                })(
+                  <Input
+                    prefix={
+                      <Icon
+                        type="user"
+                        style={{ color: "rgba(0,0,0,.25)" }}
                       />
-                    )}
-                  </Form.Item>
-                </Col>
-                <Col span={24}>
-                  <Form.Item>
-                    {getFieldDecorator("password", {
-                      rules: [{ required: true, message: "กรุณาใส่รหัสผ่าน!" }]
-                    })(
-                      <Input.Password
-                        prefix={
-                          <Icon
-                            type="lock"
-                            style={{ color: "rgba(0,0,0,.25)" }}
-                          />
-                        }
-                        placeholder="รหัสผ่าน"
+                    }
+                    placeholder="ชื่อผู้ใช้"
+                  />
+                )}
+              </Form.Item>
+              <Form.Item>
+                {getFieldDecorator("password", {
+                  rules: [{ required: true, message: "กรุณาใส่รหัสผ่าน!" }]
+                })(
+                  <Input.Password
+                    prefix={
+                      <Icon
+                        type="lock"
+                        style={{ color: "rgba(0,0,0,.25)" }}
                       />
-                    )}
-                  </Form.Item>
-                </Col>
-                <Col span={24}>
-                  <Form.Item>
-                    {getFieldDecorator("remember", {
-                      valuePropName: "checked",
-                      initialValue: false
-                    })(
-                      <Checkbox className="signin-signup-form-remember">
-                        จดจำรหัสผ่าน
-                      </Checkbox>
-                    )}
-                    <Link to="/" className="signin-signup-form-forgot">
-                      ลืมรหัสผ่าน
-                    </Link>
-                    <Button
-                      type="primary"
-                      htmlType="submit"
-                      className="signin-signup-form-button"
-                    >
-                      ลงชื่อเข้าใช้
-                    </Button>
-                    <Link
-                      to="/signup"
-                      onClick={this.props.onChangeMode("signup")}
-                    >
-                      สมัครเลย!
-                    </Link>
-                  </Form.Item>
-                </Col>
-              </Row>
+                    }
+                    placeholder="รหัสผ่าน"
+                  />
+                )}
+              </Form.Item>
+              <Form.Item style={{ marginBottom: 0 }}>
+                {getFieldDecorator("remember", {
+                  valuePropName: "checked",
+                  initialValue: false
+                })(
+                  <Checkbox className="signin-signup-form-remember">
+                    จดจำรหัสผ่าน
+                    </Checkbox>
+                )}
+                <Link to="/" className="signin-signup-form-forgot">
+                  ลืมรหัสผ่าน
+                  </Link>
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  className="signin-signup-form-button"
+                >
+                  ลงชื่อเข้าใช้
+                  </Button>
+                หรือ <Link
+                  to="/signup"
+                  onClick={this.props.onChangeMode("signup")}
+                >
+                  สมัครสมาชิก
+                </Link>
+              </Form.Item>
+              <Divider style={{ margin: "8px 0px" }} />
+              <Form.Item style={{ marginBottom: 0 }}>
+                <Link
+                  to="/"
+                >
+                  กลับเข้าสู่หน้าหลัก
+                  </Link>
+              </Form.Item>
             </Form>
           </Card>
         </Col>

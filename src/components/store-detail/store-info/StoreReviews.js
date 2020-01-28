@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Layout, Row, Col, Card } from "antd";
+import { Row, Col, Typography } from "antd";
 
 // ------------------------Icon------------------------------
 
@@ -11,47 +11,55 @@ import StoreUserComment from "./store-review/StoreUserComment";
 
 export class StoreReviews extends Component {
   render() {
-    const {
-      feedback_score,
-      feedbacks
-    } = this.props
+    const { feedback_score, feedbacks } = this.props;
 
     // console.log(feedbacks);
 
     return (
-      <Layout style={{ marginBottom: "24px" }}>
-        <Card>
-          <Row
-            gutter={[8, 8]}
-            type="flex"
-            justify="space-around"
-            align="middle"
-          >
-            <Col span={2} type="flex" justify="start">
-              <h1 style={{ color: "#0F4C81" }} >รีวิว</h1>
-            </Col>
-            <Col span={2} offset={6} type="flex" justify="end">
+      <>
+        <Row
+          gutter={[16, 16]}
+          type="flex"
+          justify="center"
+          align="middle"
+          style={{ marginTop: "20px" }}
+        >
+          <Col>
+            <Typography.Title style={{ margin: 0 }}>
+              รีวิว
+            </Typography.Title>
+          </Col>
+          <Col className="justifyCenter">
+            <div>
               <img
                 src={boneEmptyIcon}
-                style={{ width: "30px", height: "30px" }}
+                style={{ width: "1.4em", height: "1.4em" }}
                 alt="empty_bone"
               />
-              <h3 style={{ color: "#0F4C81" }}> {feedback_score ? feedback_score.toFixed(2) : "0.0"} </h3>
-            </Col>
-          </Row>
-        </Card>
-        {feedbacks ? feedbacks.map((feedback) => (
-          <Row key={feedback.id}>
-            <StoreUserComment
-              rating={feedback.rating}
-              comment={feedback.comment}
-              fullname={feedback.fullname}
-              createdAt={feedback.createdAt}
-            />
-          </Row>
-        )) : ""
-        }
-      </Layout>
+            </div>
+            <div>
+              <span style={{ color: "#0F4C81", fontSize: "1.4em", paddingLeft: "4px" }}>
+                {feedback_score ? feedback_score.toFixed(2) : "0.0"}
+              </span>
+            </div>
+          </Col>
+        </Row>
+
+        {feedbacks
+          ? feedbacks.map(feedback => (
+            <Row key={feedback.id} gutter={[8, 8]}>
+              <Col span={24}>
+                <StoreUserComment
+                  rating={feedback.rating}
+                  comment={feedback.comment}
+                  fullname={feedback.fullname}
+                  createdAt={feedback.createdAt}
+                />
+              </Col>
+            </Row>
+          ))
+          : ""}
+      </>
     );
   }
 }

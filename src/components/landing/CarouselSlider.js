@@ -24,7 +24,7 @@ class CarouselSlider extends Component {
             >
               <img
                 src={url}
-                style={{ width: "100%" }}
+                className="carouselImg"
                 alt="cover"
               />
             </div>

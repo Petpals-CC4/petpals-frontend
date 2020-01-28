@@ -1,26 +1,42 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+
 import { Button, Drawer, Table, Row, Col } from "antd";
+
 import { withCommas } from "../../utils";
+import { actions as paymentAction } from "../../redux/reducers/payment";
 
 class AffixServicePrice extends Component {
   state = {
-    visible: false
+    visible: false,
+    // cartItems: []
   };
 
   handleShowDrawer = () => {
-    console.log("object");
     this.setState({ visible: true });
   };
 
   handleHideDrawer = () => {
-    console.log("object");
     this.setState({ visible: false });
   };
 
-  render() {
-    const { checkedServices } = this.props;
+  handleClick = () => {
+    // this.props.setCart(this.props.checkedServices)
+    this.props.history.push("/payment")
+  }
 
-    // console.log(checkedServices)
+  handleClickDelete = (id) => () => {
+    this.props.handleDelete(id)
+  }
+
+  render() {
+    const { checkedServices, cartList } = this.props
+    // console.log("checkedServices", checkedServices);
+    // console.log("cartList", cartList);
+
+    const cartItems = checkedServices.length === 0 ? cartList : checkedServices
+    // console.log(cartItems)
 
     const columns = [
       {
@@ -38,26 +54,39 @@ class AffixServicePrice extends Component {
             <span style={{ textAlign: "right" }}>{withCommas(price)} บาท</span>
           );
         }
+      },
+      {
+        title: "",
+        key: "actions",
+        render: (_, serviceObj) => {
+          return (
+            <Button
+              icon="delete"
+              shape="circle"
+              type="danger"
+              ghost
+              onClick={this.handleClickDelete(serviceObj.id)}
+            />
+          )
+        }
       }
     ];
 
-    const sumPrice = checkedServices.length
-      ? checkedServices.reduce(
-          (total, current) => (total += parseFloat(current.service_price)),
-          0
-        )
+    const sumPrice = cartItems.length
+      ? cartItems.reduce(
+        (total, current) => (total += parseFloat(current.service_price)),
+        0
+      ).toFixed(2)
       : 0.0;
 
     return (
       <>
         <Button
-          block
           type="primary"
           onClick={this.handleShowDrawer}
-          style={{ position: "fixed", bottom: 0, zIndex: 999 }}
-        >
-          จอง
-        </Button>
+          className="floatingButton"
+          icon="shopping-cart"
+        />
 
         <Drawer
           title="สรุปรายการ"
@@ -66,21 +95,30 @@ class AffixServicePrice extends Component {
           onClose={this.handleHideDrawer}
           visible={this.state.visible}
         >
-          <Row gutter={[16,16]}>
+          <Row>
             <Col span={24}>
               <Table
                 rowKey={"id"}
                 columns={columns}
-                dataSource={checkedServices}
+                dataSource={cartItems}
                 pagination={false}
               />
             </Col>
-            <Col span={24}>ยอดรวม {withCommas(sumPrice)} บาท</Col>
+          </Row>
+
+          <Row gutter={[16, 16]} style={{ marginTop: "2em" }}>
+            <Col span={24}>
+              <Row type="flex" justify="space-between">
+                <Col style={{ fontSize: "1.8em" }}>ยอดรวม</Col>
+                <Col style={{ fontSize: "1.8em" }}>{withCommas(sumPrice)} บาท</Col>
+              </Row>
+            </Col>
             <Col span={24}>
               <Button
                 type="primary"
                 style={{ width: "100%" }}
                 disabled={sumPrice <= 0.0}
+                onClick={this.handleClick}
               >
                 ยืนยันการจอง
               </Button>
@@ -92,4 +130,12 @@ class AffixServicePrice extends Component {
   }
 }
 
-export default AffixServicePrice;
+const mapStateToProps = ({ payment }) => ({
+  cartList: payment.cart
+})
+
+const mapDispatchToProps = {
+  ...paymentAction
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(AffixServicePrice))
