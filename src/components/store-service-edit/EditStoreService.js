@@ -1,44 +1,44 @@
-import React, { Component } from 'react'
-import { Row, Col, Button, Typography, message } from 'antd';
+import React, { Component } from "react";
+import { Row, Col, Button, Typography, message } from "antd";
 import Axios from "../../utils/api.service";
 
 import { withRouter } from "react-router-dom";
-import CardStoreService from './edit-store-service/CardStoreService';
-import AddStoreServiceDrawer from './edit-store-service/AddStoreServiceDrawer';
+import CardStoreService from "./edit-store-service/CardStoreService";
+import AddStoreServiceDrawer from "./edit-store-service/AddStoreServiceDrawer";
 
 export class EditStoreService extends Component {
   state = {
     serviceLists: [],
     drawerAddVisible: false
-  }
+  };
 
-  handleOpenDrawer = (drawer_name) => (e) => {
+  handleOpenDrawer = drawer_name => e => {
     this.setState({
       [drawer_name]: true
     });
   };
 
-  handleCloseDrawer = (drawer_name) => (e) => {
+  handleCloseDrawer = drawer_name => e => {
     this.setState({
       [drawer_name]: false
     });
   };
 
-  createService = async (obj) => {
+  createService = async obj => {
     try {
-      let result = await Axios.post(`/service`, obj)
+      let result = await Axios.post(`/service`, obj);
       console.log(result.data);
-      message.success("เพิ่มรายการสำเร็จ")
+      message.success("เพิ่มรายการสำเร็จ");
     } catch (error) {
-      message.error("ไม่สามารถเพิ่มรายการได้")
+      message.error("ไม่สามารถเพิ่มรายการได้");
     }
 
     this.getService();
-    this.handleCloseDrawer("drawerAddVisible")()
-  }
+    this.handleCloseDrawer("drawerAddVisible")();
+  };
 
   getService = async () => {
-    let result = await Axios.get(`/service`)
+    let result = await Axios.get(`/service`);
     // console.log(result.data);
     this.setState({
       serviceLists: result ? result.data : []
@@ -53,7 +53,8 @@ export class EditStoreService extends Component {
     const { serviceLists } = this.state;
     return (
       <div style={{ margin: "2em" }}>
-        <Typography.Title level={3}
+        <Typography.Title
+          level={3}
           style={{
             color: "#0F4C81",
             textAlign: "center"
@@ -70,25 +71,19 @@ export class EditStoreService extends Component {
           เพิ่มบริการ
         </Button>
 
-        <Row
-          type="flex"
-          gutter={[16, 16]}
-        >
+        <Row type="flex" gutter={[16, 16]}>
           {serviceLists
             ? serviceLists.map(serviceList => (
-              <Col
-                key={serviceList.id}
-                xs={24} sm={12} md={8} xl={4}
-              >
-                <CardStoreService
-                  service_id={serviceList.id}
-                  service_name={serviceList.service_name}
-                  service_description={serviceList.service_description}
-                  service_price={serviceList.service_price}
-                  refreshService={this.getService}
-                />
-              </Col>
-            ))
+                <Col key={serviceList.id} xs={24} sm={12} md={8} xl={4}>
+                  <CardStoreService
+                    service_id={serviceList.id}
+                    service_name={serviceList.service_name}
+                    service_description={serviceList.service_description}
+                    service_price={serviceList.service_price}
+                    refreshService={this.getService}
+                  />
+                </Col>
+              ))
             : ""}
         </Row>
 
@@ -98,8 +93,8 @@ export class EditStoreService extends Component {
           handleClickSave={this.createService}
         />
       </div>
-    )
+    );
   }
 }
 
-export default withRouter(EditStoreService)
+export default withRouter(EditStoreService);

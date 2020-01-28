@@ -1,88 +1,49 @@
 import React, { Component } from "react";
-import { Drawer, Card, Button, Row, Col, Modal } from "antd";
-import axios from "../../utils/api.service";
-
-import AddStoreBank from "./store-bank/AddStoreBank";
-import EditStoreBank from "./store-bank/EditStoreBank";
-
 import { withRouter } from "react-router-dom";
+import Axios from "../../utils/api.service";
 
-const { confirm } = Modal;
+import { Button, Row, Col, Typography, message } from "antd";
+
+import CardStoreBank from './store-bank/CardStoreBank';
+import AddStoreBankDrawer from './store-bank/AddStoreBankDrawer';
+
 class StoreBank extends Component {
+
   state = {
-    drawerVisible: false,
-    drawerEditVisible: false
-  };
+    bankLists: [],
+    drawerAddVisible: false
+  }
 
-  showUpdateConfirm = obj => {
-    const me = this;
-    confirm({
-      title: "คุณยืนยันจะแก้ไขบัญชีธนาคารนี้ใช่หรือไม่?",
-      okText: "ใช่",
-      okType: "success",
-      cancelText: "ไม่",
-      onOk() {
-        me.updateBank(obj);
-      },
-      onCancel() {
-        console.log("Cancel");
-      }
+  handleOpenDrawer = (drawer_name) => (e) => {
+    this.setState({
+      [drawer_name]: true
     });
   };
 
-  updateBank = async obj => {
-    console.log(obj);
-    let result = await axios.put(`/bank/${this.props.match.params.id}`, obj);
-    console.log(result.data);
+  handleCloseDrawer = (drawer_name) => (e) => {
+    this.setState({
+      [drawer_name]: false
+    });
+  };
+
+  createBank = async obj => {
+    try {
+      let result = await Axios.post(`/bank`, obj);
+      console.log(result.data);
+      message.success("เพิ่มรายการสำเร็จ");
+    } catch (error) {
+      message.error("ไม่สามารถเพิ่มรายการได้");
+    }
+
     this.getBank();
-    this.onEditDrawerclose();
+    this.handleCloseDrawer("drawerAddVisible")();
   };
 
-  showDeleteConfirm = id => () => {
-    const me = this;
-    confirm({
-      title: "คุณยืนยันจะลบบัญชีธนาคารนี้ใช่หรือไม่?",
-      okText: "ใช่",
-      okType: "danger",
-      cancelText: "ไม่",
-      onOk() {
-        me.deleteBank(id);
-      },
-      onCancel() {
-        console.log("Cancel");
-      }
-    });
-  };
-
-  deleteBank = async id => {
-    let result = await axios.delete(`/bank/${id}`, {
-      data: {
-        store_id: "1"
-      }
-    });
-    console.log(result.data);
-    this.getBank();
-  };
-
-  showDrawer = () => {
+  getBank = async () => {
+    let result = await Axios.get(`/bank`);
+    // console.log(result.data);
     this.setState({
-      drawerVisible: true
-    });
-  };
-  onDrawerclose = () => {
-    this.setState({
-      drawerVisible: false
-    });
-  };
-
-  showEditDrawer = () => {
-    this.setState({
-      drawerEditVisible: true
-    });
-  };
-  onEditDrawerclose = () => {
-    this.setState({
-      drawerEditVisible: false
+      bankLists: result ? result.data : []
     });
   };
 
@@ -90,125 +51,55 @@ class StoreBank extends Component {
     this.getBank();
   };
 
-  getBank = async () => {
-    let result = await axios.get(`/bank/${this.props.match.params.id}`);
-    console.log(result.data);
-    this.setState({
-      bankAccounts: result ? result.data : []
-    });
-  };
-
   render() {
-    const { bankAccounts } = this.state;
+    const { bankLists } = this.state;
     return (
-      <>
-        <Row>
-          <Col>
-            <Row type="flex" justify="space-around" align="middle">
-              <h1
-                style={{
-                  fontSize: "20px",
-                  color: "#0F4C81",
-                  fontWeight: "900",
-                  paddingTop: "20px"
-                }}
+      <div style={{ margin: "2em" }}>
+        <Typography.Title level={3}
+          style={{
+            color: "#0F4C81",
+            textAlign: "center"
+          }}
+        >
+          รายการบัญชีธนาคารพี่เลี้ยง
+        </Typography.Title>
+        <Button
+          block
+          type="primary"
+          onClick={this.handleOpenDrawer("drawerAddVisible")}
+          style={{ margin: "1em 0px" }}
+        >
+          เพิ่มบัญชีธนาคาร
+        </Button>
+
+        <Row
+          type="flex"
+          gutter={[16, 16]}
+        >
+          {bankLists
+            ? bankLists.map(bankList => (
+              <Col
+                key={bankList.id}
+                xs={24} sm={12} md={8} xl={4}
               >
-                รายการบัญชีธนาคารพี่เลี้ยง
-              </h1>
-              <Button
-                type="primary"
-                block
-                onClick={this.showDrawer}
-                style={{ marginTop: "10px", marginBottom: "10px" }}
-              >
-                เพิ่มบัญชีธนาคาร
-              </Button>
-            </Row>
-            <Row
-              type="flex"
-              gutter={[16, 32]}
-            >
-              {bankAccounts
-                ? bankAccounts.map(bankAccount => (
-                    <Col xs={24} sm={12} md={8} xl={4} >
-                      <Card
-                        size="default"
-                        key={bankAccount.id}
-                        style={{
-                          width: "100%",
-                          marginBottom: "10px",
-                          marginRight: "5px",
-                          marginLeft: "5px",
-                          borderRadius: "12px"
-                        }}
-                      >
-                        <Row
-                          gutter={[16, 16]}
-                          type="flex"
-                          justify="space-around"
-                          align="middle"
-                        >
-                          <Col span={24}>
-                            <h3>{bankAccount.bank_name}</h3>
-                          </Col>
-                          <Col span={24}>
-                            <p>{bankAccount.account_name}</p>
-                          </Col>
-                          <Col span={24}>
-                            <p>{bankAccount.account_number}</p>
-                          </Col>
-                        </Row>
-                        <Row gutter={[16, 16]}>
-                          <Col span={24}>
-                            <Button
-                              onClick={this.showDeleteConfirm(bankAccount.id)}
-                              type="dashed"
-                              block
-                              style={{ color: "#cc0a0a", marginRight: "20px" }}
-                            >
-                              ลบบัญชีธนาคาร
-                            </Button>
-                          </Col>
-                          <Col span={24}>
-                            <Button
-                              type="primary"
-                              block
-                              onClick={this.showEditDrawer}
-                            >
-                              แก้ไขบัญชีธนาคาร
-                            </Button>
-                          </Col>
-                        </Row>
-                      </Card>
-                    </Col>
-                  ))
-                : ""}
-            </Row>
-          </Col>
+                <CardStoreBank
+                  bank_id={bankList.id}
+                  bank_name={bankList.bank_name}
+                  account_name={bankList.account_name}
+                  account_number={bankList.account_number}
+                  refreshBank={this.getBank}
+                />
+              </Col>
+            ))
+            : ""}
         </Row>
 
-        <Drawer
-          placement="right"
-          width="400px"
-          closable={false}
-          onClose={this.onDrawerclose}
-          visible={this.state.drawerVisible}
-          title="เพิ่มบัญชี"
-        >
-          <AddStoreBank />
-        </Drawer>
-
-        <Drawer
-          placement="right"
-          width="400px"
-          closable={false}
-          onClose={this.onEditDrawerclose}
-          visible={this.state.drawerEditVisible}
-          title="แก้ไขบัญชี"
-        >
-          <EditStoreBank showUpdateConfirm={this.showUpdateConfirm} />
-        </Drawer>
-      </>
+        <AddStoreBankDrawer
+          visible={this.state.drawerAddVisible}
+          handleCloseDrawer={this.handleCloseDrawer("drawerAddVisible")}
+          handleClickSave={this.createBank}
+        />
+      </div>
     );
   }
 }
