@@ -42,7 +42,7 @@ class AddStoreBio extends Component {
                 <Row gutter={[8, 8]} type='flex' justify='space-around' align='middle'>
                   <Col span={24}>
                       <Form.Item label="ชื่อร้านค้า">
-                        {getFieldDecorator("bio_storename", {
+                        {getFieldDecorator("store_name", {
                             rules: [{ required: true, message: "กรุณาใส่ชื่อร้าน"}]
                         })(<Input placeholder="ชื่อร้านค้า" />)}
                       </Form.Item>
@@ -56,7 +56,7 @@ class AddStoreBio extends Component {
                   </Col> */}
                   <Col span={24}>
                       <Form.Item label="รายละเอียดร้านค้า">
-                        {getFieldDecorator("bio_detail", {
+                        {getFieldDecorator("store_description", {
                             rules: [{ required: true, message: "กรุณาใส่รายละเอียดร้านค้า"}]
                         })(<Input.TextArea
                            autoSize={{ minRows: 3, maxRows: 5 }}

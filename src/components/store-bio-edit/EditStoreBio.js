@@ -24,10 +24,10 @@ export class EditStoreBio extends Component {
         });
     };
 
-    edditingBio = async (Obj) => {
+    editBio = async (Obj) => {
         try {
             // { store_name: "", store_description: "" }
-            let result = await Axios.put(`/store_bio`, Obj)
+            let result = await Axios.put(`/store`, Obj)
             console.log(result.data);
             message.success('เเก้ไขสำเร็จ')
         } catch (err) {
@@ -52,37 +52,46 @@ export class EditStoreBio extends Component {
 
     render() {
         const { StoreBio } = this.state;
+        const {
+            bio_storename,
+            bio_description
+        } = this.props
         return (
             <div>
-                <Row>
-                    <Col>
-                    <AdjustStoreBio
-                     bio_storename={StoreBio.store_name}
-                     bio_description={StoreBio.store_description}
-                     bio_store_images={StoreBio.profile_image_url}
-                     />
-                    </Col>
-                 {/* {StoreBio
-                  ? StoreBio.map(StoreBio => (
-                       
-                  )) 
-                  : ""} */}
-                 </Row>
-                 <div 
+                <div 
                    className="text" 
-                   style={{ textAlign: "center", paddingTop: "60px" }}>
+                   style={{
+                    color: "#0F4C81",
+                    textAlign: "center",
+                    paddingTop: "30px",
+                    paddingBottom: '10px'
+                  }}>
                         ข้อมูลร้านค้า
-                    <Button 
-                        type="primary" 
-                        style={{ left:"20px"}}
-                        onClick={this.handleOpenDrawer("drawerAddVisible")}>
-                        แก้ไข
-                    </Button>
                   </div>
+                  <Button
+                    block 
+                    type="primary" 
+                    style={{ left:"20px"}}
+                    onClick={this.handleOpenDrawer("drawerAddVisible")}>
+                    แก้ไข
+                </Button>  
                   <AddStoreBio
                     visible={this.state.drawerAddVisible} 
+                    StoreBio={
+                        bio_storename,
+                        bio_description
+                    }
                     handleCloseDrawer={this.handleCloseDrawer("drawerAddVisible")}
-                    handleClickSave={this.getBio}/>
+                    handleClickSave={this.editBio}/>
+                <Row>
+                    <Col>
+                     <AdjustStoreBio
+                      bio_storename={StoreBio.store_name}
+                      bio_description={StoreBio.store_description}
+                      bio_store_images={StoreBio.profile_image_url}
+                     />
+                    </Col>
+                </Row>
              </div>
         )
     }
