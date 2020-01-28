@@ -7,7 +7,6 @@ import {
   Typography,
   Row,
   Col,
-  Table
 } from "antd";
 
 import EditGuideText from "./EditGuideText";
@@ -41,7 +40,7 @@ class CardGuideText extends Component {
     console.log(obj);
     try {
       let result = await Axios.put(`/admin/guide_text/${obj.guideText_id}`, obj);
-    //   console.log(result.data);
+      console.log(result.data);
       message.success("แก้ไขรายการสำเร็จ");
     } catch (error) {
       message.error("ไม่สามารถแก้ไขรายการได้");

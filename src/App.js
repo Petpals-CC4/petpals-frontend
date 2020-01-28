@@ -13,8 +13,9 @@ import VerifyPaymentPage from './pages/VerifyPaymentPage';
 import StoreDetailPage from "./pages/StoreDetailPage";
 import ShopDetailEditPage from './pages/ShopDetailEditPage';
 import AdminPage from './pages/AdminPage';
+import AdminGuideTextPage from './pages/AdminGuideTextPage';
 import DashboardPage from './pages/DashboardPage';
-import AdminGuideText from './components/admin/AdminGuideText'
+import OrderListPage from './pages/OrderListPage';
 
 class App extends Component {
   render() {
@@ -25,15 +26,21 @@ class App extends Component {
           <Route exact path="/" component={LandingPage} />
           <Route path="/signin" component={AuthPage} />
           <Route path="/signup" component={AuthPage} />
+
+          <Route path="/store_dashboard/" component={DashboardPage} />
           <Route path="/store_detail/edit" component={ShopDetailEditPage} />
+
           <Route exact path="/store_detail" component={StoreDetailPage} />
           <Route path="/store_detail/:store_id" component={StoreDetailPage} />
+
+          <Route path="/order" component={OrderListPage} />
           <Route path="/feedback" component={FeedbackPage} />
           <Route path="/payment" component={PaymentPage} />
-          <Route path="/dashboard_nanny/" component={DashboardPage} />
           <Route path="/verify_payment/:order_id" component={VerifyPaymentPage} />
-          <Route path="/guide_text/edit" component={AdminGuideText} />
+
+          <Route path="/guide_text/edit" component={AdminGuideTextPage} />
           <Route exact path="/admin" component={AdminPage} />
+
           <Route exact path="/not_found" component={NotFound} />
           <Route component={NotFound} />
         </Switch>

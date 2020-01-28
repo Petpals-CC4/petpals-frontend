@@ -42,7 +42,7 @@ class EditGuideText extends Component {
     return (
       <Drawer
         placement="right"
-        width="200px"
+        width="350px"
         closable={true}
         onClose={handleCloseDrawer}
         visible={visible}

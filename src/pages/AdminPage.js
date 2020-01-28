@@ -15,11 +15,10 @@ class AdminPage extends Component {
     }))
   }
 
-
   render() {
     // console.log(this.state.mode)
     return (
-      <div style={{ margin: '2em' }}>
+      <div>
         {this.state.mode === "user" ?
           <UserListPage handleClick={this.handleClick} />
           :

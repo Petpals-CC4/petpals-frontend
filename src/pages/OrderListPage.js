@@ -1,16 +1,15 @@
 import React, { Component } from 'react'
-import DashboardNanny from "../../src/components/DashboardNanny/DashboardNanny"
 import GoBackButton from '../components/utils/GoBackButton'
 
-class DashboardPage extends Component {
+export class OrderListPage extends Component {
   render() {
     return (
       <div>
         <GoBackButton />
-        <DashboardNanny />
+        TABLE ORDER
       </div>
     )
   }
 }
 
-export default DashboardPage
+export default OrderListPage

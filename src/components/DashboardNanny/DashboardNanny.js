@@ -2,45 +2,74 @@ import React, { Component } from "react";
 import StoreBio from "../store-detail/store-info/StoreBio";
 import { withRouter } from "react-router-dom";
 import Axios from "../../utils/api.service";
-import OrderLists from "./OrderLists/OrderLists";
-import OrderListsHis from "./OrderLists/OrderListsHis";
-import { Col, Row } from "antd";
+import OrderLists from "./OrderLists";
+import { Col, Row, message } from "antd";
 
 export class DashboardNanny extends Component {
   state = {
-    storeData: {}
+    storeBio: {},
+    orderLists: []
   };
 
-  componentDidMount = async () => {
-    let result = await Axios.get(`/shopdetail/${this.props.match.params.id}`);
-    // console.log(result.data)
-    this.setState({
-      storeData: result ? result.data : {}
-    });
+  getStoreBio = async () => {
+    try {
+      let result = await Axios.get(`/store_bio`)
+      console.log(result.data);
+      this.setState({
+        storeBio: result ? result.data : {},
+      })
+    } catch (error) {
+      message.error("ไม่พบร้านค้า")
+      this.props.history.push("/")
+    }
+  }
+
+  getOrderList = async () => {
+    try {
+      let result = await Axios.get(`/order`);
+      console.log(result.data)
+      const orderLists = result ? result.data : []
+      this.setState({
+        orderLists,
+        orderActive: orderLists.filter(order => [1, 2].indexOf(order.status_id) >= 0), // waiting_payment and waiting_verify
+        orderHistory: orderLists.filter(order => [1, 2].indexOf(order.status_id) < 0),
+      });
+    } catch (error) {
+      message.error("ไม่พบข้อมูล")
+      // this.props.history.push("/")
+    }
+  };
+
+  componentDidMount = () => {
+    this.getStoreBio()
+    this.getOrderList()
   };
 
   render() {
-    const { storeData } = this.state;
-    // console.log(storeData)
+    const {
+      storeBio,
+      orderActive,
+      orderHistory
+    } = this.state;
 
     return (
       <Row
         type="flex"
         justify="space-between"
-        style={{ flexDirection: "column", height: "100%" }}
+        style={{ flexDirection: "column", height: "100%", margin: "5em 2em 2em 2em" }}
       >
         <Col>
           <StoreBio
-            name={storeData.store_name}
-            description={storeData.store_description}
-            imageUrl={storeData.profile_image_url}
+            name={storeBio.store_name}
+            description={storeBio.store_description}
+            imageUrl={storeBio.profile_image_url}
           />
         </Col>
         <Col>
-          <OrderLists />
+          <OrderLists title="รายการปัจจุบัน" data={orderActive} />
         </Col>
         <Col>
-          <OrderListsHis />
+          <OrderLists title="รายการปัจจุบัน" data={orderHistory} />
         </Col>
       </Row>
     );

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Form, Row, Col, Button, Input, Drawer, Select, Icon } from "antd";
+import { Form, Row, Col, Button, Input, Drawer } from "antd";
 
 class AddGuideText extends Component {
   hasErrors = fieldsError => {
@@ -24,7 +24,7 @@ class AddGuideText extends Component {
     return (
       <Drawer
         placement="right"
-        width="200px"
+        width="350px"
         closable={true}
         onClose={handleCloseDrawer}
         visible={visible}

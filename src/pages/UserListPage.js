@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { Table, Row, Col, Button, Form } from 'antd'
+import { Table, Row, Col, Button, Layout, Tag } from 'antd'
 
 import axios from '../utils/api.service'
-import { withRouter } from 'react-router-dom';
+import GoBackButton from '../components/utils/GoBackButton'
 
 class UserListPage extends Component {
   state = {
@@ -33,14 +33,24 @@ class UserListPage extends Component {
   render() {
     const columns = [
       { title: 'ID', dataIndex: 'id', key: 'id' },
-      { title: 'First Name', dataIndex: 'firstname', key: 'firstname' },
-      { title: 'Last Name', dataIndex: 'lastname', key: 'lastname' },
-      { title: 'Email', dataIndex: 'email', key: 'email' },
-      { title: 'Status', dataIndex: 'status', key: 'status' },
+      { title: 'ชื่อจริง', dataIndex: 'firstname', key: 'firstname' },
+      { title: 'นามสกุล', dataIndex: 'lastname', key: 'lastname' },
+      { title: 'อีเมล์', dataIndex: 'email', key: 'email' },
       {
-        title: 'Action',
+        title: 'สถานะ',
+        dataIndex: 'status',
+        key: 'status',
+        render: (text, object) => {
+          let renderText = text ? text.toUpperCase() : ""
+          return renderText === "ACTIVE" ?
+            <Tag color="green">{renderText}</Tag>
+            : renderText !== "" && <Tag color="volcano">{renderText}</Tag>
+        }
+      },
+      {
+        title: '',
         dataIndex: '',
-        key: 'x',
+        key: 'action',
         render: (_, object) => {
           return <Button onClick={this.swapStatus(object.id)}>
             {object.status === "active" ? "MAKE BAN" : "MAKE ACTIVE"}
@@ -50,31 +60,34 @@ class UserListPage extends Component {
     ];
 
     return (
-        <Form onSubmit={this.handleSubmit}>
-          <div style={{ marginBottom: "2em" }}>
-            <Row type='flex' justify='start' >
-              <Col span={20}>
-                <Button type="default" htmlType="submit" onClick={this.props.handleClick} >
-                  <h3>Store List </h3>
-                </Button>
-              </Col>
-            </Row>
-          </div>
-
-          <Row type='flex' justify='center' >
+      <Layout className="fullMinHeight">
+        <GoBackButton />
+        <div style={{ margin: "2em" }}>
+          <Row type="flex" justify="center">
+            <Col span={20} className="justifyEnd">
+              <Button
+                type="primary"
+                onClick={this.props.handleClick}
+              >
+                เลือกดูรายชื่อร้านค้า
+              </Button>
+            </Col>
+          </Row>
+          <Row type="flex" justify="center" >
             <Col span={20}>
               <Table
+                rowKey={"id"}
                 dataSource={this.state.adminUsers}
                 columns={columns}
-                bordered
-                title={() => 'User List'}
+                title={() => "รายชื่อผู้ใช้"}
               >
               </Table>
             </Col>
           </Row>
-        </Form>
+        </div>
+      </Layout>
     )
   }
 }
 
-export default Form.create({ name: "Userlistpage_form" })(withRouter(UserListPage))
+export default UserListPage

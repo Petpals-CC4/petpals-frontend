@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import moment from 'moment'
-import { Row, Col, Upload, Icon, Form, Button, DatePicker, TimePicker, message, Modal, Typography } from 'antd'
+import { Row, Col, Upload, Icon, Form, Button, DatePicker, TimePicker, message, Modal, Typography, Input } from 'antd'
 
 import Axios from "../../utils/api.service";
 import { withRouter } from 'react-router-dom';
@@ -11,6 +11,9 @@ export class VerifyPayment extends Component {
     timeOpen: false,
     date: null,
     time: null,
+    paymentMethodSelected: "",
+    bankSelected: {},
+    storeSelected: {},
     previewImage: "",
     previewVisible: false,
     fileList: [],
@@ -95,11 +98,36 @@ export class VerifyPayment extends Component {
     }
   }
 
+  getOrderDetail = async () => {
+    try {
+      let result = await Axios.get(`/order/${this.props.match.params.order_id}`)
+      console.log(result.data);
+      if (result.data.order_status.status_name === "waiting_payment") {
+        this.setState({
+          // paymentMethodSelected: result.data.payment_method.payment_name,
+          // bankSelected: result.data.bank, // bank_name, account_name, account_number
+          storeSelected: result.data.store // store_name, store_description
+        })
+      } else {
+        message.warning("หมายเลขออเดอร์นี้ได้รับการอัพโหลดหลักฐานการโอนเงินเรียบร้อยแล้ว")
+        this.props.history.push("/")
+      }
+    } catch (error) {
+      message.error("ไม่พบหมายเลขออเดอร์")
+      this.props.history.push("/")
+    }
+  }
+
+  componentDidMount = () => {
+    this.getOrderDetail()
+  }
+
   render() {
     const {
       timeOpen,
       previewVisible,
-      previewImage
+      previewImage,
+      storeSelected
     } = this.state
 
     const { getFieldDecorator } = this.props.form
@@ -117,7 +145,12 @@ export class VerifyPayment extends Component {
         <Form layout="horizontal" onSubmit={this.handleSubmit} style={{ marginTop: '75px' }}>
           <Row gutter={[8, 8]}>
             <Col>
-              <Form.Item label="ธนาคารที่โอน:" className={"formItemShowText"} {...formItemLayout} >
+              <Form.Item label="ร้านค้าที่เลือก:" className={"formItemShowText"} {...formItemLayout} >
+                <Input value={storeSelected.store_name} disabled />
+              </Form.Item>
+            </Col>
+            <Col>
+              <Form.Item label="วันที่โอน:" className={"formItemShowText"} {...formItemLayout} >
                 {getFieldDecorator('transfer_date', {
                   rules: [{ required: true, message: 'กรุณาเลือกวันที่โอนเงิน!' }],
                 })(
@@ -133,7 +166,7 @@ export class VerifyPayment extends Component {
               </Form.Item>
             </Col>
             <Col>
-              <Form.Item label="ธนาคารที่โอน:" className={"formItemShowText"} {...formItemLayout} >
+              <Form.Item label="เวลาที่โอน:" className={"formItemShowText"} {...formItemLayout} >
                 {getFieldDecorator('transfer_time', {
                   rules: [{ required: true, message: 'กรุณาเลือกวันที่โอนเงิน!' }],
                 })(
@@ -150,7 +183,7 @@ export class VerifyPayment extends Component {
             <Col>
               <Form.Item
                 label="รูปภาพหลักฐานการโอนเงิน"
-                extra="(รองรับรูปภาพที่มีนามสกุล .png, .jpg, .jpeg และ .gif เท่านั้น)"
+                extra="(รองรับรูปภาพที่มีนามสกุล .png, .jpg และ .jpeg เท่านั้น)"
                 className={"formItemShowText"}
                 {...formItemLayout}
               >

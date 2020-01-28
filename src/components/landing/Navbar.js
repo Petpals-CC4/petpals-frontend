@@ -60,7 +60,8 @@ class Navbar extends Component {
   }
 
   handleClickEditStore = () => {
-    this.goto("/store_detail/edit")
+    // this.goto("/store_detail/edit")
+    this.goto("/store_dashboard")
   }
 
   handleClickSignin = () => {
@@ -97,6 +98,11 @@ class Navbar extends Component {
         <Menu.Item key="username" disabled>
           <span>{username}</span>
         </Menu.Item>
+        <Menu.Divider />
+        <Menu.Item key="order" onClick={() => this.goto("/order")}>
+          <span>จัดการออร์เดอร์</span>
+        </Menu.Item>
+        <Menu.Divider />
         <Menu.Item key="signout" onClick={this.handleClickSignout} style={{
           backgroundColor: "crimson",
           color: "white",
@@ -118,6 +124,29 @@ class Navbar extends Component {
         <Menu.Item key="store_edit" onClick={this.handleClickEditStore}>
           <span>ตั้งค่าหน้าร้านค้าของฉัน</span>
         </Menu.Item>
+        <Menu.Divider />
+        <Menu.Item key="signout" onClick={this.handleClickSignout} style={{
+          backgroundColor: "crimson",
+          color: "white",
+        }}>
+          <span>ลงชื่อออก</span>
+        </Menu.Item>
+      </Menu>
+    );
+
+    const adminMenu = (
+      <Menu style={{ minWidth: "200px" }}>
+        <Menu.Item key="username" disabled>
+          <span>{username}</span>
+        </Menu.Item>
+        <Menu.Divider />
+        <Menu.Item key="user-management" onClick={() => this.goto("/admin")}>
+          <span>จัดการผู้ใช้</span>
+        </Menu.Item>
+        <Menu.Item key="guide-text-edit" onClick={() => this.goto("/guide_text/edit")}>
+          <span>จัดการคำค้นหา</span>
+        </Menu.Item>
+        <Menu.Divider />
         <Menu.Item key="signout" onClick={this.handleClickSignout} style={{
           backgroundColor: "crimson",
           color: "white",
@@ -165,7 +194,7 @@ class Navbar extends Component {
                   {username ?
                     <Dropdown
                       getPopupContainer={trigger => trigger.parentNode}
-                      overlay={role === "store" ? storeMenu : userMenu}
+                      overlay={role === "store" ? storeMenu : (role === "admin" ? adminMenu : userMenu)}
                       placement="bottomRight"
                       trigger={['click']}
                     >
