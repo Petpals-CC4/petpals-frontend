@@ -12,7 +12,8 @@ import PaymentPage from "./pages/PaymentPage";
 import VerifyPaymentPage from './pages/VerifyPaymentPage';
 import StoreDetailPage from "./pages/StoreDetailPage";
 import ShopDetailEditPage from './pages/ShopDetailEditPage';
-import DashboardPage from './pages/DashboardPage'
+import DashboardPage from './pages/DashboardPage';
+import AdminGuideText from './components/admin/AdminGuideText'
 
 class App extends Component {
   render() {
@@ -31,6 +32,7 @@ class App extends Component {
           <Route path="/dashboard_nanny" component={DashboardPage} />
           <Route path="/verify_payment" component={VerifyPaymentPage} />
           <Route exact path="/not_found" component={NotFound} />
+          <Route path="/editguidetext" component={AdminGuideText} />
           <Route component={NotFound} />
         </Switch>
       </div>
