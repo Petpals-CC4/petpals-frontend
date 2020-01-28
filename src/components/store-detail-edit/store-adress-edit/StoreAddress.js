@@ -1,12 +1,10 @@
 import React, { Component } from "react";
 
-import { Row, Col, Typography, Button, Modal, message } from "antd";
+import { Row, Col, Typography, Button, message } from "antd";
 import Axios from "../../../utils/api.service";
 
 import CardStoreAddress from "./store-address/CardStoreAddress";
 import AddStoreAddressDrawer from "./store-address/AddStoreAddressDrawer";
-
-const { confirm } = Modal;
 class StoreAddress extends Component {
   state = {
     addressLists: [],
@@ -75,18 +73,18 @@ class StoreAddress extends Component {
         <Row type="flex" gutter={[16, 16]}>
           {addressLists
             ? addressLists.map(addressLists => (
-                <Col key={addressLists.id} xs={24} sm={12} md={8} xl={4}>
-                  <CardStoreAddress
-                    address_id={addressLists.id}
-                    house_no={addressLists.house_no}
-                    road={addressLists.road}
-                    sub_district={addressLists.sub_district}
-                    district={addressLists.district}
-                    province={addressLists.province}
-                    post_code={addressLists.post_code}
-                  />
-                </Col>
-              ))
+              <Col key={addressLists.id} xs={24} sm={12} md={8} xl={4}>
+                <CardStoreAddress
+                  address_id={addressLists.id}
+                  house_no={addressLists.house_no}
+                  road={addressLists.road}
+                  sub_district={addressLists.sub_district}
+                  district={addressLists.district}
+                  province={addressLists.province}
+                  post_code={addressLists.post_code}
+                />
+              </Col>
+            ))
             : ""}
         </Row>
 
