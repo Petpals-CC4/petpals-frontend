@@ -29,7 +29,7 @@ class App extends Component {
           <Route path="/feedback" component={FeedbackPage} />
           <Route path="/payment" component={PaymentPage} />
           <Route path="/dashboard_nanny/" component={DashboardPage} />
-          <Route path="/verify_payment" component={VerifyPaymentPage} />
+          <Route path="/verify_payment/:order_id" component={VerifyPaymentPage} />
           <Route exact path="/not_found" component={NotFound} />
           <Route component={NotFound} />
         </Switch>

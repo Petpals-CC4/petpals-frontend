@@ -8,6 +8,7 @@ import AffixServicePrice from "../components/store-detail/AffixServicePrice";
 import StoreInfo from "../components/store-detail/StoreInfo";
 import CarouselSlider from "../components/landing/CarouselSlider";
 import FooterZone from "../components/landing/FooterZone";
+import GoBackButton from "../components/utils/GoBackButton";
 import axios from "../utils/api.service";
 
 class StoreDetailPage extends Component {
@@ -70,6 +71,7 @@ class StoreDetailPage extends Component {
   render() {
     return (
       <Layout>
+        <GoBackButton />
         <div>
           <Typography.Title
             level={3}
