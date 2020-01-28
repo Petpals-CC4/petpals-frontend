@@ -40,6 +40,17 @@
   align-items: center;
 }
 
+.bankCreateSelect>.ant-select-selection.ant-select-selection--single,
+.bankCreateSelect>.ant-select-selection--single .ant-select-selection__rendered {
+  display: flex;
+  height: 80px;
+}
+
+.bankCreateSelect>.ant-select-selection--single .ant-select-selection__rendered>.ant-select-selection-selected-value {
+  display: flex !important;
+  align-items: center;
+}
+
 .optionWithIcon {
   height: 96px;
   display: flex;
