@@ -18,16 +18,14 @@ class Feedback extends Component {
     this.props.form.validateFields((err, value) => {
       if (!err) {
         console.log('Received values of form: ', value);
-        this.sendFeedback(value)
+        this.sendFeedback({ ...value, order_id: this.props.match.params.order_id })
       }
     })
   }
 
   sendFeedback = async (objData) => {
     try {
-      let result = await Axios.post(`/feedback/${this.state.storeID}`, {
-        ...objData,
-      })
+      let result = await Axios.post(`/feedback/${this.state.storeID}`, objData)
       console.log(result.data);
       message.success("ส่งคะแนนร้านค้าสำเร็จ")
       this.props.history.push("/order")
