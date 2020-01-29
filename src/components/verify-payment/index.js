@@ -92,7 +92,7 @@ export class VerifyPayment extends Component {
       let result = await Axios.post('/upload_slip_image', formData)
       console.log(result.data);
       message.success("อัพโหลดสำเร็จ")
-      this.props.history.push("/")
+      this.props.history.push("/order")
     } catch (error) {
       message.error("อัพโหลดไม่สำเร็จ กรุณาลองอีกครั้งในภายหลัง")
     }
@@ -110,11 +110,11 @@ export class VerifyPayment extends Component {
         })
       } else {
         message.warning("หมายเลขออเดอร์นี้ได้รับการอัพโหลดหลักฐานการโอนเงินเรียบร้อยแล้ว")
-        this.props.history.push("/")
+        this.props.history.push("/order")
       }
     } catch (error) {
       message.error("ไม่พบหมายเลขออเดอร์")
-      this.props.history.push("/")
+      this.props.history.push("/order")
     }
   }
 

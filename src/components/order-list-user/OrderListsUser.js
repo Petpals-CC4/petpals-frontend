@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { Table, Col, Typography, Row, Tag, Dropdown, Menu, Icon } from "antd";
+import { Table, Col, Typography, Row, Tag, Dropdown, Menu, Icon, message } from "antd";
 import { datetimeFormat, withCommas } from "../../utils";
 import Axios from "../../utils/api.service";
+import { withRouter } from "react-router-dom";
 
 export class OrderListsUser extends Component {
   state = {
@@ -76,7 +77,7 @@ export class OrderListsUser extends Component {
             status === "waiting_payment" ?
               <Dropdown.Button
                 // disabled={object.order_status.status_name !== "waiting_verify"}
-                onClick={this.handleApproveOrder(object.id)}
+                onClick={this.handleUploadOrder(object.id)}
                 overlay={
                   <Menu>
                     <Menu.Item
@@ -102,12 +103,19 @@ export class OrderListsUser extends Component {
     ]
   };
 
-  handleApproveOrder = (id) => (e) => {
-    console.log(id);
+  handleUploadOrder = (order_id) => (e) => {
+    this.props.history.push(`/verify_payment/${order_id}`)
   }
 
-  handleRejectOrder = (id) => (e) => {
-    console.log(id);
+  handleRejectOrder = (order_id) => async (e) => {
+    try {
+      let result = await Axios.put(`/order_status/reject`, { order_id });
+      console.log(result.data);
+      message.success("ยกเลิกออเดอร์สำเร็จ")
+      this.getOrderList()
+    } catch (error) {
+      message.error("ยกเลิกออเดอร์ไม่สำเร็จ โปรดลองใหม่อีกครั้งในภายหลัง")
+    }
   }
 
   getOrderList = async () => {
@@ -160,4 +168,4 @@ export class OrderListsUser extends Component {
     );
   }
 }
-export default OrderListsUser;
+export default withRouter(OrderListsUser);

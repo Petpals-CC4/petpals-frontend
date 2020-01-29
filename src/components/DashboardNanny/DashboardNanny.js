@@ -75,10 +75,10 @@ export class DashboardNanny extends Component {
           />
         </Col>
         <Col>
-          <OrderLists title="รายการปัจจุบัน" data={orderActive} />
+          <OrderLists title="รายการปัจจุบัน" data={orderActive} refreshData={this.getOrderList} />
         </Col>
         <Col>
-          <OrderLists title="ประวัติรายการ" data={orderHistory} />
+          <OrderLists title="ประวัติรายการ" data={orderHistory} refreshData={this.getOrderList} />
         </Col>
       </Row>
     );

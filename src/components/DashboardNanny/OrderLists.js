@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { Table, Col, Typography, Row, Tag, Dropdown, Menu, Icon } from "antd";
+import { Table, Col, Typography, Row, Tag, Dropdown, Menu, Icon, message } from "antd";
 import { datetimeFormat } from "../../utils";
+import Axios from "../../utils/api.service";
 
 export class OrderLists extends Component {
   state = {
@@ -29,7 +30,7 @@ export class OrderLists extends Component {
             </span>
           } catch (error) {
             return <span>
-              
+
             </span>
           }
         }
@@ -88,12 +89,26 @@ export class OrderLists extends Component {
     ]
   };
 
-  handleApproveOrder = (id) => (e) => {
-    console.log(id);
+  handleApproveOrder = (order_id) => async (e) => {
+    try {
+      let result = await Axios.put(`/order_status/approve`, { order_id });
+      console.log(result.data);
+      message.success("ยืนยันออเดอร์สำเร็จ")
+      this.props.refreshData()
+    } catch (error) {
+      message.error("ยืนยันออเดอร์ไม่สำเร็จ โปรดลองใหม่อีกครั้งในภายหลัง")
+    }
   }
 
-  handleRejectOrder = (id) => (e) => {
-    console.log(id);
+  handleRejectOrder = (order_id) => async (e) => {
+    try {
+      let result = await Axios.put(`/order_status/reject`, { order_id });
+      console.log(result.data);
+      message.success("ยกเลิกออเดอร์สำเร็จ")
+      this.props.refreshData()
+    } catch (error) {
+      message.error("ยกเลิกออเดอร์ไม่สำเร็จ โปรดลองใหม่อีกครั้งในภายหลัง")
+    }
   }
 
   render() {
