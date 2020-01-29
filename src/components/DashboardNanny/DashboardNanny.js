@@ -8,7 +8,9 @@ import { Col, Row, message } from "antd";
 export class DashboardNanny extends Component {
   state = {
     storeBio: {},
-    orderLists: []
+    orderLists: [],
+    orderActive: [],
+    orderHistory: []
   };
 
   getStoreBio = async () => {
