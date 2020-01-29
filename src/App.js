@@ -11,7 +11,7 @@ import FeedbackPage from './pages/FeedbackPage'
 import PaymentPage from "./pages/PaymentPage";
 import VerifyPaymentPage from './pages/VerifyPaymentPage';
 import StoreDetailPage from "./pages/StoreDetailPage";
-import ShopDetailEditPage from './pages/ShopDetailEditPage';
+import StoreDetailEditPage from './pages/StoreDetailEditPage';
 import AdminPage from './pages/AdminPage';
 import AdminGuideTextPage from './pages/AdminGuideTextPage';
 import DashboardPage from './pages/DashboardPage';
@@ -28,7 +28,7 @@ class App extends Component {
           <Route path="/signup" component={AuthPage} />
 
           <Route path="/store_dashboard/" component={DashboardPage} />
-          <Route path="/store_detail/edit" component={ShopDetailEditPage} />
+          <Route path="/store_detail/edit" component={StoreDetailEditPage} />
 
           <Route exact path="/store_detail" component={StoreDetailPage} />
           <Route path="/store_detail/:store_id" component={StoreDetailPage} />

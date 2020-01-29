@@ -3,7 +3,7 @@ import StoreBio from "../store-detail/store-info/StoreBio";
 import { withRouter } from "react-router-dom";
 import Axios from "../../utils/api.service";
 import OrderLists from "./OrderLists";
-import { Col, Row, message } from "antd";
+import { Col, Row, message, Button } from "antd";
 
 export class DashboardNanny extends Component {
   state = {
@@ -40,6 +40,10 @@ export class DashboardNanny extends Component {
     }
   };
 
+  goTo = (link) => {
+    this.props.history.push(link)
+  }
+
   componentDidMount = () => {
     this.getStoreBio()
     this.getOrderList()
@@ -56,8 +60,11 @@ export class DashboardNanny extends Component {
       <Row
         type="flex"
         justify="space-between"
-        style={{ flexDirection: "column", height: "100%", margin: "5em 2em 2em 2em" }}
+        style={{ flexDirection: "column", height: "100%", margin: "2em" }}
       >
+        <Col className="justifyEnd">
+          <Button icon="edit" onClick={() => this.goTo("/store_detail/edit")}>แก้ไขรายละเอียดร้าน</Button>
+        </Col>
         <Col>
           <StoreBio
             name={storeBio.store_name}
@@ -69,7 +76,7 @@ export class DashboardNanny extends Component {
           <OrderLists title="รายการปัจจุบัน" data={orderActive} />
         </Col>
         <Col>
-          <OrderLists title="รายการปัจจุบัน" data={orderHistory} />
+          <OrderLists title="ประวัติรายการ" data={orderHistory} />
         </Col>
       </Row>
     );
