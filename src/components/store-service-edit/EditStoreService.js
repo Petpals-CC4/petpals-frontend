@@ -39,7 +39,7 @@ export class EditStoreService extends Component {
 
   getService = async () => {
     let result = await Axios.get('/service');
-    console.log("xxx", result.data);
+    console.log(result.data);
 
     this.setState({
       serviceLists: result ? result.data : []
@@ -48,7 +48,6 @@ export class EditStoreService extends Component {
 
   componentDidMount = () => {
     this.getService();
-    console.log("kikikikik");
   };
 
   render() {
