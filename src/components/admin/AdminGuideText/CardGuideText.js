@@ -23,7 +23,7 @@ class CardGuideText extends Component {
   showUpdateConfirm = obj => {
     const me = this;
     confirm({
-      title: "คุณยืนยันจะแก้ไขประเภทบริการนี้ใช่หรือไม่?",
+      title: "คุณยืนยันจะแก้ไขคำค้นหานี้ใช่หรือไม่?",
       okText: "ยืนยัน",
       okType: "success",
       cancelText: "ยกเลิก",
@@ -53,7 +53,7 @@ class CardGuideText extends Component {
   showDeleteConfirm = id => () => {
     const me = this;
     confirm({
-      title: "คุณยืนยันจะลบประเภทบริการนี้ใช่หรือไม่?",
+      title: "คุณยืนยันจะลบคำค้นหานี้ใช่หรือไม่?",
       okText: "ใช่ ฉันจะลบ",
       okType: "danger",
       cancelText: "ยกเลิก",
