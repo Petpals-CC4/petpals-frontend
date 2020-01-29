@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
-import { Button, Card, Modal, message, Typography, Row, Col } from 'antd'
+import React, { Component } from "react";
+import { Button, Card, Modal, message, Typography, Row, Col } from "antd";
 
-import EditStoreBankDrawer from "./EditStoreBankDrawer"
-import Axios from '../../../utils/api.service'
+import EditStoreBankDrawer from "./EditStoreBankDrawer";
+import Axios from "../../../utils/api.service";
 // import { withCommas } from '../../../utils'
 
 const { confirm } = Modal;
@@ -34,16 +34,16 @@ class CardStoreBank extends Component {
     try {
       let result = await Axios.put(`/bank/${obj.bank_id}`, obj);
       console.log(result.data);
-      message.success("แก้ไขรายการสำเร็จ")
+      message.success("แก้ไขรายการสำเร็จ");
     } catch (error) {
-      message.error("ไม่สามารถแก้ไขรายการได้")
+      message.error("ไม่สามารถแก้ไขรายการได้");
     }
 
     this.props.refreshBank();
-    this.handleClickClose("drawerEditVisible")()
+    this.handleClickClose("drawerEditVisible")();
   };
 
-  showDeleteConfirm = (id) => () => {
+  showDeleteConfirm = id => () => {
     const me = this;
     confirm({
       title: "คุณยืนยันจะลบบัญชีธนาคารนี้ใช่หรือไม่?",
@@ -63,31 +63,26 @@ class CardStoreBank extends Component {
     try {
       let result = await Axios.delete(`/bank/${id}`);
       console.log(result.data);
-      message.success("ลบรายการสำเร็จ")
+      message.success("ลบรายการสำเร็จ");
     } catch (error) {
-      message.error("ไม่สามารถลบรายการได้")
+      message.error("ไม่สามารถลบรายการได้");
     }
     this.props.refreshBank();
   };
 
-  handleClick = (drawer_name) => (e) => {
+  handleClick = drawer_name => e => {
     this.setState({
       [drawer_name]: true
-    })
-  }
-  handleClickClose = (drawer_name) => (e) => {
+    });
+  };
+  handleClickClose = drawer_name => e => {
     this.setState({
       [drawer_name]: false
-    })
-  }
+    });
+  };
 
   render() {
-    const {
-      bank_id,
-      bank_name,
-      account_name,
-      account_number,
-    } = this.props
+    const { bank_id, bank_name, account_name, account_number } = this.props;
     return (
       <Card
         key={bank_id}
@@ -102,9 +97,15 @@ class CardStoreBank extends Component {
         }}
       >
         {/* {`#${bank_id}`} */}
-        <Row type="flex" justify="space-between" style={{ flexDirection: "column", height: "100%" }}>
+        <Row
+          type="flex"
+          justify="space-between"
+          style={{ flexDirection: "column", height: "100%" }}
+        >
           <Col span={24}>
-            <Typography.Title level={4} ellipsis>{bank_name}</Typography.Title>
+            <Typography.Title level={4} ellipsis>
+              {bank_name}
+            </Typography.Title>
             <span style={{ color: "rgba(0, 0, 0, 0.45)" }}>ชื่อบัญชี:</span>
             <Typography.Paragraph ellipsis={{ rows: 3 }}>
               {account_name}
@@ -133,14 +134,12 @@ class CardStoreBank extends Component {
 
         <EditStoreBankDrawer
           visible={this.state.drawerEditVisible}
-          bankDetail={
-            {
-              bank_id,
-              bank_name,
-              account_name,
-              account_number
-            }
-          }
+          bankDetail={{
+            bank_id,
+            bank_name,
+            account_name,
+            account_number
+          }}
           handleCloseDrawer={this.handleClickClose("drawerEditVisible")}
           handleClickSave={this.showUpdateConfirm}
         />

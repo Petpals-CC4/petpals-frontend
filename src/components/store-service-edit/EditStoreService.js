@@ -38,8 +38,9 @@ export class EditStoreService extends Component {
   };
 
   getService = async () => {
-    let result = await Axios.get(`/service`);
-    console.log(result.data);
+    let result = await Axios.get('/service');
+    console.log("xxx", result.data);
+
     this.setState({
       serviceLists: result ? result.data : []
     });
@@ -47,11 +48,12 @@ export class EditStoreService extends Component {
 
   componentDidMount = () => {
     this.getService();
+    console.log("kikikikik");
   };
 
   render() {
     const { serviceLists } = this.state;
-    // console.log(serviceLists);
+    console.log(serviceLists);
     return (
       <div style={{ margin: "2em" }}>
         <Typography.Title
@@ -75,16 +77,16 @@ export class EditStoreService extends Component {
         <Row type="flex" gutter={[16, 16]}>
           {serviceLists
             ? serviceLists.map(serviceList => (
-              <Col key={serviceList.id} xs={24} sm={12} md={8} xl={4}>
-                <CardStoreService
-                  service_id={serviceList.id}
-                  service_name={serviceList.service_name}
-                  service_description={serviceList.service_description}
-                  service_price={serviceList.service_price}
-                  refreshService={this.getService}
-                />
-              </Col>
-            ))
+                <Col key={serviceList.id} xs={24} sm={12} md={8} xl={4}>
+                  <CardStoreService
+                    service_id={serviceList.id}
+                    service_name={serviceList.service_name}
+                    service_description={serviceList.service_description}
+                    service_price={serviceList.service_price}
+                    refreshService={this.getService}
+                  />
+                </Col>
+              ))
             : ""}
         </Row>
 
