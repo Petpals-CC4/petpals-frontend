@@ -55,16 +55,18 @@ export class OrderListsUser extends Component {
         title: "สถานะรายการ",
         dataIndex: "order_status.status_name",
         key: "order_status.status_name",
-        render: (status_name) => {
+        render: (status_name, object) => {
           return status_name === "waiting_payment" ?
             <Tag color="gold">{"รอการชำระเงิน"}</Tag>
             : status_name === "waiting_verify" ?
               <Tag color="volcano">{"รอร้านค้ายืนยัน"}</Tag>
               : status_name === "cancelled" ?
                 <Tag color="red">{"ยกเลิกออเดอร์"}</Tag>
-                : status_name === "completed" ?
-                  <Tag color="green">{"ออเดอร์สำเร็จ"}</Tag>
-                  : status_name !== "" && <Tag color="cyan">{status_name}</Tag>
+                : status_name === "completed" && object.feedback === null ?
+                  <Tag color="green">{"รอการรีวิว"}</Tag>
+                  : status_name === "completed" ?
+                    <Tag color="green">{"ออเดอร์สำเร็จ"}</Tag>
+                    : status_name !== "" && <Tag color="cyan">{status_name}</Tag>
         }
       },
       {
@@ -96,7 +98,7 @@ export class OrderListsUser extends Component {
               >
                 อัพโหลดหลักฐานการชำระเงิน
               </Dropdown.Button>
-              : status === "completed" ?
+              : status === "completed" && object.feedback === null ?
                 <Button type="primary" icon="star" onClick={this.handleClickFeedback(object.id)}>ให้คะแนนร้านค้า</Button>
                 : null
           )
