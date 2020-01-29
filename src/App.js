@@ -34,7 +34,7 @@ class App extends Component {
           <Route path="/store_detail/:store_id" component={StoreDetailPage} />
 
           <Route path="/order" component={OrderListPage} />
-          <Route path="/feedback" component={FeedbackPage} />
+          <Route path="/feedback/:order_id" component={FeedbackPage} />
           <Route path="/payment" component={PaymentPage} />
           <Route path="/verify_payment/:order_id" component={VerifyPaymentPage} />
 

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Table, Col, Typography, Row, Tag, Dropdown, Menu, Icon, message } from "antd";
+import { Table, Col, Typography, Row, Tag, Dropdown, Menu, Icon, message, Button } from "antd";
 import { datetimeFormat, withCommas } from "../../utils";
 import Axios from "../../utils/api.service";
 import { withRouter } from "react-router-dom";
@@ -96,7 +96,9 @@ export class OrderListsUser extends Component {
               >
                 อัพโหลดหลักฐานการชำระเงิน
               </Dropdown.Button>
-              : null
+              : status === "completed" ?
+                <Button type="primary" icon="star" onClick={this.handleClickFeedback(object.id)}>ให้คะแนนร้านค้า</Button>
+                : null
           )
         }
       },
@@ -116,6 +118,10 @@ export class OrderListsUser extends Component {
     } catch (error) {
       message.error("ยกเลิกออเดอร์ไม่สำเร็จ โปรดลองใหม่อีกครั้งในภายหลัง")
     }
+  }
+
+  handleClickFeedback = (order_id) => (e) => {
+    this.props.history.push(`/feedback/${order_id}`)
   }
 
   getOrderList = async () => {
