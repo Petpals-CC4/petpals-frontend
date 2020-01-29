@@ -39,13 +39,6 @@ class DashboardUser extends Component {
             style={{ flexDirection: "column", height: "100%", margin: "5em 2em 2em 2em" }}
           >
             <Col>
-              <StoreBio
-                name={storeBio.store_name}
-                description={storeBio.store_description}
-                imageUrl={storeBio.profile_image_url}
-              />
-            </Col>
-            <Col>
               <OrderLists title="รายการปัจจุบัน" data={orderActive} />
             </Col>
             <Col>
