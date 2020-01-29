@@ -61,7 +61,7 @@ class AdminGuideText extends Component {
             textAlign: "center"
           }}
         >
-          รายการประเภทบริการ
+          รายการคำค้นหา
         </Typography.Title>
         <Button
           block
@@ -69,7 +69,7 @@ class AdminGuideText extends Component {
           onClick={this.handleOpenDrawer("drawerAddVisible")}
           style={{ margin: "1em 0px" }}
         >
-          เพิ่มประเภทบริการ
+          เพิ่มคำค้นหา
         </Button>
 
         <Row type="flex" gutter={[16, 16]}>

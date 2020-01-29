@@ -28,7 +28,7 @@ class AddGuideText extends Component {
         closable={true}
         onClose={handleCloseDrawer}
         visible={visible}
-        title="เพิ่มประเภทบริการ"
+        title="เพิ่มคำค้นหา"
       >
         <Form onSubmit={this.handleSubmit}>
           <Row
@@ -38,10 +38,10 @@ class AddGuideText extends Component {
             align="middle"
           >
             <Col span={24}>
-              <Form.Item label="ชื่อประเภทบริการ">
+              <Form.Item label="ชื่อคำค้นหา">
                 {getFieldDecorator("name", {
-                  rules: [{ required: true, message: "กรุณาใส่ชื่อประเภทบริการ" }]
-                })(<Input placeholder="ชื่อประเภทบริการ" />)}
+                  rules: [{ required: true, message: "กรุณาใส่ชื่อคำค้นหา" }]
+                })(<Input placeholder="ชื่อคำค้นหา" />)}
               </Form.Item>
             </Col>
             <Col span={24}>
