@@ -23,9 +23,15 @@ export class OrderLists extends Component {
         key: "user",
         dataIndex: "user",
         render: (user) => {
-          return <span>
-            {user.firstname + " " + user.lastname}
-          </span>
+          try {
+            return <span>
+              {user.firstname + " " + user.lastname}
+            </span>
+          } catch (error) {
+            return <span>
+              
+            </span>
+          }
         }
       },
       {
@@ -98,6 +104,8 @@ export class OrderLists extends Component {
     const {
       columns
     } = this.state
+
+    console.log(data)
 
     return (
       <Row
