@@ -5,7 +5,7 @@ axios.defaults.baseURL = HOST
 
 const UNPROTECTED_PATHS = [
   "signin",
-  "signup"
+  // "signup"
 ]
 
 const isUnprotectedPath = (url) => {
