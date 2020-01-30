@@ -16,13 +16,15 @@ import AdminPage from './pages/AdminPage';
 import AdminGuideTextPage from './pages/AdminGuideTextPage';
 import DashboardPage from './pages/DashboardPage';
 import OrderListPage from './pages/OrderListPage';
+import OrderProgress from '../src/components/DashboardNanny/OrderProgess/OrderProgress'
 
 class App extends Component {
   render() {
     window.appHistory = this.props.history
     return (
       <div>
-        <Switch>
+        <OrderProgress />
+        {/* <Switch>
           <Route exact path="/" component={LandingPage} />
           <Route path="/signin" component={AuthPage} />
           <Route path="/signup" component={AuthPage} />
@@ -43,7 +45,7 @@ class App extends Component {
 
           <Route exact path="/not_found" component={NotFound} />
           <Route component={NotFound} />
-        </Switch>
+        </Switch> */}
       </div>
     )
   }
