@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
-import { Drawer, Divider, Col, Row } from 'antd';
+import { Drawer, Col, Row } from 'antd';
 import { dateFormat, withCommas } from '../../utils';
+
+import OrderProgress from './OrderProgress'
 
 const pStyle = {
   fontSize: 16,
@@ -33,23 +35,6 @@ const DescriptionItem = ({ title, content }) => (
 );
 
 class ViewOrderDetailDrawer extends Component {
-
-  componentDidMount = () => {
-    // const { form } = this.props
-    // if (serviceDetail) {
-    //   const {
-    //     service_name,
-    //     service_description,
-    //     service_price
-    //   } = serviceDetail
-    //   form.setFieldsValue({
-    //     service_name,
-    //     service_description,
-    //     service_price,
-    //   });
-    // }
-  }
-
   render() {
     const {
       visible,
@@ -66,6 +51,14 @@ class ViewOrderDetailDrawer extends Component {
         visible={visible}
         title="รายละเอียดออเดอร์"
       >
+        <Row>
+          <Col span={24}>
+            <OrderProgress
+              current={orderDetail.status_id ? orderDetail.status_id - 1 : null}
+              isCompleted={orderDetail.status_id ? orderDetail.status_id - 1 !== 4 : true}
+            />
+          </Col>
+        </Row>
         <p style={pStyle}>รายละเอียดการโอนเงิน</p>
         <Row>
           <Col span={24}>

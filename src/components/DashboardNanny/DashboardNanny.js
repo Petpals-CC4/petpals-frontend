@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import StoreBio from "../store-detail/store-info/StoreBio";
 import { withRouter } from "react-router-dom";
+import { Col, Row, message, Button } from "antd";
+
+import StoreBio from "../store-detail/store-info/StoreBio";
 import Axios from "../../utils/api.service";
 import OrderLists from "./OrderLists";
-import { Col, Row, message, Button } from "antd";
-import OrderProgress from '../DashboardNanny/OrderProgess/OrderProgress'
 
 export class DashboardNanny extends Component {
   state = {
@@ -82,7 +82,7 @@ export class DashboardNanny extends Component {
           <OrderLists title="ประวัติรายการ" data={orderHistory} refreshData={this.getOrderList} />
         </Col>
       </Row>
-      
+
     );
   }
 }
