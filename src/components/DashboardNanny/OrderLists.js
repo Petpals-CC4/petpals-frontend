@@ -2,9 +2,12 @@ import React, { Component } from "react";
 import { Table, Col, Typography, Row, Tag, Dropdown, Menu, Icon, message } from "antd";
 import { datetimeFormat } from "../../utils";
 import Axios from "../../utils/api.service";
+import ViewOrderDetailDrawer from "./ViewOrderDetailDrawer";
 
 export class OrderLists extends Component {
   state = {
+    visibleViewOrder: false,
+    focusOrder: {},
     columns: [
       {
         title: "เลขที่รายการ",
@@ -60,15 +63,25 @@ export class OrderLists extends Component {
         title: "",
         key: "action",
         render: (object) => {
-          console.log(object);
+          // console.log(object);
           return (
             <Dropdown.Button
               disabled={object.order_status.status_name !== "waiting_verify"}
-              onClick={this.handleApproveOrder(object.id)}
+              onClick={this.handleOpenViewOrder(object)}
               overlay={
                 <Menu>
                   <Menu.Item
-                    key="stop"
+                    key="approve"
+                    onClick={this.handleApproveOrder(object.id)}
+                    style={{
+                      backgroundColor: "#0F4C81",
+                      color: "white",
+                    }}>
+                    <Icon type="check" />
+                    อนุมัติออเดอร์
+                  </Menu.Item>
+                  <Menu.Item
+                    key="reject"
                     onClick={this.handleRejectOrder(object.id)}
                     style={{
                       backgroundColor: "crimson",
@@ -81,13 +94,26 @@ export class OrderLists extends Component {
               }
               type="primary"
             >
-              อนุมัติออเดอร์
-              </Dropdown.Button>
+              ดูรายละเอียด
+            </Dropdown.Button>
           )
         }
       },
     ]
   };
+
+  handleOpenViewOrder = (order) => (e) => {
+    console.log(e);
+    this.setState({
+      visibleViewOrder: true,
+      focusOrder: order
+    })
+  }
+
+  handleCloseViewOrder = (e) => {
+    console.log(e);
+    this.setState({ visibleViewOrder: false })
+  }
 
   handleApproveOrder = (order_id) => async (e) => {
     try {
@@ -117,10 +143,10 @@ export class OrderLists extends Component {
       data
     } = this.props
     const {
-      columns
+      columns,
+      visibleViewOrder,
+      focusOrder
     } = this.state
-
-    console.log(data)
 
     return (
       <Row
@@ -141,6 +167,12 @@ export class OrderLists extends Component {
             columns={columns}
           />
         </Col>
+
+        <ViewOrderDetailDrawer
+          visible={visibleViewOrder}
+          handleCloseDrawer={this.handleCloseViewOrder}
+          orderDetail={focusOrder}
+        />
       </Row>
     );
   }

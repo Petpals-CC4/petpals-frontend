@@ -91,6 +91,7 @@ class Navbar extends Component {
   componentDidMount = () => {
     // this.getUserDetail()
     window.addEventListener("scroll", this.handleScroll);
+    this.updateBreakpoint()
 
     let me = this
     window.addEventListener("resize", this.updateBreakpoint)

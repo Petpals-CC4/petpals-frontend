@@ -16,7 +16,7 @@ export class DashboardNanny extends Component {
   getStoreBio = async () => {
     try {
       let result = await Axios.get(`/store_bio`)
-      console.log(result.data);
+      // console.log(result.data);
       this.setState({
         storeBio: result ? result.data : {},
       })
