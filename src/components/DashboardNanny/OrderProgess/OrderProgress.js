@@ -1,18 +1,32 @@
 import React, { Component } from 'react'
-import { Steps, Icon } from 'antd';
+import { Steps, Icon, Button, message } from 'antd';
 
 const { Step } = Steps;
 
-const stepStyle = {
-    marginBottom: 60,
-    boxShadow: '0px -1px 0 0 #e8e8e8 inset',
-  };
+const steps = [
+    {
+     title: 'รอการชำระเงิน'
+    },
+    {
+     title: 'รอร้านค้ายืนยัน'
+    },
+    {
+     title: 'ออเดอร์สำเร็จ'
+    }
+]
 
+const stepStyle = {
+    boxShadow: '0px -1px 0 0 #e8e8e8 inset'
+  };
 export class OrderProgress extends Component {
-    
     state = {
-        current: 0,
+        current: 1, 
       };
+    
+    next() {
+        const current = this.state.current + 1;
+        this.setState({ current });
+      }
 
     onChange = current => {
         console.log('onChange:', current);
@@ -27,17 +41,25 @@ export class OrderProgress extends Component {
                     type="navigation"
                     size="small"
                     current={current}
-                    onChange={this.onChange}
                     style={stepStyle}
                 >
+            {steps.map(item => (
+            <Step key={item.title} title={item.title} />
+          ))}
             </Steps>
-                <Steps type="navigation" current={current} onChange={this.onChange} style={stepStyle}>
-                <Step status="finish" title="รอการชำระเงิน" />
-                <Step status="process" title="รอร้านค้ายืนยัน"  />
-                <Step status="wait" title="ออเดอร์สำเร็จ" />
-                <Step status="wait" title="Step 4" />
-            </Steps>
-            </div>
+             <Button 
+                type= 'primary'
+                style={{ margin: '1.3em'}}
+                onClick={() => this.next()}
+                >
+                 ได้รับการชำระเงินเเล้ว
+             </Button>
+                {current === steps.length - 1 && (
+             <Button type="primary" onClick={() => message.success('Processing complete!')}>
+                ยืนยันทำรายการสำเร็จ
+             </Button>
+            )}
+        </div>
         )
     }
 }
