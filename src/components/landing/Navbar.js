@@ -6,6 +6,7 @@ import './Info.css'
 
 import { ReactComponent as Logo } from '../../images/patpals_logo.svg'
 import { actions as authAction } from '../../redux/reducers/auth'
+import checkBreakpoint from '../../utils/checkBreakpointAntd'
 
 const { Header } = Layout
 
@@ -13,6 +14,7 @@ class Navbar extends Component {
 
   state = {
     current: "about",
+    nowBreakpoint: "xs"
   };
 
   // getUserDetail = () => {
@@ -60,7 +62,8 @@ class Navbar extends Component {
   }
 
   handleClickEditStore = () => {
-    this.goto("/store_detail/edit")
+    // this.goto("/store_detail/edit")
+    this.goto("/store_dashboard")
   }
 
   handleClickSignin = () => {
@@ -76,17 +79,39 @@ class Navbar extends Component {
     this.props.history.push(path)
   }
 
+  updateBreakpoint = () => {
+    if (global.window) {
+      this.setState({
+        nowBreakpoint: checkBreakpoint(window.innerWidth)
+      })
+      // sessionStorage.setItem("user_breakpoint_device", checkBreakpoint(window.innerWidth))
+    }
+  }
+
   componentDidMount = () => {
     // this.getUserDetail()
-    window.addEventListener('scroll', this.handleScroll);
+    window.addEventListener("scroll", this.handleScroll);
+
+    let me = this
+    window.addEventListener("resize", this.updateBreakpoint)
+    window.addEventListener("focus", () => {
+      window.removeEventListener("resize", me.updateBreakpoint)
+    })
+    window.addEventListener("blur", () => {
+      window.addEventListener("resize", me.updateBreakpoint)
+    })
   }
 
   componentWillUnmount = () => {
-    window.removeEventListener('scroll', this.handleScroll);
+    window.removeEventListener("scroll", this.handleScroll);
+    window.removeEventListener("resize", this.updateBreakpoint)
   }
 
   // TODO: Responsive Header Tab
   render() {
+    const {
+      nowBreakpoint
+    } = this.state
     const {
       username,
       role
@@ -97,6 +122,11 @@ class Navbar extends Component {
         <Menu.Item key="username" disabled>
           <span>{username}</span>
         </Menu.Item>
+        <Menu.Divider />
+        <Menu.Item key="order" onClick={() => this.goto("/order")}>
+          <span>จัดการออร์เดอร์</span>
+        </Menu.Item>
+        <Menu.Divider />
         <Menu.Item key="signout" onClick={this.handleClickSignout} style={{
           backgroundColor: "crimson",
           color: "white",
@@ -118,6 +148,29 @@ class Navbar extends Component {
         <Menu.Item key="store_edit" onClick={this.handleClickEditStore}>
           <span>ตั้งค่าหน้าร้านค้าของฉัน</span>
         </Menu.Item>
+        <Menu.Divider />
+        <Menu.Item key="signout" onClick={this.handleClickSignout} style={{
+          backgroundColor: "crimson",
+          color: "white",
+        }}>
+          <span>ลงชื่อออก</span>
+        </Menu.Item>
+      </Menu>
+    );
+
+    const adminMenu = (
+      <Menu style={{ minWidth: "200px" }}>
+        <Menu.Item key="username" disabled>
+          <span>{username}</span>
+        </Menu.Item>
+        <Menu.Divider />
+        <Menu.Item key="user-management" onClick={() => this.goto("/admin")}>
+          <span>จัดการผู้ใช้</span>
+        </Menu.Item>
+        <Menu.Item key="guide-text-edit" onClick={() => this.goto("/guide_text/edit")}>
+          <span>จัดการคำค้นหา</span>
+        </Menu.Item>
+        <Menu.Divider />
         <Menu.Item key="signout" onClick={this.handleClickSignout} style={{
           backgroundColor: "crimson",
           color: "white",
@@ -146,7 +199,7 @@ class Navbar extends Component {
             </Col>
             <Col>
               <Row type="flex" align="middle" gutter={16}>
-                <Col>
+                {nowBreakpoint !== "xs" ? <Col>
                   <Menu
                     onClick={this.handleClick}
                     selectedKeys={[this.state.current]}
@@ -160,12 +213,13 @@ class Navbar extends Component {
                     <Menu.Item key="feedback"><a href="#feedback">รีวิว</a></Menu.Item>
                     <Menu.Item key="search"><a href="#search">ค้นหา</a></Menu.Item>
                   </Menu>
-                </Col>
+                </Col> : null
+                }
                 <Col>
                   {username ?
                     <Dropdown
                       getPopupContainer={trigger => trigger.parentNode}
-                      overlay={role === "store" ? storeMenu : userMenu}
+                      overlay={role === "store" ? storeMenu : (role === "admin" ? adminMenu : userMenu)}
                       placement="bottomRight"
                       trigger={['click']}
                     >

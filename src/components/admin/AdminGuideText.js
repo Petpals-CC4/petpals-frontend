@@ -1,14 +1,15 @@
 import React, { Component } from "react";
-import { Row, Col, Button, Typography, message } from "antd";
+import { withRouter } from "react-router-dom";
 import Axios from "../../utils/api.service";
 
-import { withRouter } from "react-router-dom";
-import CardStoreService from "./edit-store-service/CardStoreService";
-import AddStoreServiceDrawer from "./edit-store-service/AddStoreServiceDrawer";
+import { Button, Row, Col, Typography, message } from "antd";
 
-export class EditStoreService extends Component {
+import CardGuideText from "./AdminGuideText/CardGuideText";
+import AddGuideText from "./AdminGuideText/AddGuideText";
+
+class AdminGuideText extends Component {
   state = {
-    serviceLists: [],
+    guideTextLists: [],
     drawerAddVisible: false
   };
 
@@ -24,35 +25,33 @@ export class EditStoreService extends Component {
     });
   };
 
-  createService = async obj => {
+  createGuideText = async obj => {
     try {
-      let result = await Axios.post(`/service`, obj);
+      let result = await Axios.post(`/admin/guide_text`, obj);
       console.log(result.data);
       message.success("เพิ่มรายการสำเร็จ");
     } catch (error) {
       message.error("ไม่สามารถเพิ่มรายการได้");
     }
 
-    this.getService();
+    this.getGuideText();
     this.handleCloseDrawer("drawerAddVisible")();
   };
 
-  getService = async () => {
-    let result = await Axios.get('/service');
+  getGuideText = async () => {
+    let result = await Axios.get(`/admin/guide_text`);
     console.log(result.data);
-
     this.setState({
-      serviceLists: result ? result.data : []
+      guideTextLists: result ? result.data : []
     });
   };
 
   componentDidMount = () => {
-    this.getService();
+    this.getGuideText();
   };
 
   render() {
-    const { serviceLists } = this.state;
-    console.log(serviceLists);
+    const { guideTextLists } = this.state;
     return (
       <div style={{ margin: "2em" }}>
         <Typography.Title
@@ -62,7 +61,7 @@ export class EditStoreService extends Component {
             textAlign: "center"
           }}
         >
-          รายการบริการพี่เลี้ยง
+          รายการคำค้นหา
         </Typography.Title>
         <Button
           block
@@ -70,33 +69,31 @@ export class EditStoreService extends Component {
           onClick={this.handleOpenDrawer("drawerAddVisible")}
           style={{ margin: "1em 0px" }}
         >
-          เพิ่มบริการ
+          เพิ่มคำค้นหา
         </Button>
 
         <Row type="flex" gutter={[16, 16]}>
-          {serviceLists
-            ? serviceLists.map(serviceList => (
-                <Col key={serviceList.id} xs={24} sm={12} md={8} xl={4}>
-                  <CardStoreService
-                    service_id={serviceList.id}
-                    service_name={serviceList.service_name}
-                    service_description={serviceList.service_description}
-                    service_price={serviceList.service_price}
-                    refreshService={this.getService}
+          {guideTextLists
+            ? guideTextLists.map((guideText) => (
+                <Col key={guideText.id} xs={12} sm={8} md={4}>
+                  <CardGuideText
+                    guideText_id={guideText.id}
+                    name={guideText.name}
+                    refreshGuideText={this.getGuideText}
                   />
                 </Col>
               ))
             : ""}
         </Row>
 
-        <AddStoreServiceDrawer
+        <AddGuideText
           visible={this.state.drawerAddVisible}
           handleCloseDrawer={this.handleCloseDrawer("drawerAddVisible")}
-          handleClickSave={this.createService}
+          handleClickSave={this.createGuideText}
         />
       </div>
     );
   }
 }
 
-export default withRouter(EditStoreService);
+export default withRouter(AdminGuideText);

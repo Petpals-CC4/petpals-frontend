@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
-import DashboardNanny from "../../src/components/DashboardNanny/DashboardNanny"
 import GoBackButton from '../components/utils/GoBackButton'
+import AdminGuideText from '../components/admin/AdminGuideText'
 
-class DashboardPage extends Component {
+class AdminGuideTextPage extends Component {
   render() {
     return (
       <div>
         <GoBackButton />
-        <DashboardNanny />
+        <AdminGuideText />
       </div>
     )
   }
 }
 
-export default DashboardPage
+export default AdminGuideTextPage

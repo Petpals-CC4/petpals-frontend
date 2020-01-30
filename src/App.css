@@ -194,6 +194,13 @@
   font-size: 1.6em !important;
 }
 
+.goBackButton {
+  position: absolute;
+  top: 2em;
+  left: 3em;
+  z-index: 999;
+}
+
 @media only screen and (max-device-width: 576px) {
   .setCenterImg {
     max-height: 300px;

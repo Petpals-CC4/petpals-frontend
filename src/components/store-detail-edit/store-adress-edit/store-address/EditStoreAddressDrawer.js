@@ -7,8 +7,6 @@ import {
   Input,
   Drawer,
   message,
-  Select,
-  Icon
 } from "antd";
 
 class EditStoreAddressDrawer extends Component {
