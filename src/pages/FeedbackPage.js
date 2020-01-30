@@ -7,7 +7,7 @@ export class FeedbackPage extends Component {
   render() {
     return (
       <>
-        <GoBackButton />
+        <GoBackButton goTo="/order" />
         <Feedback />
       </>
     )

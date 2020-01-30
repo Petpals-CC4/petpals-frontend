@@ -6,7 +6,7 @@ class DashboardPage extends Component {
   render() {
     return (
       <div>
-        <GoBackButton />
+        <GoBackButton goTo="/" />
         <DashboardNanny />
       </div>
     )

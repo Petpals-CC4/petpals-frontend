@@ -89,7 +89,7 @@ class StoreDetailPage extends Component {
   render() {
     return (
       <Layout>
-        <GoBackButton />
+        <GoBackButton goTo="/" />
         <div>
           <Typography.Title
             level={3}

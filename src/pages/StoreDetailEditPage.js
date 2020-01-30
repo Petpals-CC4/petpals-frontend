@@ -53,7 +53,7 @@ class StoreDetailEditPage extends Component {
     } = this.state
     return (
       <>
-        <GoBackButton />
+        <GoBackButton goTo="/store_dashboard" />
         <div style={{ marginTop: "6em" }}>
           <StoreBio
             name={store_name}

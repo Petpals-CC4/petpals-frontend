@@ -61,7 +61,7 @@ class UserListPage extends Component {
 
     return (
       <Layout className="fullMinHeight">
-        <GoBackButton />
+        <GoBackButton goTo="/" />
         <div style={{ margin: "2em" }}>
           <Row type="flex" justify="center">
             <Col span={20} className="justifyEnd">

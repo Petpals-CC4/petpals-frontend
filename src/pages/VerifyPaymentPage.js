@@ -7,7 +7,7 @@ export class VerifyPaymentPage extends Component {
   render() {
     return (
       <>
-        <GoBackButton />
+        <GoBackButton goTo="/order" />
         <VerifyPayment />
       </>
     )
