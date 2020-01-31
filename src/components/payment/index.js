@@ -50,22 +50,29 @@ class Payment extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    this.props.form.validateFields((err, fieldsValue) => {
+    const {
+      form,
+      cartList,
+      setReservingDate,
+      startDate,
+      endDate
+    } = this.props
+    form.validateFields((err, fieldsValue) => {
       if (!err) {
         const orderData = {
-          "store_id": this.props.cartList[0].store_id,
+          "store_id": cartList[0].store_id,
           "payment_method_id": fieldsValue.payment_method_id,
           "bank_id": fieldsValue.payment_bank_id,
-          "start_date": dateFormat(fieldsValue.startDate),
-          "end_date": dateFormat(fieldsValue.endDate),
+          "start_date": startDate ? moment(startDate).format("YYYY-MM-DD") : dateFormat(fieldsValue.startDate),
+          "end_date": endDate ? moment(endDate).format("YYYY-MM-DD") : dateFormat(fieldsValue.endDate),
           "booking_price": this.state.bookingPrice,
           "total_price": this.state.sumPrice,
-          "service_ids": this.props.cartList.map(cart => cart.id)
+          "service_ids": cartList.map(cart => cart.id)
         }
         console.log(orderData);
-        this.props.setReservingDate({
-          startDate: dateFormat(fieldsValue.startDate),
-          endDate: dateFormat(fieldsValue.endDate)
+        setReservingDate({
+          startDate: moment(orderData.start_date),
+          endDate: moment(orderData.end_date)
         })
         this.createOrder(orderData)
       }
@@ -159,12 +166,11 @@ class Payment extends Component {
     this.setState({
       paymentMethodList: result ? result.data : [],
       isBankTransfer: true // debug
-    }, () => {
-      const transferMethod = this.state.paymentMethodList.find(item => item.payment_name === "โอนเงินผ่านธนาคาร")
-      this.props.form.setFieldsValue({
-        payment_method_id: transferMethod.id, // debug
-      });
     })
+    const transferMethod = result ? result.data.find(item => item.payment_name === "โอนเงินผ่านธนาคาร") : {}
+    this.props.form.setFieldsValue({
+      payment_method_id: transferMethod.id, // debug
+    });
   }
 
   getStorePaymentBank = async () => {
@@ -214,6 +220,7 @@ class Payment extends Component {
       startDate,
       endDate
     } = this.props
+    console.log(this.props)
     const {
       bookingPercent,
       paymentMethodList,
@@ -254,7 +261,13 @@ class Payment extends Component {
                 <Form.Item label="เริ่มฝากน้อง:" className={"formItemShowText"} {...formItemLayout}>
                   <strong>
                     {startDate ?
-                      startDate
+                      <DatePicker
+                        disabled={true}
+                        format="YYYY-MM-DD"
+                        value={startDate}
+                        placeholder="วันเริ่มต้น"
+                        style={{ width: "100%" }}
+                      />
                       : getFieldDecorator('startDate', this.state.configNotEmptyRule)(
                         <DatePicker
                           disabledDate={this.disabledStartDate}
@@ -273,7 +286,13 @@ class Payment extends Component {
                 <Form.Item label="รับน้องกลับ:" className={"formItemShowText"} {...formItemLayout}>
                   <strong>
                     {endDate ?
-                      endDate
+                      <DatePicker
+                        disabled={true}
+                        format="YYYY-MM-DD"
+                        value={endDate}
+                        placeholder="วันสิ้นสุด"
+                        style={{ width: "100%" }}
+                      />
                       : getFieldDecorator('endDate', this.state.configNotEmptyRule)(
                         <DatePicker
                           disabledDate={this.disabledEndDate}
