@@ -55,6 +55,7 @@ class Payment extends Component {
         const orderData = {
           "store_id": this.props.cartList[0].store_id,
           "payment_method_id": fieldsValue.payment_method_id,
+          "bank_id": fieldsValue.payment_bank_id,
           "start_date": dateFormat(fieldsValue.startDate),
           "end_date": dateFormat(fieldsValue.endDate),
           "booking_price": this.state.bookingPrice,

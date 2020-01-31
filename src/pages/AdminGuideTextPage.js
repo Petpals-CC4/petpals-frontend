@@ -6,7 +6,7 @@ class AdminGuideTextPage extends Component {
   render() {
     return (
       <div>
-        <GoBackButton />
+        <GoBackButton goTo="/" />
         <AdminGuideText />
       </div>
     )

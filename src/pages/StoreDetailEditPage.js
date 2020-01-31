@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 
 import StoreBio from "../components/store-detail/store-info/StoreBio"
-import EditStoreService from "../components/store-service-edit/EditStoreService";
-import StoreBank from "../components/store-detail-edit/StoreBank";
+import EditStoreAddress from "../components/store-detail-edit/EditStoreAddress";
+import EditStoreService from "../components/store-detail-edit/EditStoreService";
+import EditStoreBank from "../components/store-detail-edit/EditStoreBank";
 import FooterZone from "../components/landing/FooterZone";
-import StoreAddress from "../components/store-detail-edit/store-adress-edit/StoreAddress";
 
 import Axios from "../utils/api.service";
 import GoBackButton from "../components/utils/GoBackButton";
@@ -53,7 +53,7 @@ class StoreDetailEditPage extends Component {
     } = this.state
     return (
       <>
-        <GoBackButton />
+        <GoBackButton goTo="/store_dashboard" />
         <div style={{ marginTop: "6em" }}>
           <StoreBio
             name={store_name}
@@ -64,9 +64,9 @@ class StoreDetailEditPage extends Component {
           />
         </div>
 
-        <StoreAddress />
+        <EditStoreAddress />
         <EditStoreService />
-        <StoreBank />
+        <EditStoreBank />
         <FooterZone />
       </>
     );

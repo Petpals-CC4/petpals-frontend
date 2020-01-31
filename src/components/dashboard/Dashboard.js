@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-import StoreBio from "../store-detail/store-info/StoreBio";
 import { withRouter } from "react-router-dom";
-import Axios from "../../utils/api.service";
-import OrderLists from "./OrderLists";
 import { Col, Row, message, Button } from "antd";
 
-export class DashboardNanny extends Component {
+import StoreBio from "../store-detail/store-info/StoreBio";
+import Axios from "../../utils/api.service";
+import OrderLists from "./OrderLists";
+
+export class Dashboard extends Component {
   state = {
     storeBio: {},
     orderLists: [],
@@ -16,7 +17,7 @@ export class DashboardNanny extends Component {
   getStoreBio = async () => {
     try {
       let result = await Axios.get(`/store_bio`)
-      console.log(result.data);
+      // console.log(result.data);
       this.setState({
         storeBio: result ? result.data : {},
       })
@@ -81,8 +82,9 @@ export class DashboardNanny extends Component {
           <OrderLists title="ประวัติรายการ" data={orderHistory} refreshData={this.getOrderList} />
         </Col>
       </Row>
+
     );
   }
 }
 
-export default withRouter(DashboardNanny);
+export default withRouter(Dashboard);

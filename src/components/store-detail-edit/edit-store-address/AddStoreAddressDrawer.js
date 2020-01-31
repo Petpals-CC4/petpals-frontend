@@ -1,54 +1,45 @@
 import React, { Component } from "react";
-import {
-  Form,
-  Row,
-  Col,
-  Button,
-  Input,
-  Drawer,
-  message,
-} from "antd";
+import { Form, Row, Col, Input, Button, Drawer } from "antd";
 
-class EditStoreAddressDrawer extends Component {
-  hasErrors = fieldsError => {
+class AddStoreAddressDrawer extends Component {
+
+  hasErrors(fieldsError) {
     return Object.keys(fieldsError).some(field => fieldsError[field]);
+  }
+
+  checkNumber = (rule, value, callback) => {
+    if (isNaN(value)) {
+      callback("กรุณาใส่รหัสไปรษณีย์");
+    } else if (value < 0) {
+      callback("กรุณาใส่รหัสไปรษณีย์ให้ถูกต้อง")
+    } else {
+      let firstLetter = value.split("")[0]
+      return firstLetter !== "." ? callback() : callback("กรุณาใส่รหัสไปรษณีย์ให้ถูกต้อง")
+    }
   };
 
   handleSubmit = e => {
     e.preventDefault();
-    const { addressDetail, form, handleClickSave } = this.props;
+    const {
+      form,
+      handleClickSave
+    } = this.props
     form.validateFields(async (err, values) => {
       if (!err) {
         console.log(values);
-        if (addressDetail) {
-          handleClickSave({ ...values, address_id: addressDetail.address_id });
-        } else {
-          message.error("ไม่สามารถแก้ไขรายการได้");
-        }
+        handleClickSave({
+          house_no: values.house_no,
+          village_no: "",
+          road: values.road,
+          sub_district: values.sub_district,
+          district: values.district,
+          province: values.province,
+          post_code: values.post_code,
+          store_id: 1
+        })
+
       }
     });
-  };
-
-  componentDidMount = () => {
-    const { addressDetail, form } = this.props;
-    if (addressDetail) {
-      const {
-        house_no,
-        road,
-        sub_district,
-        district,
-        province,
-        post_code
-      } = addressDetail;
-      form.setFieldsValue({
-        house_no,
-        road,
-        sub_district,
-        district,
-        province,
-        post_code
-      });
-    }
   };
 
   render() {
@@ -61,7 +52,7 @@ class EditStoreAddressDrawer extends Component {
         closable={true}
         onClose={handleCloseDrawer}
         visible={visible}
-        title="แก้ไขที่อยู่"
+        title="เพิ่มที่อยู่"
       >
         <Form onSubmit={this.handleSubmit}>
           <Row
@@ -72,7 +63,7 @@ class EditStoreAddressDrawer extends Component {
           >
             <Col span={24}>
               <Form.Item label="บ้านเลขที่">
-                {getFieldDecorator("้house_no", {
+                {getFieldDecorator("house_no", {
                   rules: [{ required: true, message: "กรุณาใส่บ้านเลขที่" }]
                 })(<Input placeholder="บ้านเลขที่" />)}
               </Form.Item>
@@ -81,14 +72,14 @@ class EditStoreAddressDrawer extends Component {
               <Form.Item label="ถนน">
                 {getFieldDecorator("road", {
                   rules: [{ required: true, message: "กรุณาใส่ชื่อถนน" }]
-                })(<Input placeholder="ชื่อถนน" />)}
+                })(<Input placeholder="ถนน" />)}
               </Form.Item>
             </Col>
             <Col span={24}>
               <Form.Item label="แขวง/ตำบล">
                 {getFieldDecorator("sub_district", {
-                  rules: [{ required: true, message: "กรุณาใส่ชื่อแขวง/ตำบล" }]
-                })(<Input placeholder="ชื่อถนน" />)}
+                  rules: [{ required: true, message: "กรุณาใส่แขวง/ตำบล" }]
+                })(<Input placeholder="แขวง/ตำบล" />)}
               </Form.Item>
             </Col>
             <Col span={24}>
@@ -108,7 +99,10 @@ class EditStoreAddressDrawer extends Component {
             <Col span={24}>
               <Form.Item label="รหัสไปรษณีย์">
                 {getFieldDecorator("post_code", {
-                  rules: [{ required: true, message: "กรุณาใส่รหัสไปรษณีย์" }]
+                  rules: [
+                    { required: true, message: "กรุณาใส่รหัสไปรษณีย์" },
+                    { validator: this.checkNumber }
+                  ]
                 })(<Input placeholder="รหัสไปรษณีย์" />)}
               </Form.Item>
             </Col>
@@ -120,7 +114,7 @@ class EditStoreAddressDrawer extends Component {
                   disabled={this.hasErrors(getFieldsError())}
                   type="primary"
                 >
-                  ยืนยันการแก้ไข
+                  เพิ่มที่อยู่
                 </Button>
               </Form.Item>
             </Col>
@@ -131,6 +125,4 @@ class EditStoreAddressDrawer extends Component {
   }
 }
 
-export default Form.create({ name: "edit_store_address_drawer_Form" })(
-  EditStoreAddressDrawer
-);
+export default Form.create({ name: "add_address_form" })(AddStoreAddressDrawer);

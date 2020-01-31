@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
-import DashboardNanny from "../../src/components/DashboardNanny/DashboardNanny"
+import Dashboard from "../../src/components/dashboard/Dashboard"
 import GoBackButton from '../components/utils/GoBackButton'
 
 class DashboardPage extends Component {
   render() {
     return (
       <div>
-        <GoBackButton />
-        <DashboardNanny />
+        <GoBackButton goTo="/" />
+        <Dashboard />
       </div>
     )
   }

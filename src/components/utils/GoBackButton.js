@@ -2,13 +2,13 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { Button } from 'antd'
 
-const GoBackButton = ({ history }) => <div className="goBackButton">
+const GoBackButton = ({ history, goTo }) => <div className="goBackButton">
   <Button
     type="primary"
     shape="circle"
     icon="arrow-left"
     size="large"
-    onClick={() => history.goBack()}
+    onClick={() => goTo ? history.push(goTo) : history.goBack()}
   />
 </div>
 

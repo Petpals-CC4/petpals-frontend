@@ -92,7 +92,7 @@ class SearchZone extends Component {
 
   getRandomStore = async () => {
     let result = await Axios.get("/landingpage")
-    // console.log(result.data);
+    console.log(result.data);
     this.setState({
       storeResultList: result ? result.data : [],
       storeResultListOriginal: result ? result.data : []

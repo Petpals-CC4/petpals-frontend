@@ -4,10 +4,10 @@ import Axios from "../../utils/api.service";
 
 import { Button, Row, Col, Typography, message } from "antd";
 
-import CardStoreBank from './store-bank/CardStoreBank';
-import AddStoreBankDrawer from './store-bank/AddStoreBankDrawer';
+import CardStoreBank from './edit-store-bank/CardStoreBank';
+import AddStoreBankDrawer from './edit-store-bank/AddStoreBankDrawer';
 
-class StoreBank extends Component {
+class EditStoreBank extends Component {
 
   state = {
     bankLists: [],
@@ -104,4 +104,4 @@ class StoreBank extends Component {
   }
 }
 
-export default withRouter(StoreBank);
+export default withRouter(EditStoreBank);
