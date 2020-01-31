@@ -6,7 +6,7 @@ import StoreBio from "../store-detail/store-info/StoreBio";
 import Axios from "../../utils/api.service";
 import OrderLists from "./OrderLists";
 
-export class DashboardNanny extends Component {
+export class Dashboard extends Component {
   state = {
     storeBio: {},
     orderLists: [],
@@ -87,4 +87,4 @@ export class DashboardNanny extends Component {
   }
 }
 
-export default withRouter(DashboardNanny);
+export default withRouter(Dashboard);

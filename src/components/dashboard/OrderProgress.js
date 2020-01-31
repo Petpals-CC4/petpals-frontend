@@ -5,14 +5,24 @@ const { Step } = Steps;
 
 class OrderProgress extends Component {
   render() {
-    const current = this.props.current
+    const {
+      current
+    } = this.props
     const steps = [
       "รอการชำระเงิน",
       "รอการยืนยัน",
-      this.props.isCompleted ? "ออเดอร์สำเร็จ" : "ยกเลิกออเดอร์",
+      current === 3 ? "ยกเลิกออเดอร์" : "ออเดอร์สำเร็จ",
     ]
+    const currentBoundary = current > 2 ? 2 : current
     return (
-      <Steps direction="vertical" size="small" current={current}>
+      <Steps
+        size="small"
+        direction="vertical"
+        current={currentBoundary}
+        // 0 1 process
+        // 2 finish
+        // 3 error
+        status={current > 2 ? "error" : (current === steps.length - 1 ? "finish" : "process")}>
         {steps.map(item => (
           <Step key={item} title={item} />
         ))}

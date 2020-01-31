@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import { Button, Card, Modal, message, Typography, Row, Col } from "antd";
-import Axios from "../../../../utils/api.service";
+import Axios from "../../../utils/api.service";
 
 import EditStoreAddressDrawer from "./EditStoreAddressDrawer";
-
-// import { withCommas } from '../../../utils'
 
 const { confirm } = Modal;
 
@@ -40,7 +38,7 @@ class CardStoreAddress extends Component {
       message.error("ไม่สามารถแก้ไขรายการได้");
     }
 
-    this.props.refreshBank();
+    this.props.refreshAddress();
     this.handleClickClose("drawerEditVisible")();
   };
 
@@ -52,7 +50,7 @@ class CardStoreAddress extends Component {
       okType: "danger",
       cancelText: "ยกเลิก",
       onOk() {
-        me.deleteBank(id);
+        me.deleteAddress(id);
       },
       onCancel() {
         console.log("Cancel");

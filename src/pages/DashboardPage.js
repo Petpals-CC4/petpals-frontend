@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import DashboardNanny from "../../src/components/DashboardNanny/DashboardNanny"
+import Dashboard from "../../src/components/dashboard/Dashboard"
 import GoBackButton from '../components/utils/GoBackButton'
 
 class DashboardPage extends Component {
@@ -7,7 +7,7 @@ class DashboardPage extends Component {
     return (
       <div>
         <GoBackButton goTo="/" />
-        <DashboardNanny />
+        <Dashboard />
       </div>
     )
   }

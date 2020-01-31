@@ -6,13 +6,6 @@ class AddStoreServiceDrawer extends Component {
     return Object.keys(fieldsError).some(field => fieldsError[field]);
   }
 
-  handleChangeNumber = (e) => {
-    const number = parseInt(e.target.value || 0, 10);
-    if (isNaN(number)) {
-      return;
-    }
-  }
-
   checkNumber = (rule, value, callback) => {
     if (isNaN(value)) {
       callback("กรุณาใส่ราคา");

@@ -55,7 +55,6 @@ class ViewOrderDetailDrawer extends Component {
           <Col span={24}>
             <OrderProgress
               current={orderDetail.status_id ? orderDetail.status_id - 1 : null}
-              isCompleted={orderDetail.status_id ? orderDetail.status_id - 1 !== 4 : true}
             />
           </Col>
         </Row>

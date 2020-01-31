@@ -3,9 +3,12 @@ import { Table, Col, Typography, Row, Tag, Dropdown, Menu, Icon, message, Button
 import { datetimeFormat, withCommas } from "../../utils";
 import Axios from "../../utils/api.service";
 import { withRouter } from "react-router-dom";
+import ViewOrderDetailDrawer from "../dashboard/ViewOrderDetailDrawer";
 
 export class OrderListsUser extends Component {
   state = {
+    visibleViewOrder: false,
+    focusOrder: {},
     data: [],
     columns: [
       {
@@ -73,15 +76,20 @@ export class OrderListsUser extends Component {
         title: "",
         key: "action",
         render: (object) => {
-          // console.log(object);
           const status = object.order_status.status_name
           return (
             status === "waiting_payment" ?
               <Dropdown.Button
-                // disabled={object.order_status.status_name !== "waiting_verify"}
                 onClick={this.handleUploadOrder(object.id)}
                 overlay={
                   <Menu>
+                    <Menu.Item
+                      key="view"
+                      onClick={this.handleOpenViewOrder(object)}
+                    >
+                      <Icon type="file-search" />
+                      ดูรายละเอียด
+                    </Menu.Item>
                     <Menu.Item
                       key="stop"
                       onClick={this.handleRejectOrder(object.id)}
@@ -99,8 +107,28 @@ export class OrderListsUser extends Component {
                 อัพโหลดหลักฐานการชำระเงิน
               </Dropdown.Button>
               : status === "completed" && object.feedback === null ?
-                <Button type="primary" icon="star" onClick={this.handleClickFeedback(object.id)}>ให้คะแนนร้านค้า</Button>
-                : null
+                <Dropdown.Button
+                  onClick={this.handleClickFeedback(object.id)}
+                  overlay={
+                    <Menu>
+                      <Menu.Item
+                        key="view"
+                        onClick={this.handleOpenViewOrder(object)}
+                      >
+                        <Icon type="file-search" />
+                        ดูรายละเอียด
+                    </Menu.Item>
+                    </Menu>
+                  }
+                  type="primary"
+                >
+                  ให้คะแนนร้านค้า
+              </Dropdown.Button>
+                : <Button
+                  onClick={this.handleOpenViewOrder(object)}
+                >
+                  ดูรายละเอียด
+            </Button>
           )
         }
       },
@@ -122,6 +150,19 @@ export class OrderListsUser extends Component {
     }
   }
 
+  handleOpenViewOrder = (order) => (e) => {
+    // console.log(e);
+    this.setState({
+      visibleViewOrder: true,
+      focusOrder: order
+    })
+  }
+
+  handleCloseViewOrder = (e) => {
+    // console.log(e);
+    this.setState({ visibleViewOrder: false })
+  }
+
   handleClickFeedback = (order_id) => (e) => {
     this.props.history.push(`/feedback/${order_id}`)
   }
@@ -140,11 +181,11 @@ export class OrderListsUser extends Component {
 
   render() {
     const {
+      visibleViewOrder,
+      focusOrder,
+      data,
       columns,
-      data
     } = this.state
-
-    console.log(data)
 
     return (
       <Row
@@ -172,6 +213,12 @@ export class OrderListsUser extends Component {
             columns={columns}
           />
         </Col>
+
+        <ViewOrderDetailDrawer
+          visible={visibleViewOrder}
+          handleCloseDrawer={this.handleCloseViewOrder}
+          orderDetail={focusOrder}
+        />
       </Row>
     );
   }
